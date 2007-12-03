@@ -6,9 +6,9 @@ ART.Container = new Class({
 		id: null,
 		className: null,
 		
-		title: false,
-		content: false,
-		status: false,
+		title: null,
+		content: null,
+		status: null,
 		
 		height: 200,
 		width: 300,
@@ -43,9 +43,9 @@ ART.Container = new Class({
 		
 		this.center.setStyles({width: this.style.width, height: this.style.height, overflow: options.overflow});
 		
-		this.setTitle(options.title, true);
-		this.setContent(options.content, true);
-		this.setStatus(options.status, true);
+		if (options.title) this.setTitle(options.title, true);
+		if (options.content) this.setContent(options.content, true);
+		if (options.status) this.setStatus(options.status, true);
 		
 		arguments.callee.parent({
 			subject: this.container,
@@ -53,6 +53,15 @@ ART.Container = new Class({
 			onInject: this.onInject
 		});
 		
+	},
+	
+	wraps: function(element){
+		element = $(element);
+		if (!element) return this;
+		$extend(this.style, {height: element.offsetHeight, width: element.offsetWidth});
+		this.inject(element, 'after');
+		this.setContent(element);
+		return this;
 	},
 	
 	setTitle: function(content, init){
