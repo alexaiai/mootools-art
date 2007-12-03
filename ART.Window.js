@@ -26,7 +26,7 @@ ART.WM = {
 	
 	include: function(win){
 		
-		$$(win.top, win.bottom, win.maxi, win.mini, win.close, win.handle).addEvent('mousedown', function(){
+		$$(win.top, win.bottom, win.maxi, win.mini, win.close, win.handle, win.container).addEvent('mousedown', function(){
 			ART.WM.refocus(win);
 		});
 		

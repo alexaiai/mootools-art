@@ -115,27 +115,58 @@ ART.Themes = new Hash({
 	
 	hud: {
 		
-		overlayColor: '#000',
-		overlayOpacity: 0.8,
+		focus: {
+			
+			overlayColor: '#111',
+			overlayOpacity: 0.9,
+
+			reflection: 0,
+
+			borderColor: '#777',
+			borderOpacity: 0.6,
+
+			radius: 5,
+
+			titleColor: ['#444', '#222'],
+			titleOpacity: 0.9,
+
+			line: 1,
+			lineColors: ['#333', '#555'],
+
+			statusColor: ['#444', '#222'],
+			statusOpacity: 0.9,
+
+			shadow: 20,
+			shadowOpacity: 0.6
+			
+		},
 		
-		reflection: 0,
-		
-		borderColor: '#777',
-		borderOpacity: 0.5,
-		
-		radius: 5,
-		
-		titleColor: '#000',
-		titleOpacity: 0.83,
-		
-		line: 1,
-		lineColors: ['#222', '#222'],
-		
-		statusColor: '#000',
-		statusOpacity: 0.83,
-		
-		shadow: 12,
-		shadowOpacity: 0.6
+		blur: {
+			
+			overlayColor: '#111',
+			overlayOpacity: 0.8,
+
+			reflection: 0,
+
+			borderColor: '#777',
+			borderOpacity: 0.4,
+
+			radius: 5,
+
+			titleColor: '#111',
+			titleOpacity: 0.8,
+
+			line: 1,
+			lineColors: ['#333', '#333'],
+
+			statusColor: '#111',
+			statusOpacity: 0.8,
+
+			shadow: 20,
+			shadowOpacity: 0.4
+			
+		}
+
 	},
 	
 	button: {
