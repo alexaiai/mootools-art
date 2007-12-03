@@ -31,7 +31,7 @@ ART.Container = new Class({
 		if (options.className) this.container.addClass(options.className);
 		if (options.id) this.container.set('id', options.id);
 		
-		this.paint = new ART.Paint.Box().setStyles(absZero).inject(this.container);
+		this.paint = new ART.Paint().setStyles(absZero).inject(this.container);
 		
 		this.wrapper = new Element('div').setStyles(absZero).inject(this.container);
 		

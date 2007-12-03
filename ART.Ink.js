@@ -39,11 +39,6 @@ ART.Ink = new Class({
 		return this;
 	},
 
-	arc: function(center, radius, start, end){
-		this.canvas.arc(center.x, center.y, radius, Math.radians(start), Math.radians(end), false);
-		return this;
-	},
-
 	line: function(p){
 		this.canvas.lineTo(p.x, p.y);
 		return this;
@@ -77,11 +72,16 @@ ART.Ink = new Class({
 
 		this.close();
 		
-		return (typeof fill == 'string') ? this.fill(fill) : this.fill(height, fill);
+		return this.fill(fill, height);
+	},
+	
+	arc: function(center, radius, start, end, fill){
+		this.canvas.arc(center.x, center.y, radius, Math.radians(start), Math.radians(end), false);
+		return this.fill(fill, radius * 2);
 	},
 	
 	block: function(options){
-		(typeof options.fill == 'string') ? this.fill(options.fill) : this.fill(options.height, options.fill);
+		this.fill(options.fill, options.height);
 		this.canvas.fillRect(0, 0, options.width, options.height);
 		return this;
 	},
@@ -91,11 +91,10 @@ ART.Ink = new Class({
 		return this;
 	},
 
-	fill: function(color){
-		if (arguments.length > 1){
-			var gradient = this.canvas.createLinearGradient(0, 0, 0, color);
-			var colors = arguments[1];
-			colors.each(function(color, i){
+	fill: function(color, height){
+		if (typeof color != 'string'){
+			var gradient = this.canvas.createLinearGradient(0, 0, 0, height);
+			color.each(function(color, i){
 				gradient.addColorStop(i, color);
 			});
 			color = gradient;
