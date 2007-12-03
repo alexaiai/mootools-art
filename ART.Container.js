@@ -4,6 +4,7 @@ ART.Container = new Class({
 	
 	options: {
 		id: null,
+		className: null,
 		
 		title: false,
 		content: false,
@@ -14,7 +15,6 @@ ART.Container = new Class({
 		
 		position: 'relative',
 		overflow: 'hidden',
-		className: null,
 		
 		style: ART.Paint.Styles.window
 	},
@@ -28,7 +28,9 @@ ART.Container = new Class({
 		var absZero = {position: 'absolute', top: 0, left: 0};
 		
 		this.container = new Element('div', {'class': 'art-' + this.component}).setStyles({position: options.position});
-		if (options.className) this.container.addClass(options.className);
+		if (options.className) $splat(options.className).each(function(cn){
+			this.container.addClass(cn);
+		}, this);
 		if (options.id) this.container.set('id', options.id);
 		
 		this.paint = new ART.Paint().setStyles(absZero).inject(this.container);
