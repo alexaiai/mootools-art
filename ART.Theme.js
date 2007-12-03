@@ -1,4 +1,4 @@
-ART.Paint.Style = function(properties){
+ART.Theme = function(properties){
 	
 	var style = $extend({
 
@@ -51,35 +51,65 @@ ART.Paint.Style = function(properties){
 	return style;
 };
 
-ART.Paint.Styles = new Hash({
+ART.Themes = new Hash({
 	
 	window: {
-	
-		radius: 4,
 		
-		titleColor: ['#CCC', '#969696'],
-		titleOpacity: 1,
+		focus: {
+			radius: 4,
 
-		statusColor: ['#CCC', '#969696'],
-		statusOpacity: 1,
+			titleColor: ['#DDD', '#AAA'],
+			titleOpacity: 1,
 
-		overlay: true,
-		overlayColor: '#FFF',
-		overlayOpacity: 1,
+			statusColor: ['#DDD', '#AAA'],
+			statusOpacity: 1,
 
-		shadow: 10,
-		shadowColor: '#000',
-		shadowOpacity: 0.5,
+			overlay: true,
+			overlayColor: '#FFF',
+			overlayOpacity: 1,
 
-		border: 1,
-		borderColor: ['#333', '#000'],
-		borderOpacity: 0.4,
+			shadow: 10,
+			shadowColor: '#000',
+			shadowOpacity: 0.5,
 
-		reflection: 1,
-		reflectionColors: ['#EEE', '#DDD'],
+			border: 1,
+			borderColor: ['#333', '#000'],
+			borderOpacity: 0.4,
 
-		line: 1,
-		lineColors: ['#777', '#AAA']
+			reflection: 1,
+			reflectionColors: ['#F6F6F6', '#EEEEEE'],
+
+			line: 1,
+			lineColors: ['#999', '#AAA']
+		},
+		
+		blur: {
+			radius: 4,
+
+			titleColor: '#EEE',
+			titleOpacity: 1,
+
+			statusColor: '#EEE',
+			statusOpacity: 1,
+
+			overlay: true,
+			overlayColor: '#FFF',
+			overlayOpacity: 1,
+
+			shadow: 10,
+			shadowColor: '#000',
+			shadowOpacity: 0.3,
+
+			border: 1,
+			borderColor: '#555',
+			borderOpacity: 0.3,
+
+			reflection: 1,
+			reflectionColors: ['#FFF', '#FFF'],
+
+			line: 1,
+			lineColors: ['#DDD', '#DDD']
+		}
 
 	},
 	

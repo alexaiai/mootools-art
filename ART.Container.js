@@ -10,24 +10,28 @@ ART.Container = new Class({
 		content: null,
 		status: null,
 		
-		height: 200,
-		width: 300,
+		styles: {
+			height: 200,
+			width: 300
+		},
 		
 		position: 'relative',
 		overflow: 'hidden',
 		
-		style: ART.Paint.Styles.window
+		theme: ART.Themes.window.focus
 	},
 	
 	initialize: function(options, component){
 		this.component = component || 'container';
 		this.setOptions(options);
 		options = this.options;
-		this.style = $extend(options.style, {height: options.height, width: options.width});
+		this.theme = options.theme;
 		
 		var absZero = {position: 'absolute', top: 0, left: 0};
 		
-		this.container = new Element('div', {'class': 'art-' + this.component}).setStyles({position: options.position});
+		this.container = new Element('div', {'class': 'art-' + this.component}).setStyles({
+			position: options.styles.position, top: options.styles.top, left: options.styles.left
+		});
 		if (options.className) $splat(options.className).each(function(cn){
 			this.container.addClass(cn);
 		}, this);
@@ -41,7 +45,7 @@ ART.Container = new Class({
 			this[part] = new Element('div').inject(this.wrapper);
 		}, this);
 		
-		this.center.setStyles({width: this.style.width, height: this.style.height, overflow: options.overflow});
+		this.center.setStyles({width: options.styles.width, height: options.styles.height, overflow: options.styles.overflow});
 		
 		if (options.title) this.setTitle(options.title, true);
 		if (options.content) this.setContent(options.content, true);
@@ -58,8 +62,7 @@ ART.Container = new Class({
 	wraps: function(element){
 		element = $(element);
 		if (!element) return this;
-		$extend(this.style, {height: element.offsetHeight, width: element.offsetWidth});
-		this.inject(element, 'after');
+		this.container.replaces(element);
 		this.setContent(element);
 		return this;
 	},
@@ -93,17 +96,24 @@ ART.Container = new Class({
 		if (!init) this.draw();
 	},
 	
-	draw: function(style){
-		this.style = $merge(this.style, style, {title: this.top.offsetHeight, status: this.bottom.offsetHeight});
-		style = new ART.Paint.Style(this.style);
-		this.center.setStyles({height: style.height, width: style.width});
-		this.container.setStyles({height: style.outerHeight, width: style.outerWidth});
-		var shadow = style.shadow, border = style.border;
+	draw: function(theme){
+		if (theme){
+			if (theme.height) this.center.setStyles({height: theme.height});
+			if (theme.width) this.center.setStyles({width: theme.width});
+		}
+		theme = new ART.Theme($merge(this.theme, theme, {
+			title: this.top.offsetHeight,
+			status: this.bottom.offsetHeight,
+			height: this.center.offsetHeight,
+			width: this.center.offsetWidth
+		}));
+		this.container.setStyles({height: theme.outerHeight, width: theme.outerWidth});
+		var shadow = theme.shadow, border = theme.border;
 		this.wrapper.setStyles({
-			top: shadow + border + (shadow * (style.shadowOffsetY > 0 ? 0 : style.shadowOffsetY)),
-			left: shadow + border + (shadow * (style.shadowOffsetX > 0 ? 0 : style.shadowOffsetX))
+			top: shadow + border + (shadow * (theme.shadowOffsetY > 0 ? 0 : theme.shadowOffsetY)),
+			left: shadow + border + (shadow * (theme.shadowOffsetX > 0 ? 0 : theme.shadowOffsetX))
 		});
-		this.paint.draw(style);
+		this.paint.draw(theme);
 		return this;
 	}
 	

@@ -1,14 +1,64 @@
+ART.WM = {
+	
+	windows: [],
+	
+	init: function(){
+		
+		if (ART.WM.initialized) return;
+		ART.WM.initialized = true;
+		
+		document.addEvent('mousedown', function(e){
+			
+			var target = e.target, found = false;
+			
+			ART.WM.windows.each(function(win){
+				if (found) return;
+				if (win.wrapper.hasChild(target)){
+					found = true;
+					ART.WM.refocus(win);
+				}
+			});
+			
+			if (!found) ART.WM.refocus();
+			
+		});
+	},
+	
+	include: function(win){
+		
+		$$(win.top, win.bottom, win.maxi, win.mini, win.close, win.handle).addEvent('mousedown', function(){
+			ART.WM.refocus(win);
+		});
+		
+		ART.WM.init();
+		ART.WM.refocus(win);
+	},
+	
+	refocus: function(win){
+		if (win){
+			ART.WM.windows.remove(win).unshift(win);
+			win.focus();
+		}
+		ART.WM.windows.each(function(w, i){
+			w.container.setStyle('z-index', ART.WM.windows.length - i + 1);
+			if (w != win) w.blur();
+		});
+	}
+	
+};
+
 ART.Window = new Class({
 	
 	Extends: ART.Container,
 	
 	options: {
 		
-		width: 200,
-		height: 200,
-		
-		overflow: 'auto',
-		position: 'absolute',
+		styles: {
+			width: 200,
+			height: 200,
+			overflow: 'auto',
+			position: 'absolute'
+		},
 		
 		resizable: true,
 		draggable: true,
@@ -25,10 +75,15 @@ ART.Window = new Class({
 			close: true,
 			mini: true,
 			maxi: true
-		}
+		},
+		
+		blurTheme: ART.Themes.window.blur,
+		focusTheme: ART.Themes.window.focus
+
 	},
 	
 	initialize: function(options){
+
 		arguments.callee.parent(options, 'window');
 
 		var buttons = this.options.buttons;
@@ -63,15 +118,16 @@ ART.Window = new Class({
 				'position': 'absolute',
 				'display': 'none',
 				'opacity': this.options.mask.opacity,
-				'border-width': this.style.border + 'px',
+				'border-width': this.theme.border + 'px',
 				'border-style': 'solid',
 				'border-color': this.options.mask.borderColor,
 				'background-color': this.options.mask.color,
-				'-webkit-border-radius': this.style.radius + 1 + 'px'
+				'-webkit-border-radius': this.theme.radius + 1 + 'px'
 			}}).inject(this.container);
 			
 		}
 		
+		ART.WM.include(this);
 	},
 	
 	onInject: function(){
@@ -87,12 +143,30 @@ ART.Window = new Class({
 	},
 	
 	showOverflow: function(){
-		this.center.setStyle('overflow', this.options.overflow);
+		this.center.setStyle('overflow', this.options.styles.overflow);
+	},
+	
+	focus: function(){
+		if (this.focused) return;
+		this.focused = true;
+		
+		this.container.addClass('art-window-focus').removeClass('art-window-blur');
+		this.showOverflow();
+		this.draw(this.options.focusTheme);
+	},
+	
+	blur: function(){
+		if (!this.focused) return;
+		this.focused = false;
+		
+		this.container.addClass('art-window-blur').removeClass('art-window-focus');
+		this.hideOverflow();
+		this.draw(this.options.blurTheme);
 	},
 	
 	showMask: function(){
 		
-		var border = this.style.border;
+		var border = this.theme.border;
 		
 		this.mask.setStyles({
 			height: this.wrapper.offsetHeight,
