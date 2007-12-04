@@ -32,14 +32,15 @@ ART.Container = new Class({
 		this.container = new Element('div', {'class': 'art-' + this.component}).setStyles({
 			position: options.styles.position, top: options.styles.top, left: options.styles.left
 		});
-		if (options.className) $splat(options.className).each(function(cn){
-			this.container.addClass(cn);
-		}, this);
 		if (options.id) this.container.set('id', options.id);
 		
 		this.paint = new ART.Paint().setStyles(absZero).inject(this.container);
 		
 		this.wrapper = new Element('div').setStyles(absZero).inject(this.container);
+		
+		if (options.className) $splat(options.className).each(function(cn){
+			this.wrapper.addClass(cn);
+		}, this);
 		
 		['top', 'center', 'bottom'].each(function(part){
 			this[part] = new Element('div').inject(this.wrapper);

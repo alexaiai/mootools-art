@@ -68,13 +68,13 @@ ART.Themes = new Hash({
 			overlayColor: '#FFF',
 			overlayOpacity: 1,
 
-			shadow: 10,
+			shadow: 20,
 			shadowColor: '#000',
-			shadowOpacity: 0.5,
+			shadowOpacity: 1.5,
 
 			border: 1,
 			borderColor: ['#333', '#000'],
-			borderOpacity: 0.4,
+			borderOpacity: 0.3,
 
 			reflection: 1,
 			reflectionColors: ['#F6F6F6', '#EEEEEE'],
@@ -96,9 +96,9 @@ ART.Themes = new Hash({
 			overlayColor: '#FFF',
 			overlayOpacity: 1,
 
-			shadow: 10,
+			shadow: 20,
 			shadowColor: '#000',
-			shadowOpacity: 0.3,
+			shadowOpacity: 0.8,
 
 			border: 1,
 			borderColor: '#555',
@@ -137,7 +137,7 @@ ART.Themes = new Hash({
 			statusOpacity: 0.9,
 
 			shadow: 20,
-			shadowOpacity: 0.6
+			shadowOpacity: 1.5
 			
 		},
 		
@@ -163,7 +163,7 @@ ART.Themes = new Hash({
 			statusOpacity: 0.8,
 
 			shadow: 20,
-			shadowOpacity: 0.4
+			shadowOpacity: 0.8
 			
 		}
 

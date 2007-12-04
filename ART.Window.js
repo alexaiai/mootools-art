@@ -9,11 +9,11 @@ ART.WM = {
 		
 		document.addEvent('mousedown', function(e){
 			
-			var target = e.target, found = false;
+			var found = false;
 			
 			ART.WM.windows.each(function(win){
 				if (found) return;
-				if (win.wrapper.hasChild(target)){
+				if (ART.WM.checkAgainst(win.wrapper, e)){
 					found = true;
 					ART.WM.refocus(win);
 				}
@@ -24,9 +24,15 @@ ART.WM = {
 		});
 	},
 	
+	checkAgainst: function(el, event){
+		el = el.getCoordinates();
+		var now = {x: event.page.x, y: event.page.y};
+		return (now.x > el.left && now.x < el.right && now.y < el.bottom && now.y > el.top);
+	},
+	
 	include: function(win){
 		
-		$$(win.top, win.bottom, win.maxi, win.mini, win.close, win.handle, win.container).addEvent('mousedown', function(){
+		$$(win.top, win.bottom, win.maxi, win.mini, win.close, win.handle).addEvent('mousedown', function(){
 			ART.WM.refocus(win);
 		});
 		
@@ -121,8 +127,7 @@ ART.Window = new Class({
 				'border-width': this.theme.border + 'px',
 				'border-style': 'solid',
 				'border-color': this.options.mask.borderColor,
-				'background-color': this.options.mask.color,
-				'-webkit-border-radius': this.theme.radius + 1 + 'px'
+				'background-color': this.options.mask.color
 			}}).inject(this.container);
 			
 		}
@@ -139,7 +144,7 @@ ART.Window = new Class({
 	},
 	
 	hideOverflow: function(){
-		this.center.setStyle('overflow', 'hidden');
+		if (Browser.Engine.gecko && Browser.Platform.mac) this.center.setStyle('overflow', 'hidden');
 	},
 	
 	showOverflow: function(){
