@@ -59,7 +59,7 @@ ART.Tips = new Class({
 		}).setStyles({
 			visibility: 'hidden',
 			position: 'absolute'
-		}).setContent(content).inject(document.body);
+		}).setContent(content).inject(this.toolTip.container);
 		
 		var height = holder.offsetHeight, width = holder.offsetWidth;
 		
