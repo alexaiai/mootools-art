@@ -131,6 +131,8 @@ ART.Paint = new Class({
 		}
 		
 		if (style.status){
+			
+			console.log('bad!');
 		
 			this.translate({x: 0, y: height + style.title}).box({
 				'width': width,

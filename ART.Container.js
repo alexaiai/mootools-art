@@ -40,10 +40,10 @@ ART.Container = new Class({
 		if (options.className) $splat(options.className).each(function(cn){
 			this.wrapper.addClass(cn);
 		}, this);
-		
-		['top', 'center', 'bottom'].each(function(part){
-			this[part] = new Element('div').inject(this.wrapper);
-		}, this);
+
+		this.top = {offsetHeight: 0};
+		this.bottom = {offsetHeight: 0};
+		this.center = new Element('div').inject(this.wrapper);
 		
 		this.center.setStyles({width: options.styles.width, height: options.styles.height, overflow: options.styles.overflow});
 		
@@ -53,7 +53,6 @@ ART.Container = new Class({
 		
 		arguments.callee.parent({
 			subject: this.container,
-			grabber: this.content,
 			onInject: this.onInject
 		});
 		
@@ -68,16 +67,19 @@ ART.Container = new Class({
 	},
 	
 	setTitle: function(content){
+		this.top = this.top || new Element('div').inject(this.wrapper);
 		this.process('title', content, this.top);
 		return this;
 	},
 	
 	setContent: function(content){
 		this.process('content', content, this.center);
+		this.grabber = this.content;
 		return this;
 	},
 	
 	setStatus: function(content){
+		this.bottom = this.bottom || new Element('div').inject(this.wrapper);
 		this.process('status', content, this.bottom);
 		return this;
 	},

@@ -65,11 +65,14 @@ ART.Tips = new Class({
 		
 		this.toolTip.setContent(content);
 		
-		if (title) this.toolTip.setTitle(title);
-		if (status){
-			console.log(status);
-			this.toolTip.setStatus(status);
-		}
+		// if (title){
+		// 	console.log(title);
+		// 	this.toolTip.setTitle(title);
+		// }
+		// if (status){
+		// 	console.log(status);
+		// 	this.toolTip.setStatus(status);
+		// }
 		
 		this.toolTip.draw({height: height, width: width});
 		
