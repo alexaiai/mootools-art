@@ -169,6 +169,16 @@ ART.Themes = new Hash({
 
 	},
 	
+	tip: {
+		shadow: 5,
+		shadowOpacity: 0.3,
+		topLeftRadius: 0,
+		titleColor: '#F9F4DE',
+		overlayColor: ['#F9F4DE', '#F9EFBD'],
+		statusColor: '#F9EFBD',
+		reflectionColors: ['#F9F8F3', '#F9F8F3']
+	},
+	
 	button: {
 		shadow: 2,
 		reflection: 0,

@@ -1,5 +1,13 @@
 var ART = {};
 
+Element.implement({
+	
+	setContent: function(content){
+		return (typeof content == 'string') ? this.set('html', content) : this.adopt(content);
+	}
+	
+});
+
 ART.Element = new Class({
 	
 	Implements: [Events, Options],
@@ -40,6 +48,11 @@ ART.Element = new Class({
 	dispose: function(){
 		this.fireEvent('onDispose', this.subject);
 		this.subject.dispose();
+		return this;
+	},
+	
+	setStyle: function(style, value){
+		this.subject.setStyle(style, value);
 		return this;
 	},
 	

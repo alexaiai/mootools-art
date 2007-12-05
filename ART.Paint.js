@@ -72,10 +72,24 @@ ART.Paint = new Class({
 		//main overlay
 		
 		if (style.overlay){
+			
+			if (!style.title && style.reflection){
+				this.box({
+					'width': width,
+					'height': height,
+					'top-left-radius': tl,
+					'top-right-radius': tr,
+					'bottom-left-radius': bl,
+					'bottom-right-radius': br,
+					'fill': this.colorize(style.reflectionColors[0], style.overlayOpacity)
+				}).translate({x: 0, y: style.reflection});
+			}
+			
+			var mh = (!style.title) ? style.reflection : 0;
 
 			this.translate({x: 0, y: style.title}).box({
 				'width': width,
-				'height': height,
+				'height': height - mh,
 				'bottom-left-radius': style.status ? 0 : bl,
 				'bottom-right-radius': style.status ? 0 : br,
 				'top-left-radius': style.title ? 0 : tl,

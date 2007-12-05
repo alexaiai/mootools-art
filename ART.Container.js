@@ -12,11 +12,10 @@ ART.Container = new Class({
 		
 		styles: {
 			height: 200,
-			width: 300
+			width: 300,
+			position: 'relative',
+			overflow: 'hidden'
 		},
-		
-		position: 'relative',
-		overflow: 'hidden',
 		
 		theme: ART.Themes.window.focus
 	},
@@ -48,9 +47,9 @@ ART.Container = new Class({
 		
 		this.center.setStyles({width: options.styles.width, height: options.styles.height, overflow: options.styles.overflow});
 		
-		if (options.title) this.setTitle(options.title, true);
-		if (options.content) this.setContent(options.content, true);
-		if (options.status) this.setStatus(options.status, true);
+		if (options.title) this.setTitle(options.title);
+		if (options.content) this.setContent(options.content);
+		if (options.status) this.setStatus(options.status);
 		
 		arguments.callee.parent({
 			subject: this.container,
@@ -68,18 +67,18 @@ ART.Container = new Class({
 		return this;
 	},
 	
-	setTitle: function(content, init){
-		this.process('title', content, this.top, init);
+	setTitle: function(content){
+		this.process('title', content, this.top);
 		return this;
 	},
 	
-	setContent: function(content, init){
-		this.process('content', content, this.center, init);
+	setContent: function(content){
+		this.process('content', content, this.center);
 		return this;
 	},
 	
-	setStatus: function(content, init){
-		this.process('status', content, this.bottom, init);
+	setStatus: function(content){
+		this.process('status', content, this.bottom);
 		return this;
 	},
 	
@@ -87,14 +86,13 @@ ART.Container = new Class({
 		this.draw();
 	},
 
-	process: function(name, part, container, init){
+	process: function(name, part, container){
 		var where = this[name];
 		if (where) where.dispose();
 		if (!part) return;
 		where = new Element('div', {'class': 'art-' + this.component + '-' + name}).inject(container);
-		($type(part) == 'string') ?  where.set('html', part) : where.adopt(part);
+		where.setContent(part);
 		this[name] = where;
-		if (!init) this.draw();
 	},
 	
 	draw: function(theme){
