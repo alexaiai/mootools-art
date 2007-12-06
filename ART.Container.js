@@ -67,7 +67,7 @@ ART.Container = new Class({
 	},
 	
 	setTitle: function(content){
-		this.top = this.top || new Element('div').inject(this.wrapper);
+		if ($type(this.top) != 'element') this.top = new Element('div').inject(this.wrapper, 'top');
 		this.process('title', content, this.top);
 		return this;
 	},
@@ -79,7 +79,7 @@ ART.Container = new Class({
 	},
 	
 	setStatus: function(content){
-		this.bottom = this.bottom || new Element('div').inject(this.wrapper);
+		if ($type(this.bottom) != 'element') this.bottom = new Element('div').inject(this.wrapper, 'bottom');
 		this.process('status', content, this.bottom);
 		return this;
 	},
