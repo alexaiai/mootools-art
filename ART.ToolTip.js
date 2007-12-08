@@ -5,6 +5,9 @@ ART.Themes.ToolTip.yellow = {
 	shadow: 5,
 	shadowOpacity: 0.3,
 	topLeftRadius: 0,
+	topRightRadius: 3,
+	bottomLeftRadius: 3,
+	bottomRightRadius: 3,
 	titleColor: '#F9F4DE',
 	overlayColor: ['#F9F4DE', '#F9EFBD'],
 	statusColor: '#F9EFBD',
@@ -13,44 +16,50 @@ ART.Themes.ToolTip.yellow = {
 };
 
 
-ART.Tips = new Class({
+ART.ToolTip = new Class({
 	
-	Implements: [Events, Options],
+	Extends: ART.Container,
 
 	options: {
-		onShow: function(tip){
-			tip.setStyle('visibility', 'visible');
+		
+		onShow: function(){
+			this.setStyle('visibility', 'visible');
 		},
-		onHide: function(tip){
-			tip.setStyle('visibility', 'hidden');
+		
+		onHide: function(){
+			this.setStyle('visibility', 'hidden');
 		},
-		maxTitleChars: 30,
-		showDelay: 100,
+		
+		// onStart: $empty,
+		
+		showDelay: 200,
 		hideDelay: 100,
-		className: null,
+
 		offsets: {'x': 16, 'y': 16},
 		fixed: false,
+		
 		theme: ART.Themes.ToolTip.yellow,
+		
 		contents: [],
 		titles: [],
 		statuses: []
 	},
 
 	initialize: function(elements, options){
-		this.setOptions(options);
+		
+		arguments.callee.parent(options, 'tooltip');
+		
 		this.elements = $$(elements);
 		this.contents = this.options.contents;
 		this.titles = this.options.titles;
 		this.statuses = this.options.statuses;
 		
-		this.toolTip = new ART.Container({
-			styles: {position: 'absolute'},
-			theme: this.options.theme,
-			className: this.options.className
-		}, 'tips').setStyles({visibility: 'hidden'}).inject(document.body);
+		this.setStyles({position: 'absolute', visibility: 'hidden'}).inject(document.body);
 		
 		this.bound = {end: this.end.bind(this), locate: this.locate.bind(this)};
-		elements.each(this.build, this);
+		this.elements.each(this.build, this);
+		
+		this.fireEvent('onStart');
 	},
 
 	build: function(el, i){
@@ -69,23 +78,23 @@ ART.Tips = new Class({
 		
 		var title = this.titles[i], content = this.contents[i], status = this.statuses[i];
 		
-		this.toolTip.setContent(content);
+		this.setContent(content);
 		
-		if (title) this.toolTip.setTitle(title);
-		if (status) this.toolTip.setStatus(status);
+		if (title) this.setTitle(title);
+		if (status) this.setStatus(status);
 		
-		this.toolTip.draw();
+		this.draw();
 		
 		$clear(this.timer);
 		this.timer = this.show.delay(this.options.showDelay, this);
 	},
 	
 	show: function(){
-		this.fireEvent('onShow', this.toolTip);
+		this.fireEvent('onShow');
 	},
 
 	hide: function(){
-		this.fireEvent('onHide', this.toolTip);
+		this.fireEvent('onHide');
 	},
 
 	end: function(event){
@@ -95,7 +104,7 @@ ART.Tips = new Class({
 
 	position: function(element){
 		var pos = element.getPosition();
-		this.toolTip.setStyles({
+		this.setStyles({
 			'left': pos.x + this.options.offsets.x,
 			'top': pos.y + this.options.offsets.y
 		});
@@ -104,12 +113,12 @@ ART.Tips = new Class({
 	locate: function(event){
 		var doc = window.getOffsetSize();
 		var scroll = window.getScroll();
-		var tip = {'x': this.toolTip.container.offsetWidth, 'y': this.toolTip.container.offsetHeight};
+		var tip = {'x': this.container.offsetWidth, 'y': this.container.offsetHeight};
 		var prop = {'x': 'left', 'y': 'top'};
 		for (var z in prop){
 			var pos = event.page[z] + this.options.offsets[z];
 			if ((pos + tip[z] - scroll[z]) > doc[z]) pos = event.page[z] - this.options.offsets[z] - tip[z];
-			this.toolTip.setStyle(prop[z], pos);
+			this.setStyle(prop[z], pos);
 		}
 	}
 	

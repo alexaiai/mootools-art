@@ -1,6 +1,6 @@
-ART.Themes.Button = {};
+ART.Themes.MetalButton = {};
 
-ART.Themes.Button.normal = {
+ART.Themes.MetalButton.normal = {
 	shadow: 2,
 	reflection: 0,
 	shadowColor: '#FFF',
@@ -12,7 +12,7 @@ ART.Themes.Button.normal = {
 	radius: 5
 };
 
-ART.Themes.Button.active = {
+ART.Themes.MetalButton.active = {
 	overlayColor: ['#555', '#bbb'],
 	borderOpacity: 0.7,
 	borderColor: ['#000', '#444'],
@@ -20,7 +20,7 @@ ART.Themes.Button.active = {
 };
 
 
-ART.Themes.Button.over = {
+ART.Themes.MetalButton.over = {
 	borderOpacity: 0.6
 };
 
@@ -35,9 +35,9 @@ ART.Button = new Class({
 		// onMouseEnter: $empty,
 		// onMouseLeave: $empty,
 		
-		theme: ART.Themes.Button.normal,
-		activeTheme: ART.Themes.Button.active,
-		overTheme: ART.Themes.Button.over
+		theme: ART.Themes.MetalButton.normal,
+		activeTheme: ART.Themes.MetalButton.active,
+		overTheme: ART.Themes.MetalButton.over
 	},
 	
 	initialize: function(options){
