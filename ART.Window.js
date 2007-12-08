@@ -98,7 +98,7 @@ ART.Window = new Class({
 			
 			this.buttonsWrapper = new Element('div', {
 				'class': 'art-window-buttons'
-			}).setStyles({position: 'absolute', overflow: 'hidden'}).inject(this.top);
+			}).setStyles({position: 'absolute', overflow: 'hidden'}).inject(this.wrapper);
 			
 			for (var button in buttons){
 				if (!buttons[button]) continue;
@@ -118,7 +118,7 @@ ART.Window = new Class({
 				overflow: 'hidden',
 				bottom: 0,
 				right: 0
-			}).inject(this.bottom);
+			}).inject(this.wrapper);
 			
 			this.mask = new Element('div', {'class': 'art-window-mask', styles: {
 				'position': 'absolute',
@@ -263,8 +263,7 @@ ART.Window = new Class({
 		if (this.madeDraggable) return;
 		this.madeDraggable = true;
 		
-		new Drag.Move(this.container, {handle: this.top});
-		new Drag.Move(this.container, {handle: this.bottom});
+		new Drag.Move(this.container, {handles: [this.top, this.bottom]});
 		
 	}
 	

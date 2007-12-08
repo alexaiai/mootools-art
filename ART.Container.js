@@ -111,8 +111,8 @@ ART.Container = new Class({
 		this.container.setStyles({height: theme.outerHeight, width: theme.outerWidth});
 		var shadow = theme.shadow, border = theme.border;
 		this.wrapper.setStyles({
-			top: shadow + border + (shadow * (theme.shadowOffsetY > 0 ? 0 : theme.shadowOffsetY)),
-			left: shadow + border + (shadow * (theme.shadowOffsetX > 0 ? 0 : theme.shadowOffsetX))
+			top: shadow + border + theme.shadowOffsetY,
+			left: shadow + border + theme.shadowOffsetX
 		});
 		this.paint.draw(theme);
 		return this;

@@ -18,7 +18,7 @@ ART.Theme = function(properties){
 
 		shadow: 20,
 		shadowOffsetX: 0,
-		shadowOffsetY: -0.2,
+		shadowOffsetY: -2,
 		shadowColor: '#000',
 		shadowOpacity: 0.5,
 		drawShadow: true,
@@ -38,8 +38,8 @@ ART.Theme = function(properties){
 	style.innerHeight = style.height + style.status + style.title + (style.border * 2);
 	style.innerWidth = style.width + (style.border * 2);
 	
-	style.outerHeight = (style.shadow * 2) - (style.shadow * Math.abs(style.shadowOffsetY)) + style.innerHeight;
-	style.outerWidth = (style.shadow * 2) - (style.shadow * Math.abs(style.shadowOffsetX)) + style.innerWidth;
+	style.outerHeight = (style.shadow * 2) - Math.abs(style.shadowOffsetY) + style.innerHeight;
+	style.outerWidth = (style.shadow * 2) - Math.abs(style.shadowOffsetX) + style.innerWidth;
 	
 	var tl = style.topLeftRadius, tr = style.topRightRadius, bl = style.bottomLeftRadius, br = style.bottomRightRadius;
 	

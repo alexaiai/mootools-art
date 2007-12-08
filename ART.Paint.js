@@ -55,7 +55,7 @@ ART.Paint = new Class({
 		}, this);
 		else this.translate({x: shadow, y: shadow});
 		
-		this.translate({x: shadow * (style.shadowOffsetX > 0 ? 0 : style.shadowOffsetX), y: shadow * (style.shadowOffsetY > 0 ? 0 : style.shadowOffsetY)});
+		this.translate({x: style.shadowOffsetX, y: style.shadowOffsetY});
 		
 		//border
 		

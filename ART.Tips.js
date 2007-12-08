@@ -98,9 +98,9 @@ ART.Tips = new Class({
 	},
 
 	locate: function(event){
-		var doc = document.getOffsetSize();
-		var scroll = document.getScroll();
-		var tip = {'x': this.toolTip.offsetWidth, 'y': this.toolTip.offsetHeight};
+		var doc = window.getOffsetSize();
+		var scroll = window.getScroll();
+		var tip = {'x': this.toolTip.container.offsetWidth, 'y': this.toolTip.container.offsetHeight};
 		var prop = {'x': 'left', 'y': 'top'};
 		for (var z in prop){
 			var pos = event.page[z] + this.options.offsets[z];
