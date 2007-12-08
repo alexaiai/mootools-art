@@ -56,7 +56,7 @@ ART.ToolTip = new Class({
 		
 		this.setStyles({position: 'absolute', visibility: 'hidden'}).inject(document.body);
 		
-		this.bound = {end: this.end.bind(this), locate: this.locate.bind(this)};
+		this.bound = {end: this.end.bind(this), locate: this.locate.bind(this), hide: this.hide.bind(this)};
 		this.elements.each(this.build, this);
 		
 		this.fireEvent('onStart');
@@ -64,14 +64,24 @@ ART.ToolTip = new Class({
 
 	build: function(el, i){
 		
-		el.addEvent('mouseenter', function(event){
+		var enter = function(event){
 			this.start(el, i);
-			(!this.options.fixed) ? this.locate(event) : this.position(el);
-		}.bind(this));
+			
+			if (!this.options.fixed){
+				this.locate(event);
+				el.addEvent('mousemove', this.bound.locate);
+			} else {
+				this.position(el);
+			}
+		}.bind(this);
 		
-		if (!this.options.fixed) el.addEvent('mousemove', this.bound.locate);
-		
-		el.addEvent('mouseleave', this.bound.end);
+		var leave = this.end.bind(this, el);
+
+		el.addEvents({
+			mouseenter: enter,
+			mousedown: leave,
+			mouseleave: leave
+		});
 	},
 
 	start: function(el, i){
@@ -88,6 +98,12 @@ ART.ToolTip = new Class({
 		$clear(this.timer);
 		this.timer = this.show.delay(this.options.showDelay, this);
 	},
+
+	end: function(el){
+		el.removeEvent('mousemove', this.bound.locate);
+		$clear(this.timer);
+		this.timer = this.hide.delay(this.options.hideDelay, this);
+	},
 	
 	show: function(){
 		this.fireEvent('onShow');
@@ -95,11 +111,6 @@ ART.ToolTip = new Class({
 
 	hide: function(){
 		this.fireEvent('onHide');
-	},
-
-	end: function(event){
-		$clear(this.timer);
-		this.timer = this.hide.delay(this.options.hideDelay, this);
 	},
 
 	position: function(element){

@@ -17,7 +17,8 @@ ART.Container = new Class({
 			overflow: 'hidden'
 		},
 		
-		theme: {}
+		theme: {},
+		morph: {link: 'cancel'}
 	},
 	
 	initialize: function(options, component){
@@ -51,10 +52,8 @@ ART.Container = new Class({
 		if (options.content) this.setContent(options.content);
 		if (options.status) this.setStatus(options.status);
 		
-		var ofx = $extend(this.options.morph || {}, {link: 'cancel'});
-		
-		this.pfx = new Fx.Draw(this, ofx);
-		this.sfx = new Fx.Morph(this.container, ofx);
+		this.pfx = new Fx.Draw(this, this.options.morph);
+		this.sfx = new Fx.Morph(this.container, this.options.morph);
 		
 		arguments.callee.parent({
 			subject: this.container,
