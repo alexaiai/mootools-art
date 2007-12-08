@@ -16,7 +16,7 @@ ART.Theme = function(properties){
 		overlayColor: '#FFF',
 		overlayOpacity: 1,
 
-		shadow: 20,
+		shadow: 10,
 		shadowOffsetX: 0,
 		shadowOffsetY: -2,
 		shadowColor: '#000',
@@ -57,57 +57,36 @@ ART.Themes = new Hash({
 		
 		focus: {
 			radius: 4,
-
+			
 			titleColor: ['#DDD', '#AAA'],
-			titleOpacity: 1,
-
+			
 			statusColor: ['#DDD', '#AAA'],
-			statusOpacity: 1,
-
-			overlay: true,
+			
 			overlayColor: '#FFF',
-			overlayOpacity: 1,
-
-			shadow: 20,
+			
 			shadowColor: '#000',
-			shadowOpacity: 1.5,
+			shadowOpacity: 1,
 
-			border: 1,
 			borderColor: ['#333', '#000'],
 			borderOpacity: 0.3,
 
-			reflection: 1,
 			reflectionColors: ['#F6F6F6', '#EEEEEE'],
 
-			line: 1,
 			lineColors: ['#999', '#AAA']
 		},
 		
 		blur: {
-			radius: 4,
-
 			titleColor: '#EEE',
-			titleOpacity: 1,
-
 			statusColor: '#EEE',
-			statusOpacity: 1,
 
-			overlay: true,
-			overlayColor: '#FFF',
-			overlayOpacity: 1,
-
-			shadow: 20,
 			shadowColor: '#000',
-			shadowOpacity: 0.8,
+			shadowOpacity: 0.5,
 
-			border: 1,
-			borderColor: '#555',
-			borderOpacity: 0.3,
+			borderColor: '#000',
+			borderOpacity: 0.1,
 
-			reflection: 1,
 			reflectionColors: ['#FFF', '#FFF'],
 
-			line: 1,
 			lineColors: ['#DDD', '#DDD']
 		}
 
@@ -117,6 +96,8 @@ ART.Themes = new Hash({
 		
 		focus: {
 			
+			radius: 5,
+			
 			overlayColor: '#111',
 			overlayOpacity: 0.9,
 
@@ -125,19 +106,18 @@ ART.Themes = new Hash({
 			borderColor: '#777',
 			borderOpacity: 0.6,
 
-			radius: 5,
+			
 
 			titleColor: ['#444', '#222'],
 			titleOpacity: 0.9,
 
-			line: 1,
 			lineColors: ['#333', '#555'],
 
 			statusColor: ['#444', '#222'],
 			statusOpacity: 0.9,
 
-			shadow: 20,
-			shadowOpacity: 1.5
+			shadow: 10,
+			shadowOpacity: 1
 			
 		},
 		
@@ -156,14 +136,12 @@ ART.Themes = new Hash({
 			titleColor: '#111',
 			titleOpacity: 0.8,
 
-			line: 1,
 			lineColors: ['#333', '#333'],
 
 			statusColor: '#111',
 			statusOpacity: 0.8,
 
-			shadow: 20,
-			shadowOpacity: 0.8
+			shadowOpacity: 0.5
 			
 		}
 

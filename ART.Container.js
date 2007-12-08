@@ -102,7 +102,7 @@ ART.Container = new Class({
 			if (theme.height) this.center.setStyles({height: theme.height});
 			if (theme.width) this.center.setStyles({width: theme.width});
 		}
-		theme = new ART.Theme($merge(this.theme, theme, {
+		theme = this.theme = new ART.Theme($merge(this.theme, theme, {
 			title: this.top.offsetHeight,
 			status: this.bottom.offsetHeight,
 			height: this.center.offsetHeight,

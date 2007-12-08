@@ -124,7 +124,6 @@ ART.Window = new Class({
 				'position': 'absolute',
 				'display': 'none',
 				'opacity': this.options.mask.opacity,
-				'border-width': this.theme.border + 'px',
 				'border-style': 'solid',
 				'border-color': this.options.mask.borderColor,
 				'background-color': this.options.mask.color
@@ -178,6 +177,7 @@ ART.Window = new Class({
 			width: this.wrapper.offsetWidth,
 			top: this.wrapper.style.top.toInt() - border,
 			left: this.wrapper.style.left.toInt() - border,
+			'border-width': border,
 			display: 'block'
 		});
 	},
