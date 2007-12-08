@@ -1,3 +1,18 @@
+ART.Themes.ToolTip = {};
+
+ART.Themes.ToolTip.yellow = {
+	
+	shadow: 5,
+	shadowOpacity: 0.3,
+	topLeftRadius: 0,
+	titleColor: '#F9F4DE',
+	overlayColor: ['#F9F4DE', '#F9EFBD'],
+	statusColor: '#F9EFBD',
+	reflectionColors: ['#F9F8F3', '#F9F8F3']
+	
+};
+
+
 ART.Tips = new Class({
 	
 	Implements: [Events, Options],
@@ -15,7 +30,7 @@ ART.Tips = new Class({
 		className: null,
 		offsets: {'x': 16, 'y': 16},
 		fixed: false,
-		theme: ART.Themes.tip,
+		theme: ART.Themes.ToolTip.yellow,
 		contents: [],
 		titles: [],
 		statuses: []

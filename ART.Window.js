@@ -53,6 +53,96 @@ ART.WM = {
 	
 };
 
+ART.Themes.Window = {};
+
+ART.Themes.Window.normal = {
+
+	radius: 4,
+	
+	titleColor: ['#DDD', '#AAA'],
+	
+	statusColor: ['#DDD', '#AAA'],
+	
+	overlayColor: '#FFF',
+	
+	shadowColor: '#000',
+	shadowOpacity: 1,
+
+	borderColor: ['#333', '#000'],
+	borderOpacity: 0.3,
+
+	reflectionColors: ['#F6F6F6', '#EEEEEE'],
+
+	lineColors: ['#999', '#AAA']
+
+};
+
+ART.Themes.Window.blur = {
+	
+	titleColor: '#EEE',
+	statusColor: '#EEE',
+
+	shadowColor: '#000',
+	shadowOpacity: 0.5,
+
+	borderColor: '#000',
+	borderOpacity: 0.1,
+
+	reflectionColors: ['#FFF', '#FFF'],
+
+	lineColors: ['#DDD', '#DDD']
+};
+
+ART.Themes.HUD = {};
+
+ART.Themes.HUD.normal = {
+	
+	radius: 5,
+	
+	overlayColor: '#111',
+	overlayOpacity: 0.9,
+
+	reflection: 0,
+
+	borderColor: '#777',
+	borderOpacity: 0.6,
+
+	titleColor: ['#444', '#222'],
+	titleOpacity: 0.9,
+
+	lineColors: ['#333', '#555'],
+
+	statusColor: ['#444', '#222'],
+	statusOpacity: 0.9,
+
+	shadow: 10,
+	shadowOpacity: 1
+};
+
+ART.Themes.HUD.blur = {
+	
+	overlayColor: '#111',
+	overlayOpacity: 0.8,
+
+	reflection: 0,
+
+	borderColor: '#777',
+	borderOpacity: 0.4,
+
+	radius: 5,
+
+	titleColor: '#111',
+	titleOpacity: 0.8,
+
+	lineColors: ['#333', '#333'],
+
+	statusColor: '#111',
+	statusOpacity: 0.8,
+
+	shadowOpacity: 0.5
+	
+};
+
 ART.Window = new Class({
 	
 	Extends: ART.Container,
@@ -83,8 +173,8 @@ ART.Window = new Class({
 			maxi: true
 		},
 		
-		blurTheme: ART.Themes.window.blur,
-		focusTheme: ART.Themes.window.focus
+		blurTheme: ART.Themes.Window.blur,
+		theme: ART.Themes.Window.normal
 
 	},
 	
@@ -154,16 +244,16 @@ ART.Window = new Class({
 		if (this.focused) return;
 		this.focused = true;
 		
-		this.container.addClass('art-window-focus').removeClass('art-window-blur');
+		this.container.removeClass('art-window-blur');
 		this.showOverflow();
-		this.draw(this.options.focusTheme);
+		this.draw(this.options.theme);
 	},
 	
 	blur: function(){
 		if (!this.focused) return;
 		this.focused = false;
 		
-		this.container.addClass('art-window-blur').removeClass('art-window-focus');
+		this.container.addClass('art-window-blur');
 		this.hideOverflow();
 		this.draw(this.options.blurTheme);
 	},

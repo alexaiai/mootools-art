@@ -17,7 +17,7 @@ ART.Container = new Class({
 			overflow: 'hidden'
 		},
 		
-		theme: ART.Themes.window.focus
+		theme: {}
 	},
 	
 	initialize: function(options, component){
