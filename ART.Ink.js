@@ -94,8 +94,9 @@ ART.Ink = new Class({
 	fill: function(color, height){
 		if (typeof color != 'string'){
 			var gradient = this.canvas.createLinearGradient(0, 0, 0, height);
+			var len = color.length;
 			color.each(function(color, i){
-				gradient.addColorStop(i, color);
+				gradient.addColorStop(i / (len - 1), color);
 			});
 			color = gradient;
 		}

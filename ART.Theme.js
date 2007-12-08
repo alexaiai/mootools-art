@@ -157,16 +157,6 @@ ART.Themes = new Hash({
 		reflectionColors: ['#F9F8F3', '#F9F8F3']
 	},
 	
-	button: {
-		shadow: 2,
-		reflection: 0,
-		shadowColor: '#FFF',
-		shadowOpacity: 2,
-		overlayColor: ['#fefefe', '#a9a9a9'],
-		borderOpacity: 0.55,
-		radius: 2
-	},
-	
 	menu: {
 		overlayColor: '#FFF',
 		overlayOpacity: 0.9,

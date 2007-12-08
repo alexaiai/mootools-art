@@ -54,23 +54,12 @@ ART.Tips = new Class({
 		
 		var title = this.titles[i], content = this.contents[i], status = this.statuses[i];
 		
-		var holder = new Element('div', {
-			'class': this.options.className || '' + ' art-tips-content'
-		}).setStyles({
-			visibility: 'hidden',
-			position: 'absolute'
-		}).setContent(content).inject(this.toolTip.container);
-		
-		var height = holder.offsetHeight, width = holder.offsetWidth;
-		
 		this.toolTip.setContent(content);
 		
 		if (title) this.toolTip.setTitle(title);
 		if (status) this.toolTip.setStatus(status);
 		
-		this.toolTip.draw({height: height, width: width});
-		
-		holder.dispose();
+		this.toolTip.draw();
 		
 		$clear(this.timer);
 		this.timer = this.show.delay(this.options.showDelay, this);

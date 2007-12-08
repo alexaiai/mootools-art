@@ -11,8 +11,8 @@ ART.Container = new Class({
 		status: null,
 		
 		styles: {
-			height: 200,
-			width: 300,
+			height: 'auto',
+			width: 'auto',
 			position: 'relative',
 			overflow: 'hidden'
 		},
@@ -50,6 +50,11 @@ ART.Container = new Class({
 		if (options.title) this.setTitle(options.title);
 		if (options.content) this.setContent(options.content);
 		if (options.status) this.setStatus(options.status);
+		
+		var ofx = $extend(this.options.morph || {}, {link: 'cancel'});
+		
+		this.pfx = new Fx.Draw(this, ofx);
+		this.sfx = new Fx.Morph(this.container, ofx);
 		
 		arguments.callee.parent({
 			subject: this.container,
@@ -98,6 +103,7 @@ ART.Container = new Class({
 	},
 	
 	draw: function(theme){
+		this.container.setStyle('width', '100%');
 		if (theme){
 			if (theme.height) this.center.setStyles({height: theme.height});
 			if (theme.width) this.center.setStyles({width: theme.width});
@@ -110,11 +116,41 @@ ART.Container = new Class({
 		}));
 		this.container.setStyles({height: theme.outerHeight, width: theme.outerWidth});
 		var shadow = theme.shadow, border = theme.border;
+		
 		this.wrapper.setStyles({
-			top: shadow + border + theme.shadowOffsetY,
-			left: shadow + border + theme.shadowOffsetX
+			top: shadow + border + ((theme.shadowOffsetY > 0) ? 0 : theme.shadowOffsetY),
+			left: shadow + border + ((theme.shadowOffsetX > 0) ? 0 : theme.shadowOffsetX)
 		});
+		
 		this.paint.draw(theme);
+		return this;
+	},
+	
+	morph: function(properties){
+		if (!properties) return this;
+		var pstyle = {};
+		for (var p in this.theme){
+			var pp = properties[p];
+			if ($defined(pp)){
+				pstyle[p] = properties[p];
+				delete properties[p];
+			}
+		}
+		
+		if (Hash.getLength(pstyle)){
+			this.draw({drawShadow: false});
+			this.pfx.start(pstyle).chain(function(){
+				this.draw({drawShadow: true});
+			}.bind(this));
+		} 
+		
+		var opacity = properties.opacity;
+		if (Browser.Engine.trident && $chk(opacity)){
+			this.container.setStyle('opacity', opacity);
+			delete properties.opacity;
+		}
+		
+		if (Hash.getLength(properties)) this.sfx.start(properties);
 		return this;
 	}
 	

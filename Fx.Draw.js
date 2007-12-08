@@ -22,7 +22,7 @@ Fx.Draw = new Class({
 		if (!this.check(properties)) return this;
 		var from = {}, to = {};
 		for (var p in properties){
-			from[p] = this.paint.style[p];
+			from[p] = this.paint.theme[p];
 			to[p] = properties[p];
 		}
 		return arguments.callee.parent(from, to);

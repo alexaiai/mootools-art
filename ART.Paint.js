@@ -20,7 +20,9 @@ ART.Paint = new Class({
 		
 		switch ($type(color)){
 			case 'string': return rgba(color, alpha);
-			case 'array': return [rgba(color[0], alpha), rgba(color[1], alpha)];
+			case 'array': return color.map(function(c){
+				return rgba(c, alpha);
+			});
 		}
 		
 		return '#000';
@@ -55,7 +57,7 @@ ART.Paint = new Class({
 		}, this);
 		else this.translate({x: shadow, y: shadow});
 		
-		this.translate({x: style.shadowOffsetX, y: style.shadowOffsetY});
+		this.translate({x: (style.shadowOffsetX > 0) ? 0 : style.shadowOffsetX, y: (style.shadowOffsetY > 0) ? 0 : style.shadowOffsetY});
 		
 		//border
 		

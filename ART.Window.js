@@ -143,7 +143,7 @@ ART.Window = new Class({
 	},
 	
 	hideOverflow: function(){
-		if (Browser.Engine.gecko && Browser.Platform.mac) this.center.setStyle('overflow', 'hidden');
+		this.center.setStyle('overflow', 'hidden');
 	},
 	
 	showOverflow: function(){
@@ -173,19 +173,19 @@ ART.Window = new Class({
 		var border = this.theme.border;
 		
 		this.mask.setStyles({
-			height: this.wrapper.offsetHeight,
-			width: this.wrapper.offsetWidth,
-			top: this.wrapper.style.top.toInt() - border,
-			left: this.wrapper.style.left.toInt() - border,
+			'height': this.wrapper.offsetHeight,
+			'width': this.wrapper.offsetWidth,
+			'top': this.wrapper.style.top.toInt() - border,
+			'left': this.wrapper.style.left.toInt() - border,
 			'border-width': border,
-			display: 'block'
+			'display': 'block'
 		});
 	},
 	
-	remask: function(){
+	remask: function(drawShadow){
 		this.draw({
 			height: this.mask.clientHeight - this.top.offsetHeight - this.bottom.offsetHeight,
-			width: this.mask.clientWidth
+			width: this.mask.clientWidth, drawShadow: drawShadow
 		});
 	},
 	
@@ -211,14 +211,14 @@ ART.Window = new Class({
 		if (buttons.maxi) this.maxi.addEvents({
 			mousedown: stop,
 			mouseup: function(){
-				self.draw({height: lim.y[1], width: lim.x[1]});
+				self.morph({height: lim.y[1], width: lim.x[1]});
 			}
 		});
 		
 		if (buttons.mini) this.mini.addEvents({
 			mousedown: stop,
 			mouseup: function(){
-				self.draw({height: lim.y[0], width: lim.x[0]});
+				self.morph({height: lim.y[0], width: lim.x[0]});
 			}
 		});
 		
@@ -237,19 +237,25 @@ ART.Window = new Class({
 		
 		var self = this;
 		
+		self.mask.setStyle('visibility', 'hidden');
+		
 		new Drag(this.mask, {
 			limit: {x: [this.minw, this.maxw], y: [this.minh, this.maxh]},
 			modifiers: {x: 'width', y: 'height'},
 			onBeforeStart: function(){
 				self.hideOverflow();
 				self.showMask();
+				self.draw({drawShadow: false});
 			},
 			onCancel: function(){
 				self.showOverflow();
 				self.hideMask();
 			},
+			onDrag: function(){
+				self.remask(false);
+			},
 			onComplete: function(){
-				self.remask();
+				self.remask(true);
 				self.hideMask();
 				self.showOverflow();
 			},
