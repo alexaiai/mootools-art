@@ -124,12 +124,8 @@ ART.Themes.HUD.blur = {
 	overlayColor: '#111',
 	overlayOpacity: 0.8,
 
-	reflection: 0,
-
 	borderColor: '#777',
-	borderOpacity: 0.4,
-
-	radius: 5,
+	borderOpacity: 0.3,
 
 	titleColor: '#111',
 	titleOpacity: 0.8,
@@ -233,7 +229,7 @@ ART.Window = new Class({
 	},
 	
 	hideOverflow: function(){
-		this.center.setStyle('overflow', 'hidden');
+		if (Browser.Engine.gecko && Browser.Platform.mac) this.center.setStyle('overflow', 'hidden');
 	},
 	
 	showOverflow: function(){
@@ -275,7 +271,7 @@ ART.Window = new Class({
 	remask: function(drawShadow){
 		this.draw({
 			height: this.mask.clientHeight - this.top.offsetHeight - this.bottom.offsetHeight,
-			width: this.mask.clientWidth, drawShadow: drawShadow
+			width: this.mask.clientWidth, drawShadow: (Browser.Engine.webkit420) ? true : drawShadow
 		});
 	},
 	
@@ -327,15 +323,16 @@ ART.Window = new Class({
 		
 		var self = this;
 		
-		self.mask.setStyle('visibility', 'hidden');
+		self.mask.set('opacity', 0, true);
 		
 		new Drag(this.mask, {
 			limit: {x: [this.minw, this.maxw], y: [this.minh, this.maxh]},
 			modifiers: {x: 'width', y: 'height'},
 			onBeforeStart: function(){
-				self.hideOverflow();
 				self.showMask();
-				self.draw({drawShadow: false});
+			},
+			onStart: function(){
+				self.hideOverflow();
 			},
 			onCancel: function(){
 				self.showOverflow();
@@ -345,9 +342,9 @@ ART.Window = new Class({
 				self.remask(false);
 			},
 			onComplete: function(){
+				self.showOverflow();
 				self.remask(true);
 				self.hideMask();
-				self.showOverflow();
 			},
 			handle: this.handle
 		});

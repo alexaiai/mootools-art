@@ -10,7 +10,7 @@ ART.Themes.MetalTextInput.normal = {
 	borderColor: ['#000', '#555'],
 	borderOpacity: 0.5,
 	shadowOffsetY: -1,
-	radius: 2
+	radius: 3
 };
 
 ART.Themes.MetalTextInput.focus = {
