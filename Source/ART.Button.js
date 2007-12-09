@@ -39,7 +39,9 @@ ART.Button = new Class({
 		
 		theme: ART.Themes.MetalButton.normal,
 		activeTheme: ART.Themes.MetalButton.active,
-		overTheme: ART.Themes.MetalButton.over
+		overTheme: ART.Themes.MetalButton.over,
+		
+		input: null
 	},
 	
 	initialize: function(options){
@@ -55,6 +57,30 @@ ART.Button = new Class({
 			mouseenter: this.bound.mouseEnter,
 			mouseleave: this.bound.mouseLeave
 		});
+		
+		this.input = new Element('a', {href: '#'}).addEvents({
+			click: function(e){
+				e.preventDefault();
+			},
+			focus: this.bound.mouseEnter,
+			blur: this.bound.mouseLeave,
+			keydown: function(e){
+				if (e.key == 'enter' || e.key == 'space') this.bound.mouseDown(e);
+			}.bind(this),
+			keyup: function(e){
+				if (e.key == 'enter' || e.key == 'space') this.bound.mouseUp(e);
+			}.bind(this)
+		});
+		
+		var input = this.options.input;
+		
+		switch ($type(input)){
+			case 'text': this.input.set('html', input); break;
+			case 'element': this.input.set('html', input.value);
+		};
+		this.setContent(this.input);
+		this.center.cloneEvents(input);
+		if ($type(input) == 'element' && input.parentNode) this.replaces(input);
 	},
 	
 	mouseDown: function(e){

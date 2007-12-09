@@ -5,6 +5,7 @@
 	margin: 0;
 	padding: 0;
 	cursor: default;
+	outline: none;
 }
 
 /* @end */
@@ -17,6 +18,14 @@
 
 .art-button-content {
 	padding: 4px 12px 6px;
+}
+
+.art-button-content a:link,
+.art-button-content a:visited,
+.art-button-content a:hover,
+.art-button-content a:active {
+	color: inherit;
+	text-decoration: none;
 }
 
 /* @end */

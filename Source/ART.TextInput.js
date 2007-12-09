@@ -26,14 +26,13 @@ ART.TextInput = new Class({
 		theme: ART.Themes.MetalTextInput.normal,
 		focusTheme: ART.Themes.MetalTextInput.focus,
 		input: null,
-		name: null
+		name: null,
+		type: null
 	},
 	
 	initialize: function(options){
 		arguments.callee.parent(options, 'textinput');
-		this.input = $(this.options.input) || new Element('input', {type: 'text', name: this.options.name || ''});
-		
-		this.input.addClass('art-textinput-input');
+		this.input = $(this.options.input) || new Element('input', {type: this.options.type || 'text', name: this.options.name || ''});
 		
 		this.input.setStyles({
 			outline: 'none',
