@@ -36,10 +36,10 @@ ART.TextInput = new Class({
 		
 		this.input.setStyles({
 			outline: 'none',
-			border: 0,
-			margin: 0,
 			background: 'none',
-			resize: 'none'
+			resize: 'none',
+			border: 0,
+			margin: 0
 		}).addEvents({
 			focus: this.onFocus.bind(this),
 			blur: this.onBlur.bind(this)
