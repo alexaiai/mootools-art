@@ -53,9 +53,9 @@ ART.WM = {
 	
 };
 
-ART.Themes.Window = {};
+ART.Themes.MetalWindow = {};
 
-ART.Themes.Window.normal = {
+ART.Themes.MetalWindow.normal = {
 
 	radius: 4,
 	
@@ -77,7 +77,7 @@ ART.Themes.Window.normal = {
 
 };
 
-ART.Themes.Window.blur = {
+ART.Themes.MetalWindow.blur = {
 	
 	titleColor: '#EEE',
 	statusColor: '#EEE',
@@ -173,8 +173,8 @@ ART.Window = new Class({
 			maxi: true
 		},
 		
-		blurTheme: ART.Themes.Window.blur,
-		theme: ART.Themes.Window.normal
+		blurTheme: ART.Themes.MetalWindow.blur,
+		theme: ART.Themes.MetalWindow.normal
 
 	},
 	

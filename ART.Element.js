@@ -38,6 +38,11 @@ ART.Element = new Class({
 		return this;
 	},
 	
+	replaces: function(element){
+		this.subject.replaces(element);
+		return this;
+	},
+	
 	adopt: function(){
 		Array.flatten(arguments).each(function(element){
 			this.grab(element);

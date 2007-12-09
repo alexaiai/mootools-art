@@ -67,7 +67,13 @@ ART.Container = new Class({
 		if (!element) return this;
 		this.container.replaces(element);
 		this.setContent(element);
+		this.draw();
 		return this;
+	},
+	
+	replaces: function(element){
+		arguments.callee.parent(element);
+		return this.draw();
 	},
 	
 	setTitle: function(content){

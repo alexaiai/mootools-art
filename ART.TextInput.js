@@ -1,0 +1,72 @@
+ART.Themes.MetalTextInput = {};
+
+ART.Themes.MetalTextInput.normal = {
+	shadow: 2,
+	reflection: 1,
+	reflectionColors: ['#ccc', '#ccc'],
+	shadowColor: '#FFF',
+	shadowOpacity: 2,
+	overlayColor: '#fff',
+	borderColor: ['#000', '#777'],
+	borderOpacity: 0.5,
+	shadowOffsetY: -1,
+	radius: 2
+};
+
+ART.Themes.MetalTextInput.focus = {
+	borderOpacity: 0.7,
+	borderColor: ['#0C81CE', '#2BA2F1']
+};
+
+ART.TextInput = new Class({
+	
+	Extends: ART.Container,
+	
+	options: {
+		theme: ART.Themes.MetalTextInput.normal,
+		focusTheme: ART.Themes.MetalTextInput.focus,
+		input: null,
+		name: null
+	},
+	
+	initialize: function(options){
+		arguments.callee.parent(options, 'textinput');
+		this.input = $(this.options.input) || new Element('input', {type: 'text', name: this.options.name || ''});
+		
+		this.input.addClass('art-textinput-input');
+		
+		this.input.setStyles({
+			outline: 'none',
+			border: 0,
+			margin: 0,
+			background: 'none',
+			resize: 'none'
+		}).addEvents({
+			focus: this.onFocus.bind(this),
+			blur: this.onBlur.bind(this)
+		});
+		
+		(this.input.parentNode) ? this.wraps(this.input) : this.setContent(this.input);
+	},
+	
+	focus: function(){
+		this.input.focus();
+		this.onFocus();
+	},
+	
+	blur: function(){
+		this.input.blur();
+		this.onBlur();
+	},
+	
+	onFocus: function(){
+		this.container.addClass('art-textinput-focus');
+		return this.draw(this.options.focusTheme);
+	},
+	
+	onBlur: function(){
+		this.container.removeClass('art-textinput-focus');
+		return this.draw(this.options.theme);
+	}
+	
+});

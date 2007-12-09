@@ -5,7 +5,7 @@ ART.Themes.MetalButton.normal = {
 	reflection: 0,
 	shadowColor: '#FFF',
 	shadowOpacity: 2,
-	overlayColor: ['#fefefe', '#a9a9a9'],
+	overlayColor: ['#fafafa', '#a9a9a9'],
 	borderColor: ['#000', '#222'],
 	borderOpacity: 0.4,
 	shadowOffsetY: -1,
@@ -13,15 +13,17 @@ ART.Themes.MetalButton.normal = {
 };
 
 ART.Themes.MetalButton.active = {
+	reflection: 1,
+	reflectionColors: ['#444'],
 	overlayColor: ['#555', '#bbb'],
 	borderOpacity: 0.7,
-	borderColor: ['#000', '#444'],
-	reflectionColors: ['#999', '#666']
+	borderColor: ['#000', '#444']
 };
 
 
 ART.Themes.MetalButton.over = {
-	borderOpacity: 0.6
+	borderOpacity: 0.7,
+	borderColor: ['#0C81CE', '#0C81CE']
 };
 
 ART.Button = new Class({
@@ -48,7 +50,6 @@ ART.Button = new Class({
 			mouseLeave: this.mouseLeave.bind(this)
 		};
 		arguments.callee.parent(options, 'button');
-		
 		this.center.addEvents({
 			mousedown: this.bound.mouseDown,
 			mouseenter: this.bound.mouseEnter,
@@ -91,6 +92,14 @@ ART.Button = new Class({
 		if (this.options.overTheme) this.draw(this.options.theme);
 		this.container.removeClass('art-button-over');
 		this.fireEvent('onMouseLeave', e);
+	},
+	
+	enable: function(){
+		
+	},
+	
+	disable: function(){
+		
 	}
 	
 });
