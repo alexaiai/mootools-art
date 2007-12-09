@@ -244,7 +244,7 @@ ART.Window = new Class({
 		if (this.focused) return;
 		this.focused = true;
 		
-		this.container.removeClass('art-window-blur');
+		this.wrapper.removeClass('art-window-blur');
 		this.showOverflow();
 		this.draw(this.options.theme);
 	},
@@ -253,7 +253,7 @@ ART.Window = new Class({
 		if (!this.focused) return;
 		this.focused = false;
 		
-		this.container.addClass('art-window-blur');
+		this.wrapper.addClass('art-window-blur');
 		this.hideOverflow();
 		this.draw(this.options.blurTheme);
 	},
@@ -359,7 +359,7 @@ ART.Window = new Class({
 		if (this.madeDraggable) return;
 		this.madeDraggable = true;
 		
-		new Drag.Move(this.container, {handles: [this.top, this.bottom]});
+		new Drag.Move(this.container, {handle: [this.top, this.bottom]});
 		
 	}
 	

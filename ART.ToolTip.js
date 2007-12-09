@@ -122,7 +122,7 @@ ART.ToolTip = new Class({
 	},
 
 	locate: function(event){
-		var doc = window.getOffsetSize();
+		var doc = window.getSize();
 		var scroll = window.getScroll();
 		var tip = {'x': this.container.offsetWidth, 'y': this.container.offsetHeight};
 		var prop = {'x': 'left', 'y': 'top'};

@@ -5,9 +5,9 @@ ART.Themes.MetalTextInput.normal = {
 	reflection: 1,
 	reflectionColors: ['#ccc', '#ccc'],
 	shadowColor: '#FFF',
-	shadowOpacity: 2,
+	shadowOpacity: 1,
 	overlayColor: '#fff',
-	borderColor: ['#000', '#777'],
+	borderColor: ['#000', '#555'],
 	borderOpacity: 0.5,
 	shadowOffsetY: -1,
 	radius: 2
@@ -60,12 +60,12 @@ ART.TextInput = new Class({
 	},
 	
 	onFocus: function(){
-		this.container.addClass('art-textinput-focus');
+		this.wrapper.addClass('art-textinput-focus');
 		return this.draw(this.options.focusTheme);
 	},
 	
 	onBlur: function(){
-		this.container.removeClass('art-textinput-focus');
+		this.wrapper.removeClass('art-textinput-focus');
 		return this.draw(this.options.theme);
 	}
 	
