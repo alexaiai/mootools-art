@@ -1,0 +1,129 @@
+/* @group General */
+
+.art-container * {
+	font: 11px/1 Verdana;
+	margin: 0;
+	padding: 0;
+	cursor: default;
+}
+
+/* @end */
+
+/* @group Button */
+
+.art-button {
+	text-align: center;
+}
+
+.art-button-content {
+	padding: 4px 12px 6px;
+}
+
+/* @end */
+
+/* @group TextInput */
+
+.art-textinput input, .art-textinput textarea {
+	font-family: Verdana;
+	font-size: 11px;
+	padding: 4px 6px 4px;
+}
+
+/* @end */
+
+/* @group ToolTip */
+
+.art-tooltip {
+	font-size: 10px;
+}
+
+.art-tooltip-content, .art-tooltip-title, .art-tooltip-status {
+	padding: 3px 6px 4px;
+}
+
+/* @end */
+
+/* @group Window */
+
+.art-window-title {
+	padding: 5px 8px 5px;
+}
+
+.art-window-content {
+	padding: 10px;
+}
+
+.art-window-content p {
+	line-height: 1.5;
+	margin-bottom: 1em;
+}
+
+.art-window-status {
+	line-height: 1.3;
+	padding: 3px 8px;
+}
+
+/* the resize handle button is automatically put on the bottom-right of the window */
+
+.art-window-button-handle {
+	background-image: url(../Images/button-handle.png);
+	height: 18px;
+	width: 18px;
+}
+
+/* traffic button container */
+
+.art-window-buttons {
+	top: 5px;
+	right: 7px;
+	height: 13px;
+	width: 48px;
+}
+
+.art-window-blur .art-window-buttons {
+	opacity: 0.5;
+}
+
+.art-window-buttons:hover .art-window-button {
+	background-position: 0 0;
+}
+
+/* default state buttons */
+
+.art-window-button {
+	top: 0;
+	height: 13px;
+	width: 12px;
+	background-position: 0 -13px;
+}
+
+.art-window-button-close {
+	background-image: url(../Images/button-close.png);
+	left: 36px;
+}
+
+.art-window-button-maxi {
+	background-image: url(../Images/button-maxi.png);
+	left: 0;
+}
+
+/* blurred state buttons */
+
+.art-window-button-mini {
+	background-image: url(../Images/button-mini.png);
+	left: 18px;
+}
+
+.art-window-blur .art-window-button-close {
+	background-image: url(../Images/button-close-blur.png);
+}
+
+.art-window-blur .art-window-button-maxi {
+	background-image: url(../Images/button-maxi-blur.png);
+}
+
+.art-window-blur .art-window-button-mini {
+	background-image: url(../Images/button-mini-blur.png);
+}
+
+/* @end */
