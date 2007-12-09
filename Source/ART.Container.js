@@ -22,14 +22,14 @@ ART.Container = new Class({
 	},
 	
 	initialize: function(options, component){
-		this.component = component || 'container';
+		this.component = (component) ? ' art-' + component : '';
 		this.setOptions(options);
 		options = this.options;
 		this.theme = options.theme;
 		
 		var absZero = {position: 'absolute', top: 0, left: 0};
 		
-		this.container = new Element('div', {'class': 'art-' + this.component}).setStyles({
+		this.container = new Element('div', {'class': 'art-container' + this.component}).setStyles({
 			position: options.styles.position, top: options.styles.top, left: options.styles.left
 		});
 		if (options.id) this.container.set('id', options.id);
