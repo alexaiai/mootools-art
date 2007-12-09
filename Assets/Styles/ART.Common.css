@@ -32,7 +32,8 @@
 
 /* @group TextInput */
 
-.art-textinput input, .art-textinput textarea {
+.art-textinput input,
+.art-textinput textarea {
 	font-family: Verdana;
 	font-size: 11px;
 	padding: 4px 6px 4px;
@@ -46,7 +47,9 @@
 	font-size: 10px;
 }
 
-.art-tooltip-content, .art-tooltip-title, .art-tooltip-status {
+.art-tooltip-content,
+.art-tooltip-title,
+.art-tooltip-status {
 	padding: 3px 6px 4px;
 }
 
