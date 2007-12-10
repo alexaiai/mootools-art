@@ -60,11 +60,8 @@
 	padding: 5px 8px 5px;
 }
 
-.art-window-content * {
-	line-height: 1.5;
-}
-
 .art-window-content p {
+	line-height: 1.5;
 	margin-bottom: 1em;
 }
 
