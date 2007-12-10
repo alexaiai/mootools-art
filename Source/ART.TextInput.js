@@ -27,7 +27,8 @@ ART.TextInput = new Class({
 		focusTheme: ART.Themes.MetalTextInput.focus,
 		input: null,
 		name: null,
-		type: null
+		type: null,
+		changeDelay: 500
 	},
 	
 	initialize: function(options){
@@ -42,15 +43,33 @@ ART.TextInput = new Class({
 			margin: 0
 		}).addEvents({
 			focus: this.onFocus.bind(this),
-			blur: this.onBlur.bind(this)
+			blur: this.onBlur.bind(this),
+			keyup: this.checkChange.bind(this)
 		});
 		
 		(this.input.parentNode) ? this.wraps(this.input) : this.setContent(this.input);
+		
+		this.value = this.getValue();
+	},
+	
+	getValue: function(){
+		return this.input.value.clean();
 	},
 	
 	focus: function(){
 		this.input.focus();
 		this.onFocus();
+	},
+	
+	checkChange: function(e){
+		if (!this.$events.onChange) return;
+		$clear(this.changeTimer);
+		if (this.value != this.getValue()) this.changeTimer = this.onChange.delay(this.options.changeDelay, this);
+	},
+	
+	onChange: function(){
+		this.value = this.getValue();
+		this.fireEvent('onChange');
 	},
 	
 	blur: function(){
