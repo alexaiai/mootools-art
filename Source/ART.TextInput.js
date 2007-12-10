@@ -7,10 +7,10 @@ ART.Themes.MetalTextInput.normal = {
 	shadowColor: '#FFF',
 	shadowOpacity: 1,
 	overlayColor: '#fff',
-	borderColor: ['#000', '#555'],
+	borderColor: ['#000', '#333'],
 	borderOpacity: 0.5,
 	shadowOffsetY: -1,
-	radius: 3
+	radius: 1
 };
 
 ART.Themes.MetalTextInput.focus = {
@@ -53,7 +53,7 @@ ART.TextInput = new Class({
 	},
 	
 	getValue: function(){
-		return this.input.value.clean();
+		return this.input.value.trim();
 	},
 	
 	focus: function(){

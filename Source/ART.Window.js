@@ -56,7 +56,7 @@ ART.Themes.MetalWindow = {};
 
 ART.Themes.MetalWindow.normal = {
 
-	radius: 4,
+	radius: 5,
 	
 	titleColor: ['#DDD', '#AAA'],
 	
