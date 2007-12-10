@@ -31,13 +31,12 @@ ART.WM = {
 	},
 	
 	include: function(win){
-		
-		$$(win.top, win.bottom, win.maxi, win.mini, win.close, win.handle).addEvent('mousedown', function(){
-			ART.WM.refocus(win);
-		});
-		
 		ART.WM.init();
 		ART.WM.refocus(win);
+	},
+	
+	remove: function(win){
+		ART.WM.windows.remove(win);
 	},
 	
 	refocus: function(win){
@@ -154,14 +153,9 @@ ART.Window = new Class({
 		
 		resizable: true,
 		draggable: true,
+		showContentWhileResizing: true,
 		
 		limit: {x: [200, 400], y: [200, 300]},
-		
-		mask: {
-			opacity: 0.5,
-			color: '#9A9FA3',
-			borderColor: '#454D59'
-		},
 		
 		buttons: {
 			close: true,
@@ -182,13 +176,15 @@ ART.Window = new Class({
 		
 		if (buttons){
 			
+			this.buttons = {};
+			
 			this.buttonsWrapper = new Element('div', {
 				'class': 'art-window-buttons'
 			}).setStyles({position: 'absolute', overflow: 'hidden'}).inject(this.wrapper);
 			
 			for (var button in buttons){
 				if (!buttons[button]) continue;
-				this[button] = new Element('div', {
+				this.buttons[button] = new Element('div', {
 					'class': 'art-window-button art-window-button-' + button
 				}).setStyles({overflow: 'hidden', position: 'absolute', 'background-repeat': 'no-repeat'}).inject(this.buttonsWrapper);
 			}
@@ -206,18 +202,12 @@ ART.Window = new Class({
 				right: 0
 			}).inject(this.wrapper);
 			
-			this.mask = new Element('div', {'class': 'art-window-mask', styles: {
-				'position': 'absolute',
-				'display': 'none',
-				'opacity': this.options.mask.opacity,
-				'border-style': 'solid',
-				'border-color': this.options.mask.borderColor,
-				'background-color': this.options.mask.color
+			this.mask = new Element('div', {styles: {
+				position: 'absolute',
+				display: 'none'
 			}}).inject(this.container);
 			
 		}
-		
-		ART.WM.include(this);
 	},
 	
 	onInject: function(){
@@ -228,17 +218,11 @@ ART.Window = new Class({
 		arguments.callee.parent();
 	},
 	
-	hideOverflow: function(){
-		if (Browser.Engine.gecko && Browser.Platform.mac) this.center.setStyle('overflow', 'hidden');
-	},
-	
-	showOverflow: function(){
-		this.center.setStyle('overflow', this.options.styles.overflow);
-	},
-	
 	focus: function(){
 		if (this.focused) return;
 		this.focused = true;
+		
+		ART.WM.refocus(this);
 		
 		this.wrapper.removeClass('art-window-blur');
 		this.showOverflow();
@@ -254,18 +238,71 @@ ART.Window = new Class({
 		this.draw(this.options.blurTheme);
 	},
 	
+	open: function(element, position){
+		
+		if (this.opened) return this;
+		this.opened = true;
+		ART.WM.include(this);
+		
+		this.hideOverflow();
+		this.inject(element);
+		
+		position = position || this.container.getRelativePosition();
+		
+		this.container.setStyle('opacity', 0);
+		this.container.position({x: position.x, y: position.y - 10});
+		return this.morph({opacity: 1, top: position.y}, function(){
+			this.showOverflow();
+		});
+	},
+	
+	close: function(){
+		if (!this.opened) return this;
+		this.opened = false;
+		
+		ART.WM.remove(this);
+		
+		this.hideOverflow();
+		
+		var position = this.container.getRelativePosition();
+		
+		this.container.setStyle('opacity', 1);
+		return this.morph({opacity: 0, top: position.y + 10}, function(){
+			this.container.position({x: position.x, y: position.y}).dispose();
+		}.bind(this));
+	},
+	
 	showMask: function(){
 		
 		var border = this.theme.border;
 		
 		this.mask.setStyles({
-			'height': this.wrapper.offsetHeight,
-			'width': this.wrapper.offsetWidth,
-			'top': this.wrapper.style.top.toInt() - border,
-			'left': this.wrapper.style.left.toInt() - border,
-			'border-width': border,
-			'display': 'block'
+			height: this.wrapper.offsetHeight,
+			width: this.wrapper.offsetWidth,
+			top: this.wrapper.style.top.toInt(),
+			left: this.wrapper.style.left.toInt(),
+			display: 'block'
 		});
+	},
+	
+	hideMask: function(){
+		this.mask.setStyles({display: 'none'});
+	},
+	
+	showCenter: function(){
+		this.center.setStyle('visibility', 'visible');
+	},
+	
+	hideCenter: function(){
+		this.center.setStyle('visibility', 'hidden');
+	},
+	
+	hideOverflow: function(){
+		if (Browser.Engine.gecko && Browser.Platform.mac) this.center.setStyle('overflow', 'hidden');
+	},
+	
+	showOverflow: function(){
+		if (this.focused) this.center.setStyle('overflow', this.options.styles.overflow);
 	},
 	
 	remask: function(drawShadow){
@@ -273,10 +310,6 @@ ART.Window = new Class({
 			height: this.mask.clientHeight - this.top.offsetHeight - this.bottom.offsetHeight,
 			width: this.mask.clientWidth, drawShadow: (Browser.Engine.webkit420) ? true : drawShadow
 		});
-	},
-	
-	hideMask: function(){
-		this.mask.setStyles({display: 'none'});
 	},
 	
 	computeSizes: function(){
@@ -290,28 +323,21 @@ ART.Window = new Class({
 	attachButtonEvents: function(){
 		var self = this, lim = this.options.limit, buttons = this.options.buttons;
 		
-		var stop = function(){
-			return false;
-		};
-		
-		if (buttons.maxi) this.maxi.addEvents({
-			mousedown: stop,
+		if (buttons.maxi) this.buttons.maxi.addEvents({
 			mouseup: function(){
 				self.morph({height: lim.y[1], width: lim.x[1]});
 			}
 		});
 		
-		if (buttons.mini) this.mini.addEvents({
-			mousedown: stop,
+		if (buttons.mini) this.buttons.mini.addEvents({
 			mouseup: function(){
 				self.morph({height: lim.y[0], width: lim.x[0]});
 			}
 		});
 		
-		if (buttons.close) this.close.addEvents({
-			mousedown: stop,
+		if (buttons.close) this.buttons.close.addEvents({
 			mouseup: function(){
-				self.container.dispose();
+				self.close();
 			}
 		});
 	},
@@ -323,8 +349,6 @@ ART.Window = new Class({
 		
 		var self = this;
 		
-		self.mask.set('opacity', 0, true);
-		
 		new Drag(this.mask, {
 			limit: {x: [this.minw, this.maxw], y: [this.minh, this.maxh]},
 			modifiers: {x: 'width', y: 'height'},
@@ -332,16 +356,17 @@ ART.Window = new Class({
 				self.showMask();
 			},
 			onStart: function(){
+				if (!self.options.showContentWhileResizing) self.hideCenter();
 				self.hideOverflow();
 			},
 			onCancel: function(){
-				self.showOverflow();
 				self.hideMask();
 			},
 			onDrag: function(){
 				self.remask(false);
 			},
 			onComplete: function(){
+				self.showCenter();
 				self.showOverflow();
 				self.remask(true);
 				self.hideMask();

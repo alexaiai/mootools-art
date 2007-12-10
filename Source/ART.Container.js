@@ -130,8 +130,17 @@ ART.Container = new Class({
 		return this;
 	},
 	
-	morph: function(properties){
+	morph: function(properties, callback){
 		if (!properties) return this;
+		
+		var self = this;
+		
+		var cb = function(){
+			if (arguments.callee.done) return;
+			arguments.callee.done = true;
+			if (callback) callback.call(self);
+		};
+		
 		var pstyle = {};
 		for (var p in this.theme){
 			var pp = properties[p];
@@ -144,17 +153,12 @@ ART.Container = new Class({
 		if (Hash.getLength(pstyle)){
 			this.draw({drawShadow: false});
 			this.pfx.start(pstyle).chain(function(){
-				this.draw({drawShadow: true});
-			}.bind(this));
-		} 
-		
-		var opacity = properties.opacity;
-		if (Browser.Engine.trident && $chk(opacity)){
-			this.container.setStyle('opacity', opacity);
-			delete properties.opacity;
+				self.draw({drawShadow: true});
+				cb();
+			});
 		}
 		
-		if (Hash.getLength(properties)) this.sfx.start(properties);
+		if (Hash.getLength(properties)) this.sfx.start(properties).chain(cb);
 		return this;
 	}
 	
