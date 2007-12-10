@@ -79,7 +79,6 @@ ART.Button = new Class({
 			case 'element': this.input.set('html', input.value);
 		};
 		this.setContent(this.input);
-		this.center.cloneEvents(input);
 		if ($type(input) == 'element' && input.parentNode) this.replaces(input);
 	},
 	
@@ -88,6 +87,7 @@ ART.Button = new Class({
 		this.center.removeEvent('mouseleave', this.bound.mouseLeave);
 		this.center.removeEvent('mouseenter', this.bound.mouseEnter);
 		if (this.options.activeTheme) this.draw(this.options.activeTheme);
+		this.input.focus();
 		this.wrapper.addClass('art-button-active');
 		this.fireEvent('onMouseDown', e);
 		return false;
@@ -98,7 +98,7 @@ ART.Button = new Class({
 		this.center.addEvent('mouseenter', this.bound.mouseEnter);
 		if (e.target == this.container || this.container.hasChild(e.target)){
 			this.draw(this.options.theme);
-			this.fireEvent('onMouseUp', e);
+			this.fireEvent('onMouseUp', e).fireEvent('onClick', e);
 			this.mouseEnter(e);
 		} else {
 			this.draw(this.options.theme);
