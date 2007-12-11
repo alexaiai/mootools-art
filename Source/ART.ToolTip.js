@@ -1,3 +1,5 @@
+/* ART ToolTip */
+
 ART.Themes.ToolTip = {};
 
 ART.Themes.ToolTip.yellow = {

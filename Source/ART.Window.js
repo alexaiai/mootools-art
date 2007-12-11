@@ -1,3 +1,5 @@
+/* ART Window */
+
 ART.WM = {
 	
 	windows: [],

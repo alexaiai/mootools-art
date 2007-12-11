@@ -1,3 +1,5 @@
+/* ART Paint */
+
 ART.Paint = new Class({
 	
 	Extends: ART.Ink,

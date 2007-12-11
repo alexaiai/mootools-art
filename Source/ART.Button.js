@@ -1,3 +1,5 @@
+/* ART Button */
+
 ART.Themes.MetalButton = {};
 
 ART.Themes.MetalButton.normal = {

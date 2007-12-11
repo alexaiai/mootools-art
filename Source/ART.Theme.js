@@ -1,3 +1,5 @@
+/* ART Theme */
+
 ART.Theme = function(properties){
 	
 	var style = $extend({

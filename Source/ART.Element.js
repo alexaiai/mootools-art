@@ -1,3 +1,5 @@
+/* ART Element */
+
 var ART = {};
 
 Element.implement({

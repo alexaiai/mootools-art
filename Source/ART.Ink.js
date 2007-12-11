@@ -1,3 +1,5 @@
+/* ART Ink */
+
 ART.Ink = new Class({
 	
 	Extends: ART.Element,

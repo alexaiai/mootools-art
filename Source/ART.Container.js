@@ -1,3 +1,5 @@
+/* ART Container */
+
 ART.Container = new Class({
 	
 	Extends: ART.Element,

@@ -1,3 +1,5 @@
+/* ART TextInput */
+
 ART.Themes.MetalTextInput = {};
 
 ART.Themes.MetalTextInput.normal = {

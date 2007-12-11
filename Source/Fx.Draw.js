@@ -1,3 +1,5 @@
+/* Fx Draw */
+
 Fx.Draw = new Class({
 	
 	Extends: Fx,

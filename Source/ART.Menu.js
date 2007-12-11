@@ -1,3 +1,5 @@
+/* ART Menu */
+
 ART.Themes.MetalMenu = {
 	
 	radius: 4,
