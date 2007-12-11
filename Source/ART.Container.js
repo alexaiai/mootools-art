@@ -101,7 +101,7 @@ ART.Container = new Class({
 		var where = this[name];
 		if (where) where.dispose();
 		if (!part) return;
-		where = new Element('div', {'class': 'art-' + this.component + '-' + name}).inject(container);
+		where = new Element('div', {'class': this.component + '-' + name}).inject(container);
 		where.setContent(part);
 		this[name] = where;
 	},

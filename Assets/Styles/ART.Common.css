@@ -23,7 +23,7 @@
 .art-button-content a:active {
 	outline: none;
 	border: 0;
-	color: #111;
+	color: #222;
 	text-decoration: none;
 }
 
@@ -36,6 +36,12 @@
 	font-family: Verdana;
 	font-size: 11px;
 	padding: 4px 6px 4px;
+	color: #555;
+}
+
+.art-textinput-focus input,
+.art-textinput-focus textarea {
+	color: #222;
 }
 
 /* @end */
@@ -49,6 +55,7 @@
 .art-tooltip-content,
 .art-tooltip-title,
 .art-tooltip-status {
+	color: #222;
 	padding: 3px 6px 4px;
 }
 
@@ -72,6 +79,16 @@
 .art-window-status {
 	line-height: 1.3;
 	padding: 3px 8px;
+}
+
+.art-window-title, art-window-content, .art-window-status {
+	color: #222;
+}
+
+.art-window-blur .art-window-title,
+.art-window-blur art-window-content,
+.art-window-blur .art-window-status {
+	color: #555;
 }
 
 /* the resize handle button is automatically put on the bottom-right of the window */
