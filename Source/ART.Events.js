@@ -18,7 +18,7 @@ var toggleAdd = function(type){
 			var timer = (function(){
 				doc.addEvent(type + 'up', up);
 				doc.removeEvent(type + 'up', canceler);
-			}).delay(200);
+			}).delay(300);
 
 			var canceler = function(event){
 				if (self != doc && event.target != self && !self.hasChild(event.target)) up(event);
