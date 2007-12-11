@@ -32,6 +32,9 @@ ART.Container = new Class({
 		this.container = new Element('div', {'class': 'art-container' + this.component}).setStyles({
 			position: options.styles.position, top: options.styles.top, left: options.styles.left
 		});
+		
+		if (!this.component) this.component = 'art-container';
+		
 		if (options.id) this.container.set('id', options.id);
 		if (options.className) $splat(options.className).each(function(cn){
 			this.container.addClass(cn);
@@ -107,7 +110,8 @@ ART.Container = new Class({
 	},
 	
 	draw: function(theme){
-		this.container.setStyle('width', '100%');
+		
+		this.container.setStyles({width: '100%'});
 		if (theme){
 			if (theme.height) this.center.setStyles({height: theme.height});
 			if (theme.width) this.center.setStyles({width: theme.width});

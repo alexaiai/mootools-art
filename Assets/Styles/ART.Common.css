@@ -81,12 +81,12 @@
 	padding: 3px 8px;
 }
 
-.art-window-title, art-window-content, .art-window-status {
+.art-window-title,
+.art-window-status {
 	color: #222;
 }
 
 .art-window-blur .art-window-title,
-.art-window-blur art-window-content,
 .art-window-blur .art-window-status {
 	color: #555;
 }

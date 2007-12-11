@@ -4,8 +4,8 @@ ART.Themes.MetalMenu = {
 	reflection: 0,
 	
 	overlayColor: '#fff',
-	overlayOpacity: 0.95,
-	borderOpacity: 0.4
+	overlayOpacity: 0.8,
+	borderOpacity: 0.2
 	
 };
 
