@@ -138,3 +138,38 @@
 }
 
 /* @end */
+
+/* @group Menu */
+
+.art-menu ul {
+	list-style: none;
+	line-height: 1.5;
+}
+
+.art-menu a {
+	display: block;
+	text-decoration: none;
+	padding: 4px 12px;
+}
+
+.art-menu a:link, .art-menu a:visited {
+	color: #222;
+}
+
+.art-menu a:hover, .art-menu a:active {
+	background-image: url(../Images/gradient.png);
+	background-position: center center;
+	color: #FFF;
+}
+
+.art-menu-content {
+	padding: 5px 0;
+}
+
+.art-menu .art-menu-separator {
+	height: 10px;
+	background: url(../Images/menu-separator.png) repeat-x center center;
+}
+
+
+/* @end */
