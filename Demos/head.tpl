@@ -8,20 +8,20 @@
 <script type="text/javascript" src="moocanvas.js"></script>
 <![endif]-->
 
-<script type="text/javascript" src="http://mootools-art.googlecode.com/svn/trunk/Source/ART.Element.js"></script>
-<script type="text/javascript" src="http://mootools-art.googlecode.com/svn/trunk/Source/ART.Ink.js"></script>
-<script type="text/javascript" src="http://mootools-art.googlecode.com/svn/trunk/Source/ART.Paint.js"></script>
-<script type="text/javascript" src="http://mootools-art.googlecode.com/svn/trunk/Source/ART.Theme.js"></script>
-<script type="text/javascript" src="http://mootools-art.googlecode.com/svn/trunk/Source/ART.Container.js"></script>
-<script type="text/javascript" src="http://mootools-art.googlecode.com/svn/trunk/Source/ART.Window.js"></script>
-<script type="text/javascript" src="http://mootools-art.googlecode.com/svn/trunk/Source/ART.Button.js"></script>
-<script type="text/javascript" src="http://mootools-art.googlecode.com/svn/trunk/Source/ART.TextInput.js"></script>
-<script type="text/javascript" src="http://mootools-art.googlecode.com/svn/trunk/Source/ART.ToolTip.js"></script>
-<script type="text/javascript" src="http://mootools-art.googlecode.com/svn/trunk/Source/ART.Menu.js"></script>
-<script type="text/javascript" src="http://mootools-art.googlecode.com/svn/trunk/Source/ART.Events.js"></script>
-<script type="text/javascript" src="http://mootools-art.googlecode.com/svn/trunk/Source/Fx.Draw.js"></script>
+<script type="text/javascript" src="{URI}/Source/ART.Element.js"></script>
+<script type="text/javascript" src="{URI}/Source/ART.Ink.js"></script>
+<script type="text/javascript" src="{URI}/Source/ART.Paint.js"></script>
+<script type="text/javascript" src="{URI}/Source/ART.Theme.js"></script>
+<script type="text/javascript" src="{URI}/Source/ART.Container.js"></script>
+<script type="text/javascript" src="{URI}/Source/ART.Window.js"></script>
+<script type="text/javascript" src="{URI}/Source/ART.Button.js"></script>
+<script type="text/javascript" src="{URI}/Source/ART.TextInput.js"></script>
+<script type="text/javascript" src="{URI}/Source/ART.ToolTip.js"></script>
+<script type="text/javascript" src="{URI}/Source/ART.Menu.js"></script>
+<script type="text/javascript" src="{URI}/Source/ART.Events.js"></script>
+<script type="text/javascript" src="{URI}/Source/Fx.Draw.js"></script>
 
-<link rel="stylesheet" type="text/css" media="screen" href="http://mootools-art.googlecode.com/svn/trunk/Assets/Styles/ART.Common.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="{URI}/Assets/Styles/ART.Common.css" />
 
 <style type="text/css" media="screen">
 	
