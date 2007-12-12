@@ -39,11 +39,6 @@
 		padding: 10px 0 0;
 	}
 	
-	#container {
-		margin: 0 auto;
-		padding: 10px;
-	}
-	
 	.mono {
 		font-family: Andale Mono, Monaco, Monospace;
 	}
