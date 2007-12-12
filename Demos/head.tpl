@@ -39,6 +39,14 @@
 		padding: 10px 0 0;
 	}
 	
+	#debug {
+		font-family: Andale Mono, Monaco, Monospace;
+		white-space: pre;
+		background: #ccc;
+		color: #000;
+		padding: 10px;
+	}
+	
 	.mono {
 		font-family: Andale Mono, Monaco, Monospace;
 	}
