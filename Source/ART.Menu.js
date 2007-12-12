@@ -90,7 +90,7 @@ ART.Menu = new Class({
 			
 			if (!this.opened || !event.key.match(/up|down/)) return;
 				
-			switch(event.key){
+			switch (event.key){
 				case 'down': this.active++; break;
 				case 'up': this.active--;
 			}
