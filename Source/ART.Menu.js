@@ -58,7 +58,7 @@ ART.Menu = new Class({
 		var target = $(this.options.target), relative = this.options.relative;
 		
 		var up = function(event){
-			if (event.key && event.key == 'tab') return;
+			if (event.key && event.key == 'up' || event.key == 'down') return;
 			
 			this.close();
 			document.removeEvent('mouseup', up);
@@ -86,6 +86,22 @@ ART.Menu = new Class({
 			}
 		});
 		
+		document.addEvent('keydown', function(event){
+			
+			if (!this.opened || !event.key.match(/up|down/)) return;
+				
+			switch(event.key){
+				case 'down': this.active++; break;
+				case 'up': this.active--;
+			}
+			
+			if (this.active < 0) this.active = 0;
+			if (this.active > this.links.length - 1) this.active = this.links.length - 1;
+			
+			this.links[this.active].focus();
+			
+		}.bind(this));
+		
 		this.setContent(this.list);
 	},
 	
@@ -100,6 +116,8 @@ ART.Menu = new Class({
 	open: function(position){
 		if (this.opened) return this;
 		this.opened = true;
+		
+		this.active = -1;
 		
 		this.inject(document.body);
 
