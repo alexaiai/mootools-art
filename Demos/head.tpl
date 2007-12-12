@@ -1,6 +1,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-<title>Demos</title>
+<title>{TITLE}</title>
 
 <script type="text/javascript" src="mootools.js"></script>
 
