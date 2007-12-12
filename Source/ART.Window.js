@@ -54,91 +54,89 @@ ART.WM = {
 	
 };
 
-ART.Themes.MetalWindow = {};
-
-ART.Themes.MetalWindow.normal = {
-
-	radius: 5,
+ART.Themes.MetalWindow = new ART.Theme({
 	
-	titleColor: ['#DDD', '#AAA'],
+	normal: {
+		radius: 5,
+
+		titleColor: ['#DDD', '#AAA'],
+
+		statusColor: ['#DDD', '#AAA'],
+
+		overlayColor: '#FFF',
+
+		shadowColor: '#000',
+		shadowOpacity: 1,
+
+		borderColor: ['#333', '#000'],
+		borderOpacity: 0.3,
+
+		reflectionColors: ['#F6F6F6', '#EEEEEE'],
+
+		lineColors: ['#999', '#AAA']
+	},
 	
-	statusColor: ['#DDD', '#AAA'],
+	blur: {
+		titleColor: '#EEE',
+		statusColor: '#EEE',
+
+		shadowColor: '#000',
+		shadowOpacity: 0.5,
+
+		borderColor: '#000',
+		borderOpacity: 0.1,
+
+		reflectionColors: ['#FFF', '#FFF'],
+
+		lineColors: ['#DDD', '#DDD']
+	}
 	
-	overlayColor: '#FFF',
+});
+
+ART.Themes.HUDWindow = new ART.Theme({
 	
-	shadowColor: '#000',
-	shadowOpacity: 1,
+	normal: {
+		radius: 5,
 
-	borderColor: ['#333', '#000'],
-	borderOpacity: 0.3,
+		overlayColor: '#111',
+		overlayOpacity: 0.9,
 
-	reflectionColors: ['#F6F6F6', '#EEEEEE'],
+		reflection: 0,
 
-	lineColors: ['#999', '#AAA']
+		borderColor: '#777',
+		borderOpacity: 0.6,
 
-};
+		titleColor: ['#444', '#222'],
+		titleOpacity: 0.9,
 
-ART.Themes.MetalWindow.blur = {
+		lineColors: ['#333', '#555'],
+
+		statusColor: ['#444', '#222'],
+		statusOpacity: 0.9,
+
+		shadow: 10,
+		shadowOpacity: 1
+	},
 	
-	titleColor: '#EEE',
-	statusColor: '#EEE',
+	blur: {
+		overlayColor: '#111',
+		overlayOpacity: 0.8,
 
-	shadowColor: '#000',
-	shadowOpacity: 0.5,
+		borderColor: '#777',
+		borderOpacity: 0.3,
 
-	borderColor: '#000',
-	borderOpacity: 0.1,
+		titleColor: '#111',
+		titleOpacity: 0.8,
 
-	reflectionColors: ['#FFF', '#FFF'],
+		lineColors: ['#333', '#333'],
 
-	lineColors: ['#DDD', '#DDD']
-};
+		statusColor: '#111',
+		statusOpacity: 0.8,
 
-ART.Themes.HUD = {};
-
-ART.Themes.HUD.normal = {
+		shadowOpacity: 0.5
+	}
 	
-	radius: 5,
-	
-	overlayColor: '#111',
-	overlayOpacity: 0.9,
-
-	reflection: 0,
-
-	borderColor: '#777',
-	borderOpacity: 0.6,
-
-	titleColor: ['#444', '#222'],
-	titleOpacity: 0.9,
-
-	lineColors: ['#333', '#555'],
-
-	statusColor: ['#444', '#222'],
-	statusOpacity: 0.9,
-
-	shadow: 10,
-	shadowOpacity: 1
-};
-
-ART.Themes.HUD.blur = {
-	
-	overlayColor: '#111',
-	overlayOpacity: 0.8,
-
-	borderColor: '#777',
-	borderOpacity: 0.3,
-
-	titleColor: '#111',
-	titleOpacity: 0.8,
-
-	lineColors: ['#333', '#333'],
-
-	statusColor: '#111',
-	statusOpacity: 0.8,
-
-	shadowOpacity: 0.5
-	
-};
+});
 
 ART.Window = new Class({
 	
@@ -165,8 +163,7 @@ ART.Window = new Class({
 			maxi: true
 		},
 		
-		blurTheme: ART.Themes.MetalWindow.blur,
-		theme: ART.Themes.MetalWindow.normal
+		theme: ART.Themes.MetalWindow
 
 	},
 	
@@ -228,7 +225,7 @@ ART.Window = new Class({
 		
 		this.wrapper.removeClass('art-window-blur');
 		this.showOverflow();
-		this.draw(this.options.theme);
+		this.draw(this.options.theme.normal);
 	},
 	
 	blur: function(){
@@ -237,7 +234,7 @@ ART.Window = new Class({
 		
 		this.wrapper.addClass('art-window-blur');
 		this.hideOverflow();
-		this.draw(this.options.blurTheme);
+		this.draw(this.options.theme.blur);
 	},
 	
 	open: function(element, position){

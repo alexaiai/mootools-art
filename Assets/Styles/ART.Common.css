@@ -14,15 +14,13 @@
 
 /* @group Button */
 
-.art-button-content {
-	text-align: center;
-	padding: 4px 12px 6px;
-}
-
 .art-button-content a:link,
 .art-button-content a:visited,
 .art-button-content a:hover,
 .art-button-content a:active {
+	display: block;
+	text-align: center;
+	padding: 4px 12px 6px;
 	outline: none;
 	border: 0;
 	color: #222;
@@ -171,11 +169,14 @@
 	padding: 4px 12px;
 }
 
-.art-menu a:link, .art-menu a:visited {
+.art-menu a:link,
+.art-menu a:visited,
+.art-menu a:hover,
+.art-menu a:active {
 	color: #222;
 }
 
-.art-menu a:hover, .art-menu a:active {
+.art-menu a.art-menu-selected {
 	background-image: url(../Images/gradient.png);
 	background-position: center center;
 	color: #FFF;
@@ -185,7 +186,7 @@
 	padding: 5px 0;
 }
 
-.art-menu .art-menu-separator {
+.art-menu-separator {
 	height: 10px;
 	background: url(../Images/menu-separator.png) repeat-x center center;
 }

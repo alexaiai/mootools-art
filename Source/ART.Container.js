@@ -19,7 +19,7 @@ ART.Container = new Class({
 			overflow: 'hidden'
 		},
 		
-		theme: {},
+		theme: null,
 		morph: {link: 'cancel'}
 	},
 	
@@ -27,7 +27,6 @@ ART.Container = new Class({
 		this.component = (component) ? ' art-' + component : '';
 		this.setOptions(options);
 		options = this.options;
-		this.theme = options.theme;
 		
 		var absZero = {position: 'absolute', top: 0, left: 0};
 		
@@ -58,6 +57,8 @@ ART.Container = new Class({
 		
 		this.pfx = new Fx.Draw(this, this.options.morph);
 		this.sfx = new Fx.Morph(this.container, this.options.morph);
+		
+		this.theme = options.theme.normal;
 		
 		arguments.callee.parent({
 			subject: this.container,
@@ -113,17 +114,29 @@ ART.Container = new Class({
 	
 	draw: function(theme){
 		
+		theme = $unlink(theme || {});
+		
 		this.container.setStyles({width: '100%'});
-		if (theme){
-			if (theme.height) this.center.setStyles({height: theme.height});
-			if (theme.width) this.center.setStyles({width: theme.width});
+		
+		var h = theme.height, w = theme.width;
+		if ($chk(h)){
+			this.center.setStyles({height: h});
+			delete theme.height;
 		}
-		theme = this.theme = new ART.Theme($merge(this.theme, theme, {
+		if ($chk(w)){
+			this.center.setStyles({width: w});
+			delete theme.width;
+		}
+		
+		$extend(this.theme, $extend(theme, {
 			title: this.top.offsetHeight,
 			status: this.bottom.offsetHeight,
 			height: this.center.offsetHeight,
 			width: this.center.offsetWidth
 		}));
+		
+		theme = ART.Theme.fill(this.theme);
+		
 		this.container.setStyles({height: theme.outerHeight, width: theme.outerWidth});
 		var shadow = theme.shadow, border = theme.border;
 		

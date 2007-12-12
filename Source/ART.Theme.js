@@ -2,6 +2,18 @@
 
 ART.Theme = function(properties){
 	
+	properties = $unlink(properties);
+	
+	this.normal = properties.normal;
+	
+	delete properties.normal;
+	
+	for (var p in properties) this[p] = $merge(this.normal, properties[p]);
+	
+};
+
+ART.Theme.fill = function(properties){
+	
 	var style = $extend({
 
 		radius: 0,
@@ -36,21 +48,23 @@ ART.Theme = function(properties){
 		lineColors: ['#AAA', '#AAA']
 
 	}, properties);
-	
+
 	style.innerHeight = style.height + style.status + style.title + (style.border * 2);
 	style.innerWidth = style.width + (style.border * 2);
-	
+
 	style.outerHeight = (style.shadow * 2) - Math.abs(style.shadowOffsetY) + style.innerHeight;
 	style.outerWidth = (style.shadow * 2) - Math.abs(style.shadowOffsetX) + style.innerWidth;
-	
+
 	var tl = style.topLeftRadius, tr = style.topRightRadius, bl = style.bottomLeftRadius, br = style.bottomRightRadius;
-	
+
 	style.topLeftRadius = $pick(tl, style.radius);
 	style.topRightRadius = $pick(tr, style.radius);
 	style.bottomLeftRadius = $pick(bl, style.radius);
 	style.bottomRightRadius = $pick(br, style.radius);
-	
+
 	return style;
+	
 };
+
 
 ART.Themes = new Hash;

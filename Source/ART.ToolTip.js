@@ -1,21 +1,19 @@
 /* ART ToolTip */
 
-ART.Themes.ToolTip = {};
-
-ART.Themes.ToolTip.yellow = {
-	
-	shadow: 5,
-	shadowOpacity: 0.3,
-	topLeftRadius: 0,
-	topRightRadius: 3,
-	bottomLeftRadius: 3,
-	bottomRightRadius: 3,
-	titleColor: '#F9F4DE',
-	overlayColor: ['#F9F4DE', '#F9EFBD'],
-	statusColor: '#F9EFBD',
-	reflectionColors: ['#F9F8F3', '#F9F8F3']
-	
-};
+ART.Themes.MetalToolTip = new ART.Theme({
+	normal: {
+		shadow: 5,
+		shadowOpacity: 0.3,
+		topLeftRadius: 0,
+		topRightRadius: 3,
+		bottomLeftRadius: 3,
+		bottomRightRadius: 3,
+		titleColor: '#F9F4DE',
+		overlayColor: ['#F9F4DE', '#F9EFBD'],
+		statusColor: '#F9EFBD',
+		reflectionColors: ['#F9F8F3', '#F9F8F3']
+	}
+});
 
 
 ART.ToolTip = new Class({
@@ -40,7 +38,7 @@ ART.ToolTip = new Class({
 		offsets: {'x': 16, 'y': 16},
 		fixed: false,
 		
-		theme: ART.Themes.ToolTip.yellow,
+		theme: ART.Themes.MetalToolTip,
 		
 		contents: [],
 		titles: [],

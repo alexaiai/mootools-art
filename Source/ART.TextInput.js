@@ -1,32 +1,37 @@
 /* ART TextInput */
 
-ART.Themes.MetalTextInput = {};
-
-ART.Themes.MetalTextInput.normal = {
-	shadow: 2,
-	reflection: 1,
-	reflectionColors: ['#ccc', '#ccc'],
-	shadowColor: '#FFF',
-	shadowOpacity: 1,
-	overlayColor: '#fff',
-	borderColor: ['#000', '#333'],
-	borderOpacity: 0.5,
-	shadowOffsetY: -1,
-	radius: 1
-};
-
-ART.Themes.MetalTextInput.focus = {
-	borderOpacity: 0.7,
-	borderColor: ['#0C81CE', '#2BA2F1']
-};
+ART.Themes.MetalTextInput = new ART.Theme({
+	
+	normal: {
+		shadow: 2,
+		reflection: 1,
+		reflectionColors: ['#ccc', '#ccc'],
+		shadowColor: '#FFF',
+		shadowOpacity: 1,
+		overlayColor: '#fff',
+		borderColor: ['#000', '#333'],
+		borderOpacity: 0.5,
+		shadowOffsetY: -1,
+		radius: 1
+	},
+	
+	focus: {
+		borderOpacity: 0.7,
+		borderColor: ['#0C81CE', '#2BA2F1']
+	},
+	
+	disabled: {
+		
+	}
+	
+});
 
 ART.TextInput = new Class({
 	
 	Extends: ART.Container,
 	
 	options: {
-		theme: ART.Themes.MetalTextInput.normal,
-		focusTheme: ART.Themes.MetalTextInput.focus,
+		theme: ART.Themes.MetalTextInput,
 		input: null,
 		name: null,
 		type: null,
@@ -35,6 +40,7 @@ ART.TextInput = new Class({
 	
 	initialize: function(options){
 		arguments.callee.parent(options, 'textinput');
+		
 		this.input = $(this.options.input) || new Element('input', {type: this.options.type || 'text', name: this.options.name || ''});
 		
 		this.input.setStyles({
@@ -81,12 +87,20 @@ ART.TextInput = new Class({
 	
 	onFocus: function(){
 		this.wrapper.addClass('art-textinput-focus');
-		return this.draw(this.options.focusTheme);
+		return this.draw(this.options.theme.focus);
 	},
 	
 	onBlur: function(){
 		this.wrapper.removeClass('art-textinput-focus');
-		return this.draw(this.options.theme);
+		return this.draw(this.options.theme.normal);
+	},
+	
+	enable: function(){
+		
+	},
+	
+	disable: function(){
+		
 	}
 	
 });
