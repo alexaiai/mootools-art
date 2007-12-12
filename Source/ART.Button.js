@@ -25,7 +25,8 @@ ART.Themes.MetalButton = new ART.Theme({
 	
 	over: {
 		borderOpacity: 0.7,
-		borderColor: ['#0C81CE', '#0C81CE']
+		borderColor: ['#0C81CE', '#0C81CE'],
+		overlayOpacity: 0.95
 	},
 	
 	disabled: {

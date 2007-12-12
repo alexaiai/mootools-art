@@ -126,7 +126,7 @@ ART.Menu = new Class({
 		return this.morph({opacity: 1});
 	},
 	
-	close: function(){	
+	close: function(){
 		if (!this.opened) return this;
 		this.opened = false;		
 				
