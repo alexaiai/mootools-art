@@ -1,7 +1,7 @@
 <style type="text/css" media="screen">
 
 	body {
-		background: url(/images/mandolux.jpg);
+		background: url(images/mandolux.jpg);
 	}
 
 	#container {
