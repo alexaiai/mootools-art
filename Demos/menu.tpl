@@ -53,7 +53,7 @@ window.addEvent('load', function(){
 		{text: '-'},
 		{text: 'Get Info', action: function(){console.log('get info');}},
 		{text: '-'},
-		{text: 'Change Desktop Background&hellip;', action: function(){console.log('change desktop background&hellip;');}},
+		{text: 'Change Desktop Background&hellip;', action: function(){console.log('change desktop background');}},
 		{text: 'Keep Arranged By', action: function(){console.log('keep arranged by');}},
 		{text: 'Show View Options', action: function(){console.log('show view options');}},
 		{text: '-'},

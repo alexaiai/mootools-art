@@ -18,7 +18,7 @@
 <script type="text/javascript" src="{URI}/Source/ART.TextInput.js"></script>
 <script type="text/javascript" src="{URI}/Source/ART.ToolTip.js"></script>
 <script type="text/javascript" src="{URI}/Source/ART.Menu.js"></script>
-<script type="text/javascript" src="{URI}/Source/ART.Events.js"></script>
+<script type="text/javascript" src="{URI}/Source/ART.Select.js"></script>
 <script type="text/javascript" src="{URI}/Source/Fx.Draw.js"></script>
 
 <link rel="stylesheet" type="text/css" media="screen" href="{URI}/Assets/Styles/ART.Common.css" />

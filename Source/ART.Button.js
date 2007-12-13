@@ -51,7 +51,9 @@ ART.Button = new Class({
 		input: null
 	},
 	
-	initialize: function(options){
+	initialize: function(options, component){
+		
+		this.component = component || 'button';
 		
 		this.bound = {
 			mouseDown: this.mouseDown.bind(this),
@@ -60,7 +62,7 @@ ART.Button = new Class({
 			mouseLeave: this.mouseLeave.bind(this)
 		};
 		
-		arguments.callee.parent(options, 'button');
+		arguments.callee.parent(options, this.component);
 		
 		this.input = new Element('a', {href: '#'}).addEvents({
 			
@@ -99,7 +101,7 @@ ART.Button = new Class({
 		this.center.addEvent('mouseup', this.bound.mouseUp);
 		this.input.focus();
 		this.draw(this.options.theme.active);
-		this.wrapper.addClass('art-button-active');
+		this.wrapper.addClass('art-' + this.component + '-active');
 		this.fireEvent('onMouseDown', e);
 		return false;
 	},
@@ -110,7 +112,7 @@ ART.Button = new Class({
 			this.mouseEnter(e);
 		} else {
 			this.draw(this.options.theme.normal);
-			this.wrapper.removeClass('art-button-active');
+			this.wrapper.removeClass('art-' + this.component + '-active');
 		}
 		
 		this.center.removeEvent('mouseup', this.bound.mouseUp);
@@ -118,20 +120,20 @@ ART.Button = new Class({
 	
 	mouseEnter: function(e){
 		this.draw(this.options.theme.over);
-		this.wrapper.addClass('art-button-over');
+		this.wrapper.addClass('art-' + this.component + '-over');
 	},
 	
 	mouseLeave: function(e){
 		this.center.removeEvent('mouseup', this.bound.mouseUp);
 		this.draw(this.options.theme.normal);
-		this.wrapper.removeClass('art-button-over');
+		this.wrapper.removeClass('art-' + this.component + '-over');
 	},
 	
 	enable: function(){
 		if (!this.disabled) return this;
 		this.disabled = false;
 		this.draw(this.options.theme);
-		this.wrapper.removeClass('art-button-disabled');
+		this.wrapper.removeClass('art-' + this.component + '-disabled');
 		return this;
 	},
 	
@@ -139,7 +141,7 @@ ART.Button = new Class({
 		if (this.disabled) return this;
 		this.disabled = true;
 		this.draw(this.options.theme.disabled);
-		this.wrapper.addClass('art-button-disabled');
+		this.wrapper.addClass('art-' + this.component + '-disabled');
 		return this;
 	}
 	
