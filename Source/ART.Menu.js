@@ -107,7 +107,7 @@ ART.Menu = new Class({
 					return;
 				}
 
-				var link = new Element('a', {href: '#', text: text}).inject(li);
+				var link = new Element('a', {href: '#', html: text}).inject(li);
 				
 				if ($type(action) == 'function'){
 					action = action.bind(this);

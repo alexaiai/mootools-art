@@ -20,7 +20,7 @@
 
 <a id="toggler" href="#"></a>
 
-<ul id="menu">
+<!-- <ul id="menu">
 	<li><a href="#">New Folder</a></li>
 	
 	<li><a href="#">New Burn Folder</a></li>
@@ -39,7 +39,7 @@
 	
 	<li><a href="#">More</a></li>
 	
-</ul>
+</ul> -->
 
 
 <script type="text/javascript">
@@ -51,7 +51,13 @@ window.addEvent('load', function(){
 		{text: 'New Folder', action: function(){console.log('new folder');}},
 		{text: 'New Burn Folder', action: function(){console.log('new burn folder');}},
 		{text: '-'},
-		{text: 'Get Info', action: function(){console.log('get info');}}
+		{text: 'Get Info', action: function(){console.log('get info');}},
+		{text: '-'},
+		{text: 'Change Desktop Background&hellip;', action: function(){console.log('change desktop background&hellip;');}},
+		{text: 'Keep Arranged By', action: function(){console.log('keep arranged by');}},
+		{text: 'Show View Options', action: function(){console.log('show view options');}},
+		{text: '-'},
+		{text: 'More', action: function(){console.log('more');}}
 	
 	]);
 	
