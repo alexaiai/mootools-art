@@ -46,7 +46,7 @@ ART.Menu = new Class({
 			}.bind(this),
 			
 			down: function(event){
-				if (event.key && event.key != 'space') return false;
+				if (event.key && (event.key != 'space' && event.key != 'enter')) return false;
 				event.preventDefault();
 				
 				var c = target.getCoordinates();

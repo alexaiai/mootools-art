@@ -64,18 +64,8 @@ ART.Button = new Class({
 		
 		arguments.callee.parent(options, this.component);
 		
-		this.input = new Element('a', {href: '#'}).addEvents({
-			
-			click: function(e){
-				e.preventDefault();
-			},
-			
-			focus: this.bound.mouseEnter,
-			blur: this.bound.mouseLeave,
-			
-			mouseenter: this.bound.mouseEnter,
-			mouseleave: this.bound.mouseLeave
-			
+		this.input = new Element('a', {href: '#'}).addEvent('click', function(e){
+			e.preventDefault();
 		});
 		
 		if (!this.options.preventActions) this.input.addEvents({
@@ -92,6 +82,8 @@ ART.Button = new Class({
 			
 		});
 		
+		this.enableFocus();
+		
 		var input = this.options.input;
 		
 		switch ($type(input)){
@@ -103,11 +95,24 @@ ART.Button = new Class({
 		if ($type(input) == 'element' && input.parentNode) this.replaces(input);
 	},
 	
+	enableFocus: function(){
+		this.input.addEvent('mouseenter', this.bound.mouseEnter);
+		this.input.addEvent('mouseleave', this.bound.mouseLeave);
+		this.input.addEvent('focus', this.bound.mouseEnter);
+		this.input.addEvent('blur', this.bound.mouseLeave);
+	},
+	
+	disableFocus: function(){
+		this.input.removeEvent('mouseenter', this.bound.mouseEnter);
+		this.input.removeEvent('mouseleave', this.bound.mouseLeave);
+		this.input.removeEvent('focus', this.bound.mouseEnter);
+		this.input.removeEvent('blur', this.bound.mouseLeave);
+	},
+	
 	mouseDown: function(e){
 		e.preventDefault();
 
-		this.input.removeEvent('mouseenter', this.bound.mouseEnter);
-		this.input.removeEvent('mouseleave', this.bound.mouseLeave);
+		this.disableFocus();
 		
 		if (!this.options.preventActions) document.addEvent('mouseup', this.bound.mouseUp);
 		
@@ -120,8 +125,7 @@ ART.Button = new Class({
 	
 	mouseUp: function(e){
 		
-		this.input.addEvent('mouseenter', this.bound.mouseEnter);
-		this.input.addEvent('mouseleave', this.bound.mouseLeave);
+		this.enableFocus();
 		
 		if (!this.options.preventActions) document.removeEvent('mouseup', this.bound.mouseUp);
 		

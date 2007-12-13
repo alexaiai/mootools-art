@@ -8,19 +8,19 @@ Element.implement({
 			
 			if (actions.up.call(this, event) === false) return;
 
-			doc.removeEvent('mouseup', actions.up);
-			doc.removeEvent('keyup', actions.up);
+			doc.removeEvent('mouseup', up);
+			doc.removeEvent('keyup', up);
 
 		}.bind(this);
 		
 		var down = function(event){
 			if (actions.down.call(this, event) === false) return;
 
-			doc.removeEvent('mouseup', actions.up);
-			doc.removeEvent('keyup', actions.up);
+			doc.removeEvent('mouseup', up);
+			doc.removeEvent('keyup', up);
 
 			(function(){
-				doc.addEvents({mouseup: actions.up, keyup: actions.up});
+				doc.addEvents({mouseup: up, keyup: up});
 			}).delay(300);
 		};
 		

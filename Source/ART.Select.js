@@ -41,12 +41,13 @@ ART.Select = new Class({
 			up: function(event){
 				if (event.key && (event.key == 'up' || event.key == 'down')) return false;
 				this.mouseUp(event);
+				this.mouseEnter(event);
 				this.menu.close();
 				return true;
 			}.bind(this),
 			
 			down: function(event){
-				if (event.key && event.key != 'space') return false;
+				if (event.key && (event.key != 'space' && event.key != 'enter')) return false;
 				this.mouseDown(event);
 				var c = this.wrapper.getCoordinates();
 				this.menu.open({x: c.left - 1, y: c.bottom});
