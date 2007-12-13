@@ -65,13 +65,12 @@ window.addEvent('load', function(){
 		
 		styles: {
 			height: 200,
-			width: 300,
-			left: 10, top: 10
+			width: 300
 		},
 		
 		className: 'normal'
 		
-	}).open(document.body);
+	}).open(document.body, {x: 10, y: 10});
 	
 	window.win2 = new ART.Window({
 
@@ -81,13 +80,12 @@ window.addEvent('load', function(){
 		
 		styles: {
 			height: 200,
-			width: 200,
-			left: 30, top: 30
+			width: 200
 		},
 		
 		className: 'normal'
 		
-	}).open(document.body);
+	}).open(document.body, {x: 60, y: 60});
 	
 	window.win3 = new ART.Window({
 
@@ -97,7 +95,6 @@ window.addEvent('load', function(){
 		styles: {
 			height: 200,
 			width: 400,
-			left: 50, top: 50,
 			overflow: 'hidden'
 		},
 		
@@ -107,7 +104,7 @@ window.addEvent('load', function(){
 		
 		className: 'hud'
 		
-	}).open(document.body);
+	}).open(document.body, {x: 110, y: 110});
 	
 });
 	

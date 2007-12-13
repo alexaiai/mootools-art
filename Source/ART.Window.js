@@ -207,6 +207,8 @@ ART.Window = new Class({
 			}}).inject(this.container);
 			
 		}
+		
+		this.draw();
 	},
 	
 	onInject: function(){
@@ -244,12 +246,12 @@ ART.Window = new Class({
 		ART.WM.include(this);
 		
 		this.hideOverflow();
-		this.inject(element);
+		this.setStyle('opacity', 0).inject(element);
 		
-		position = position || this.container.getRelativePosition();
+		position = position || {x: 0, y: 0};
 		
-		this.container.setStyle('opacity', 0);
-		this.container.position({x: position.x, y: position.y - 10});
+		this.setPosition({x: position.x, y: position.y - 10});
+		
 		return this.morph({opacity: 1, top: position.y}, function(){
 			this.showOverflow();
 		});
@@ -269,6 +271,18 @@ ART.Window = new Class({
 		return this.morph({opacity: 0, top: position.y + 10}, function(){
 			this.container.position({x: position.x, y: position.y}).dispose();
 		}.bind(this));
+	},
+	
+	maximize: function(){
+		var size = window.getSize();
+		document.body.setStyle('overflow', 'hidden');
+		var oversize = this.bottom.offsetHeight + this.top.offsetHeight;
+		return this.morph({
+			height: size.y - oversize,
+			width: size.x,
+			top: -1,
+			left: -1
+		});
 	},
 	
 	showMask: function(){

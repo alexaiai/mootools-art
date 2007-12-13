@@ -31,7 +31,7 @@ ART.Container = new Class({
 		var absZero = {position: 'absolute', top: 0, left: 0};
 		
 		this.container = new Element('div', {'class': 'art-container' + this.component}).setStyles({
-			position: options.styles.position, top: options.styles.top, left: options.styles.left
+			position: options.styles.position, top: 0, left: 0
 		});
 		
 		if (!this.component) this.component = 'art-container';
@@ -140,12 +140,19 @@ ART.Container = new Class({
 		this.container.setStyles({height: theme.outerHeight, width: theme.outerWidth});
 		var shadow = theme.shadow, border = theme.border;
 		
-		this.wrapper.setStyles({
-			top: shadow + border + ((theme.shadowOffsetY > 0) ? 0 : theme.shadowOffsetY),
-			left: shadow + border + ((theme.shadowOffsetX > 0) ? 0 : theme.shadowOffsetX)
-		});
+		this.offsets = {
+			x: shadow + ((theme.shadowOffsetX > 0) ? 0 : theme.shadowOffsetX),
+			y: shadow + ((theme.shadowOffsetY > 0) ? 0 : theme.shadowOffsetY)
+		};
+		
+		this.wrapper.setStyles({left: this.offsets.x + border, top: this.offsets.y + border});
 		
 		this.paint.draw(theme);
+		return this;
+	},
+	
+	setPosition: function(position){
+		this.container.position({x: position.x - this.offsets.x, y: position.y - this.offsets.y});
 		return this;
 	},
 	
@@ -177,7 +184,12 @@ ART.Container = new Class({
 			});
 		}
 		
-		if (Hash.getLength(properties)) this.sfx.start(properties).chain(cb);
+		if (Hash.getLength(properties)){
+			var left = properties.left, top = properties.top;
+			if ($defined(left)) properties.left = left - this.offsets.x;
+			if ($defined(top)) properties.top = top - this.offsets.y;
+			this.sfx.start(properties).chain(cb);
+		}
 		return this;
 	}
 	

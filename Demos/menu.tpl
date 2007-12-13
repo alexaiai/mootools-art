@@ -46,7 +46,14 @@
 
 window.addEvent('load', function(){
 	
-	var menu = new ART.Menu({list: 'menu', morph: {duration: 150}, target: 'toggler'});
+	var menu = new ART.Menu({morph: {duration: 150}, target: 'toggler'}).load([
+		
+		{text: 'New Folder', action: function(){console.log('new folder');}},
+		{text: 'New Burn Folder', action: function(){console.log('new burn folder');}},
+		{text: '-'},
+		{text: 'Get Info', action: function(){console.log('get info');}}
+	
+	]);
 	
 });
 
