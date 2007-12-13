@@ -29,12 +29,11 @@
 		font-size: 11px;
 		padding: 4px 4px;
 		color: #fff;
-		text-shadow: 0 2px 0 rgba(0,0,0,0.5);
 		font-weight: bold;
 		line-height: 1.5;
 	}
 	
-	.art-button, .art-textinput {
+	.art-button, .art-textinput, .art-select {
 		float: left;
 	}
 	
@@ -47,7 +46,6 @@
 	}
 	
 	.art-button-content {
-		text-shadow: 0 2px 1px #eee;
 		
 		line-height: 1 !important;
 		line-height: 1.2;
@@ -101,6 +99,15 @@
 	<label>about you:</label>
 	<textarea id="real5"></textarea>
 	<span class="clr"></span>
+	<label>destiny:</label>
+	<select id="realselect">
+
+		<option>Slow Death</option>
+		<option>Fast Death</option>
+		<option>Eternal Life</option>
+
+	</select>
+	<span class="clr"></span>
 	<input id="real" type="submit" value="Cancel&hellip;" title="if you press here you will die" />
 	<input id="real2" type="submit" value="Send&hellip;" title="if you press here you will live" />
 	<span class="clr noh"></span>
@@ -131,6 +138,8 @@ window.addEvent('load', function(){
 	button2.addEvent('onClick', function(){
 		console.log('clicked ok');
 	});
+	
+	new ART.Select({styles: {width: 224}}).load('realselect');
 	
 	new ART.TextInput({input: 'real6'});
 	

@@ -70,20 +70,26 @@ ART.Button = new Class({
 				e.preventDefault();
 			},
 			
-			keydown: function(e){
-				if (e.key == 'enter' || e.key == 'space') this.bound.mouseDown(e);
-			}.bind(this),
-			
-			keyup: function(e){
-				if (e.key == 'enter' || e.key == 'space') this.bound.mouseUp(e);
-			}.bind(this),
-			
 			focus: this.bound.mouseEnter,
 			blur: this.bound.mouseLeave,
 			
-			mousedown: this.bound.mouseDown,
 			mouseenter: this.bound.mouseEnter,
 			mouseleave: this.bound.mouseLeave
+			
+		});
+		
+		if (!this.options.preventActions) this.input.addEvents({
+
+			keydown: function(e){
+				if (e.key == 'enter' || e.key == 'space') this.mouseDown(e);
+			}.bind(this),
+			
+			keyup: function(e){
+				if (e.key == 'enter' || e.key == 'space') this.mouseUp(e);
+			}.bind(this),
+			
+			mousedown: this.bound.mouseDown
+			
 		});
 		
 		var input = this.options.input;
@@ -98,7 +104,13 @@ ART.Button = new Class({
 	},
 	
 	mouseDown: function(e){
-		this.center.addEvent('mouseup', this.bound.mouseUp);
+		e.preventDefault();
+
+		this.input.removeEvent('mouseenter', this.bound.mouseEnter);
+		this.input.removeEvent('mouseleave', this.bound.mouseLeave);
+		
+		if (!this.options.preventActions) document.addEvent('mouseup', this.bound.mouseUp);
+		
 		this.input.focus();
 		this.draw(this.options.theme.active);
 		this.wrapper.addClass('art-' + this.component + '-active');
@@ -107,24 +119,27 @@ ART.Button = new Class({
 	},
 	
 	mouseUp: function(e){
+		
+		this.input.addEvent('mouseenter', this.bound.mouseEnter);
+		this.input.addEvent('mouseleave', this.bound.mouseLeave);
+		
+		if (!this.options.preventActions) document.removeEvent('mouseup', this.bound.mouseUp);
+		
 		if (e.target == this.input){
 			this.fireEvent('onMouseUp', e).fireEvent('onClick', e);
-			this.mouseEnter(e);
+			this.mouseEnter();
 		} else {
-			this.draw(this.options.theme.normal);
 			this.wrapper.removeClass('art-' + this.component + '-active');
+			this.mouseLeave();
 		}
-		
-		this.center.removeEvent('mouseup', this.bound.mouseUp);
 	},
 	
-	mouseEnter: function(e){
+	mouseEnter: function(e, fake){
 		this.draw(this.options.theme.over);
 		this.wrapper.addClass('art-' + this.component + '-over');
 	},
 	
 	mouseLeave: function(e){
-		this.center.removeEvent('mouseup', this.bound.mouseUp);
 		this.draw(this.options.theme.normal);
 		this.wrapper.removeClass('art-' + this.component + '-over');
 	},

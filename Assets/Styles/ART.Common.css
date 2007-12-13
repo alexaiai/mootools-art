@@ -20,21 +20,24 @@
 .art-button-content a:active {
 	display: block;
 	text-align: center;
-	padding: 4px 12px 6px;
+	padding: 4px 12px 5px;
 	outline: none;
 	border: 0;
 	color: #222;
 	text-decoration: none;
 }
 
+.art-select-content {
+	background: transparent url(../Images/select.png) no-repeat center right;
+}
+
 .art-select-content a:link,
 .art-select-content a:visited,
 .art-select-content a:hover,
 .art-select-content a:active {
-	background: transparent url(../Images/select.png) no-repeat center right;
 	display: block;
 	text-align: left;
-	padding: 4px 32px 6px 12px;
+	padding: 4px 22px 5px 12px;
 	outline: none;
 	border: 0;
 	color: #222;

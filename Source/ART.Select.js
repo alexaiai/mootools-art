@@ -1,43 +1,10 @@
-ART.Themes.MetalSelect = new ART.Theme({
-	
-	normal: {
-		shadow: 2,
-		reflection: 0,
-		shadowColor: '#FFF',
-		shadowOpacity: 1,
-		overlayColor: ['#fafafa', '#a9a9a9'],
-		borderColor: ['#000', '#222'],
-		borderOpacity: 0.5,
-		shadowOffsetY: -1,
-		overlayOpacity: 1,
-		radius: 4
-	},
-	
-	active: {},
-	
-	over: {
-		borderOpacity: 0.7,
-		borderColor: ['#0C81CE', '#0C81CE'],
-		overlayOpacity: 0.95
-	},
-	
-	disabled: {
-		overlayOpacity: 0.5,
-		borderOpacity: 0.25
-	}
-	
-});
-
-
 ART.Select = new Class({
 	
 	Extends: ART.Button,
 	
-	options: {
-		theme: ART.Themes.MetalSelect	
-	},
-	
 	initialize: function(options){
+		
+		options = $extend(options || {}, {preventActions: true});
 		
 		arguments.callee.parent(options, 'select');
 		
@@ -60,15 +27,33 @@ ART.Select = new Class({
 		htmlOptions.each(function(option){
 			var html = option.get('html');
 			
-			data.push({text: html, action: function(){
-				this.input.set('html', html);
-				this.draw();
+			data.push({text: html, action: function(e){
+				this.input.set('html', html).focus();
 			}.bind(this)});
 			
 			
 		}, this);
 		
-		this.menu = new ART.Menu({relative: 'element', target: this.input, morph: {duration: 100}}).load(data);
+		this.menu = new ART.Menu({styles: {width: this.options.styles.width}, relative: 'element', morph: {duration: 100}}).load(data);
+		
+		this.input.addActions({
+			
+			up: function(event){
+				if (event.key && (event.key == 'up' || event.key == 'down')) return false;
+				this.mouseUp(event);
+				this.menu.close();
+				return true;
+			}.bind(this),
+			
+			down: function(event){
+				if (event.key && event.key != 'space') return false;
+				this.mouseDown(event);
+				var c = this.wrapper.getCoordinates();
+				this.menu.open({x: c.left - 1, y: c.bottom});
+				return true;
+			}.bind(this)
+			
+		});
 		
 		this.draw();
 		

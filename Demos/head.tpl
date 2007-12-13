@@ -8,6 +8,10 @@
 <script type="text/javascript" src="moocanvas.js"></script>
 <![endif]-->
 
+
+<script type="text/javascript" src="{URI}/Source/Dictionary.js"></script>
+<script type="text/javascript" src="{URI}/Source/Element.Actions.js"></script>
+
 <script type="text/javascript" src="{URI}/Source/ART.Element.js"></script>
 <script type="text/javascript" src="{URI}/Source/ART.Ink.js"></script>
 <script type="text/javascript" src="{URI}/Source/ART.Paint.js"></script>

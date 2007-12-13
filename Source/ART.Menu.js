@@ -8,7 +8,7 @@ ART.Themes.MetalMenu = new ART.Theme({
 		reflection: 0,
 
 		overlayColor: '#fff',
-		overlayOpacity: 0.8,
+		overlayOpacity: 0.9,
 		borderOpacity: 0.2
 
 	}
@@ -37,34 +37,25 @@ ART.Menu = new Class({
 		
 		var target = $(this.options.target), relative = this.options.relative;
 		
-		var up = function(event){
-			if (event.key && event.key == 'up' || event.key == 'down') return;
+		if (target) target.addActions({
 			
-			this.close();
-			document.removeEvent('mouseup', up);
-			document.removeEvent('keyup', up);
-		}.bind(this);
-		
-		var down = function(event){
-			var c = target.getCoordinates();
-			var p = (event.page && this.options.relative == 'mouse') ? event.page : {x: c.left, y: c.bottom};
-			this.toggle(p);
+			up: function(event){
+				if (event.key && (event.key == 'up' || event.key == 'down')) return false;
+				this.close();
+				return true;
+			}.bind(this),
 			
-			document.removeEvent('mouseup', up);
-			document.removeEvent('keyup', up);
+			down: function(event){
+				if (event.key && event.key != 'space') return false;
+				event.preventDefault();
+				
+				var c = target.getCoordinates();
+				var p = (event.page && this.options.relative == 'mouse') ? event.page : {x: c.left, y: c.bottom};
+				this.toggle(p);
+				
+				return true;
+			}.bind(this)
 			
-			(function(){
-				document.addEvents({mouseup: up, keyup: up});
-			}).delay(300);
-			event.preventDefault();
-		}.bind(this);
-		
-		
-		target.addEvents({
-			mousedown: down,
-			keydown: function(event){
-				if (event.key == 'space') down(event);
-			}
 		});
 		
 		document.addEvent('keydown', function(event){
