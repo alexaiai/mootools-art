@@ -40,20 +40,14 @@ ART.Menu = new Class({
 		if (target) target.addActions({
 			
 			up: function(event){
-				if (event.key && (event.key == 'up' || event.key == 'down')) return false;
 				this.close();
-				return true;
 			}.bind(this),
 			
 			down: function(event){
-				if (event.key && (event.key != 'space' && event.key != 'enter')) return false;
 				event.preventDefault();
-				
 				var c = target.getCoordinates();
 				var p = (event.page && this.options.relative == 'mouse') ? event.page : {x: c.left, y: c.bottom};
 				this.toggle(p);
-				
-				return true;
 			}.bind(this)
 			
 		});
@@ -113,7 +107,7 @@ ART.Menu = new Class({
 						click: function(e){
 							e.preventDefault();
 						},
-
+						
 						keydown: function(e){
 							e.preventDefault();
 						}
