@@ -37,13 +37,13 @@ ART.Select = new Class({
 		this.menu = new ART.Menu({styles: {width: this.options.styles.width}, relative: 'element', morph: {duration: 100}}).load(data);
 		
 		var up = function(event){
-			this.mouseUp(event);
+			this.up(event);
 			this.input.focus();
 			this.menu.close();
 		}.bind(this);
 		
 		var down = function(event){
-			this.mouseDown(event);
+			this.down(event);
 			var c = this.wrapper.getCoordinates();
 			this.menu.open({x: c.left - 1, y: c.bottom});
 			return true;

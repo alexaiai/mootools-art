@@ -23,7 +23,7 @@ ART.Themes.MetalButton = new ART.Theme({
 		borderColor: ['#000', '#444']
 	},
 	
-	over: {
+	focus: {
 		borderOpacity: 0.7,
 		borderColor: ['#0C81CE', '#0C81CE'],
 		overlayOpacity: 0.95
@@ -42,9 +42,7 @@ ART.Button = new Class({
 	
 	options: {
 		
-		// onMouseDown: $empty,
-		// onMouseUp: $empty,
-		// onClick: $empty,
+		// onAction: $empty,
 		
 		theme: ART.Themes.MetalButton,
 		
@@ -56,10 +54,10 @@ ART.Button = new Class({
 		this.component = component || 'button';
 		
 		this.bound = {
-			mouseDown: this.mouseDown.bind(this),
-			mouseUp: this.mouseUp.bind(this),
-			mouseEnter: this.mouseEnter.bind(this),
-			mouseLeave: this.mouseLeave.bind(this)
+			down: this.down.bind(this),
+			up: this.up.bind(this),
+			focus: this.focus.bind(this),
+			blur: this.blur.bind(this)
 		};
 		
 		arguments.callee.parent(options, this.component);
@@ -71,14 +69,14 @@ ART.Button = new Class({
 		if (!this.options.preventActions) this.input.addEvents({
 
 			keydown: function(e){
-				if (e.key == 'enter' || e.key == 'space') this.mouseDown(e);
+				if (e.key == 'enter' || e.key == 'space') this.down(e);
 			}.bind(this),
 			
 			keyup: function(e){
-				if (e.key == 'enter' || e.key == 'space') this.mouseUp(e);
+				if (e.key == 'enter' || e.key == 'space') this.up(e);
 			}.bind(this),
 			
-			mousedown: this.bound.mouseDown
+			mousedown: this.bound.down
 			
 		});
 		
@@ -96,54 +94,47 @@ ART.Button = new Class({
 	},
 	
 	enableFocus: function(){
-		this.input.addEvent('mouseenter', this.bound.mouseEnter);
-		this.input.addEvent('mouseleave', this.bound.mouseLeave);
-		this.input.addEvent('focus', this.bound.mouseEnter);
-		this.input.addEvent('blur', this.bound.mouseLeave);
+		this.input.addEvent('focus', this.bound.focus);
+		this.input.addEvent('blur', this.bound.blur);
 	},
 	
 	disableFocus: function(){
-		this.input.removeEvent('mouseenter', this.bound.mouseEnter);
-		this.input.removeEvent('mouseleave', this.bound.mouseLeave);
-		this.input.removeEvent('focus', this.bound.mouseEnter);
-		this.input.removeEvent('blur', this.bound.mouseLeave);
+		this.input.removeEvent('focus', this.bound.focus);
+		this.input.removeEvent('blur', this.bound.blur);
 	},
 	
-	mouseDown: function(e){
+	down: function(e){
 		e.preventDefault();
 
 		this.disableFocus();
 		this.input.focus();
-		if (!this.options.preventActions) document.addEvent('mouseup', this.bound.mouseUp);
+		if (!this.options.preventActions) document.addEvent('mouseup', this.bound.up);
 
 		this.draw(this.options.theme.active);
 		this.wrapper.addClass('art-' + this.component + '-active');
-		this.fireEvent('onMouseDown', e);
 		return false;
 	},
 	
-	mouseUp: function(e){
+	up: function(e){
 		this.enableFocus();
 		
-		if (!this.options.preventActions) document.removeEvent('mouseup', this.bound.mouseUp);
+		if (!this.options.preventActions) document.removeEvent('mouseup', this.bound.up);
 		
-		if (e.target == this.input){
-			this.fireEvent('onMouseUp', e).fireEvent('onClick', e);
-			this.mouseEnter();
-		} else {
-			this.wrapper.removeClass('art-' + this.component + '-active');
-			this.mouseLeave();
-		}
+		this.wrapper.removeClass('art-' + this.component + '-active');
+		
+		this.focus(e);
+		
+		if (e.target == this.input) this.fireEvent('onAction', e);
 	},
 	
-	mouseEnter: function(e, fake){
-		this.draw(this.options.theme.over);
-		this.wrapper.addClass('art-' + this.component + '-over');
+	focus: function(){
+		this.draw(this.options.theme.focus);
+		this.wrapper.addClass('art-' + this.component + '-focus');
 	},
 	
-	mouseLeave: function(e){
+	blur: function(){
 		this.draw(this.options.theme.normal);
-		this.wrapper.removeClass('art-' + this.component + '-over');
+		this.wrapper.removeClass('art-' + this.component + '-focus');
 	},
 	
 	enable: function(){

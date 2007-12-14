@@ -131,11 +131,11 @@ window.addEvent('load', function(){
 		console.log(this.getValue());
 	});
 	
-	button1.addEvent('onClick', function(){
+	button1.addEvent('onAction', function(){
 		console.log('clicked cancel');
 	});
 	
-	button2.addEvent('onClick', function(){
+	button2.addEvent('onAction', function(){
 		console.log('clicked ok');
 	});
 	
