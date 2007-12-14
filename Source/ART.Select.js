@@ -10,6 +10,12 @@ ART.Select = new Class({
 		
 	},
 	
+	selectMenuItem: function(menuLink, html){
+		this.input.set('html', html);
+		menuLink.getParent('ul').getElements('a').removeClass('art-menu-current');
+		menuLink.addClass('art-menu-current');
+	},
+	
 	load: function(select){
 		
 		this.select = $(select);
@@ -17,8 +23,6 @@ ART.Select = new Class({
 		this.select.setStyle('display', 'none');
 		
 		var htmlOptions = this.select.getElements('option');
-
-		this.input.set('html', htmlOptions[0].get('html'));
 		
 		this.replaces(select);
 		
@@ -27,14 +31,18 @@ ART.Select = new Class({
 		htmlOptions.each(function(option){
 			var html = option.get('html');
 			
+			var self = this;
+			
 			data.push({text: html, action: function(event){
-				this.input.set('html', html);
-			}.bind(this)});
+				self.selectMenuItem(this, html);
+			}});
 			
 			
 		}, this);
 		
 		this.menu = new ART.Menu({styles: {width: this.options.styles.width}, relative: 'element', morph: {duration: 100}}).load(data);
+		
+		this.selectMenuItem(this.menu.links[0], this.menu.links[0].get('html'));
 		
 		var up = function(event){
 			this.up(event);

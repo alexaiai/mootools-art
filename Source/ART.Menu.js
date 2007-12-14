@@ -47,7 +47,7 @@ ART.Menu = new Class({
 				event.preventDefault();
 				var c = target.getCoordinates();
 				var p = (event.page && this.options.relative == 'mouse') ? event.page : {x: c.left, y: c.bottom};
-				this.toggle(p);
+				this.open(p);
 			}.bind(this)
 			
 		});
@@ -64,7 +64,7 @@ ART.Menu = new Class({
 			if (this.active < 0) this.active = 0;
 			if (this.active > this.links.length - 1) this.active = this.links.length - 1;
 			
-			this.links[this.active].focus();
+			this.focusItem.call(this.links[this.active]);
 			
 		}.bind(this));
 	},
@@ -95,7 +95,6 @@ ART.Menu = new Class({
 				var link = new Element('a', {href: '#', html: text}).inject(li);
 				
 				if ($type(action) == 'function'){
-					action = action.bind(this);
 					
 					link.addEvents({
 						mouseup: action,
@@ -134,11 +133,13 @@ ART.Menu = new Class({
 	},
 	
 	focusItem: function(){
-		this.addClass('art-menu-selected');
+		this.focus();
+		this.getParent('li').addClass('art-menu-selected');
 	},
 	
 	blurItem: function(){
-		this.removeClass('art-menu-selected');
+		this.blur();
+		this.getParent('li').removeClass('art-menu-selected');
 	},
 	
 	open: function(position){
@@ -146,6 +147,10 @@ ART.Menu = new Class({
 		this.opened = true;
 		
 		this.active = -1;
+		
+		this.links.each(function(link){
+			this.blurItem.call(link);
+		}, this);
 		
 		this.inject(document.body);
 
@@ -162,10 +167,6 @@ ART.Menu = new Class({
 			this.links.removeClass('art-menu-selected');
 			this.container.dispose();
 		}.bind(this));
-	},
-	
-	toggle: function(pos){
-		return (this.opened) ? this.close() : this.open(pos);
 	}
 	
 });

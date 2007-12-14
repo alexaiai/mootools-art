@@ -37,11 +37,17 @@
 .art-select-content a:active {
 	display: block;
 	text-align: left;
-	padding: 4px 22px 5px 12px;
+	padding: 4px 25px 5px 12px;
 	outline: none;
 	border: 0;
 	color: #222;
 	text-decoration: none;
+}
+
+.art-menu-current {
+	background-image: url(../Images/circle.png);
+	background-repeat: no-repeat;
+	background-position: 4px center;
 }
 
 /* @end */
@@ -193,9 +199,12 @@
 	color: #222;
 }
 
-.art-menu a.art-menu-selected {
+.art-menu .art-menu-selected {
 	background-image: url(../Images/gradient.png);
 	background-position: center center;
+}
+
+.art-menu .art-menu-selected a {
 	color: #FFF;
 }
 
