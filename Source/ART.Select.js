@@ -10,57 +10,63 @@ ART.Select = new Class({
 		
 	},
 	
-	selectMenuItem: function(menuLink, html){
-		this.input.set('html', html);
-		menuLink.getParent('ul').getElements('a').removeClass('art-menu-current');
-		menuLink.addClass('art-menu-current');
+	select: function(link){
+		this.input.set('html', link.get('html'));
+		link.getParent('ul').getElements('a').removeClass('art-menu-current');
+		link.addClass('art-menu-current');
 	},
 	
-	load: function(select){
+	load: function(data){
 		
-		this.select = $(select);
+		var select = false;
 		
-		this.select.setStyle('display', 'none');
-		
-		var htmlOptions = this.select.getElements('option');
-		
-		this.replaces(select);
-		
-		var data = [];
-		
-		htmlOptions.each(function(option){
-			var html = option.get('html');
+		if ($type(data) != 'array'){
 			
-			var self = this;
+			select = $(data);
+			data = [];
 			
-			data.push({text: html, action: function(event){
-				self.selectMenuItem(this, html);
-			}});
+			select.getElements('option').each(function(option){
+				data.push({text: option.get('html')});
+			});
 			
-			
-		}, this);
+			select.setStyle('display', 'none');
+		}
 		
 		this.menu = new ART.Menu({styles: {width: this.options.styles.width}, relative: 'element', morph: {duration: 100}}).load(data);
 		
-		this.selectMenuItem(this.menu.links[0], this.menu.links[0].get('html'));
+		this.menu.links.each(function(link){
+			
+			link.addEvent('mouseup', function(){
+				this.select(link);
+			}.bind(this));
+			
+			link.addEvent('keyup', function(e){
+				if (e.key == 'enter' || e.key == 'space') this.select(link);
+			}.bind(this));
+			
+		}, this);
 		
-		var up = function(event){
-			this.up(event);
-			this.input.focus();
-			this.menu.close();
-		}.bind(this);
+		this.select(this.menu.links[0]);
+
 		
-		var down = function(event){
-			this.down(event);
-			var c = this.wrapper.getCoordinates();
-			this.menu.open({x: c.left - 1, y: c.bottom});
-			return true;
-		}.bind(this);
+		this.input.addActions({
+			
+			up: function(event){
+				this.menu.close();
+				this.up(event);
+			}.bind(this),
+
+			down: function(event){
+				this.down(event);
+				var c = this.wrapper.getCoordinates();
+				this.menu.open({x: c.left - 1, y: c.bottom});
+				return true;
+			}.bind(this)
+		});
 		
-		this.input.addActions({up: up, down: down});
+		if (select) this.inject(select, 'after');
 		
-		this.draw();
-		
+		return this;
 	}
 
 });

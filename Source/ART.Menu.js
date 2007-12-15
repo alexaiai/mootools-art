@@ -64,7 +64,7 @@ ART.Menu = new Class({
 			if (this.active < 0) this.active = 0;
 			if (this.active > this.links.length - 1) this.active = this.links.length - 1;
 			
-			this.focusItem.call(this.links[this.active]);
+			this.focusItem(this.links[this.active], true);
 			
 		}.bind(this));
 	},
@@ -75,15 +75,18 @@ ART.Menu = new Class({
 			
 			this.list = $(data);
 			this.links = this.list.getElements('a');
+			this.lis = this.list.getElements('li');
 			
 		} else {
 			
 			this.list = new Element('ul');
-			var links = [];
+			var links = [], lis = [];
 			
 			data.each(function(object){
 
 				var li = new Element('li').inject(this.list);
+				
+				lis.push(li);
 
 				var text = object.text, action = object.action;
 
@@ -118,28 +121,39 @@ ART.Menu = new Class({
 			}, this);
 			
 			this.links = $$(links);
+			this.lis = $$(lis);
 			
 		}
 		
+		var self = this;
+		
 		this.links.addEvents({
-			mouseenter: this.focusItem,
-			mouseleave: this.blurItem,
-			focus: this.focusItem,
-			blur: this.blurItem
+			mouseenter: function(){
+				self.focusItem(this, true);
+			},
+			mouseleave: function(){
+				self.blurItem(this, true);
+			},
+			focus: function(){
+				self.focusItem(this, false);
+			},
+			blur: function(){
+				self.blurItem(this, false);
+			}
 		});
 		
 		return this.setContent(this.list).draw();
 		
 	},
 	
-	focusItem: function(){
-		this.focus();
-		this.getParent('li').addClass('art-menu-selected');
+	focusItem: function(link, force){
+		if (force) link.forceFocus();
+		link.getParent('li').addClass('art-menu-selected');
 	},
 	
-	blurItem: function(){
-		this.blur();
-		this.getParent('li').removeClass('art-menu-selected');
+	blurItem: function(link, force){
+		if (force) link.forceBlur();
+		link.getParent('li').removeClass('art-menu-selected');
 	},
 	
 	open: function(position){
@@ -149,7 +163,7 @@ ART.Menu = new Class({
 		this.active = -1;
 		
 		this.links.each(function(link){
-			this.blurItem.call(link);
+			this.blurItem(link, true);
 		}, this);
 		
 		this.inject(document.body);

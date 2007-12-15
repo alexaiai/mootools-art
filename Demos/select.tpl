@@ -32,7 +32,12 @@
 <script type="text/javascript">
 
 window.addEvent('load', function(){
-	new ART.Select().load('realselect');
+	window.thes = new ART.Select().load([
+		{text: 'choice one'},
+		{text: 'choice two'},
+		{text: 'choice three'},
+		{text: 'choice four'}
+	]).inject('content');
 });
 	
 </script>

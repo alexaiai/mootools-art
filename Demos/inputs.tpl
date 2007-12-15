@@ -121,7 +121,7 @@ window.addEvent('load', function(){
 	var real = $('real');
 	var real2 = $('real2');
 	
-	button1 = new ART.Button({input: real, className: 'first-button', styles: {width: 140}});
+	window.button1 = new ART.Button({input: real, className: 'first-button', styles: {width: 140}});
 	button2 = new ART.Button({input: real2, className: 'last-button', styles: {width: 140}});
 	
 	new ART.TextInput({input: 'real3'});
@@ -139,7 +139,7 @@ window.addEvent('load', function(){
 		console.log('clicked ok');
 	});
 	
-	new ART.Select({styles: {width: 224}}).load('realselect');
+	window.select1 = new ART.Select({styles: {width: 224}}).load('realselect');
 	
 	new ART.TextInput({input: 'real6'});
 	

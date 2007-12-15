@@ -107,7 +107,8 @@ ART.Button = new Class({
 		e.preventDefault();
 
 		this.disableFocus();
-		this.input.focus();
+		this.input.forceFocus();
+		
 		if (!this.options.preventActions) document.addEvent('mouseup', this.bound.up);
 
 		this.draw(this.options.theme.active);
@@ -116,14 +117,12 @@ ART.Button = new Class({
 	},
 	
 	up: function(e){
-		this.enableFocus();
-		
 		if (!this.options.preventActions) document.removeEvent('mouseup', this.bound.up);
+		this.input.forceFocus();
+		this.enableFocus();
+		this.focus();
 		
 		this.wrapper.removeClass('art-' + this.component + '-active');
-		
-		this.focus(e);
-		
 		if (e.target == this.input) this.fireEvent('onAction', e);
 	},
 	
