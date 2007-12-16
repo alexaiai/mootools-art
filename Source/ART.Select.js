@@ -1,17 +1,41 @@
 ART.Select = new Class({
 	
-	Extends: ART.Button,
+	Extends: ART.Element,
+	
+	options: {
+		buttonTheme: ART.Themes.MetalButton,
+		menuTheme: ART.Themes.MetalMenu,
+		className: '',
+		morph: {duration: 150}
+	},
 	
 	initialize: function(options){
 		
-		options = $extend(options || {}, {preventActions: true});
+		this.setOptions(options, {className: this.options.className + ' art-select'});
 		
-		arguments.callee.parent(options, 'select');
+		this.button = new ART.Button($merge(this.options, {
+			theme: this.options.buttonTheme,
+			preventActions: true
+		}));
+		
+		this.menu = new ART.Menu($merge(this.options, {
+			theme: this.options.menuTheme,
+			relative: 'element'
+		}));
+		
+		arguments.callee.parent({
+			subject: this.button.container,
+			onInject: this.onInject
+		});
 		
 	},
 	
+	onInject: function(){
+		this.button.draw();
+	},
+	
 	select: function(link){
-		this.input.set('html', link.get('html'));
+		this.button.input.set('html', link.get('html'));
 		link.getParent('ul').getElements('a').removeClass('art-menu-current');
 		link.addClass('art-menu-current');
 	},
@@ -32,7 +56,7 @@ ART.Select = new Class({
 			select.setStyle('display', 'none');
 		}
 		
-		this.menu = new ART.Menu({styles: {width: this.options.styles.width}, relative: 'element', morph: {duration: 100}}).load(data);
+		this.menu.load(data);
 		
 		this.menu.links.each(function(link){
 			
@@ -49,18 +73,17 @@ ART.Select = new Class({
 		this.select(this.menu.links[0]);
 
 		
-		this.input.addActions({
+		this.button.input.addActions({
 			
 			up: function(event){
 				this.menu.close();
-				this.up(event);
+				this.button.up(event);
 			}.bind(this),
 
 			down: function(event){
-				this.down(event);
-				var c = this.wrapper.getCoordinates();
+				this.button.down(event);
+				var c = this.button.wrapper.getCoordinates();
 				this.menu.open({x: c.left - 1, y: c.bottom});
-				return true;
 			}.bind(this)
 		});
 		

@@ -27,14 +27,14 @@
 	text-decoration: none;
 }
 
-.art-select-content {
+.art-select .art-button-content {
 	background: transparent url(../Images/select.png) no-repeat center right;
 }
 
-.art-select-content a:link,
-.art-select-content a:visited,
-.art-select-content a:hover,
-.art-select-content a:active {
+.art-select .art-button-content a:link,
+.art-select .art-button-content a:visited,
+.art-select .art-button-content a:hover,
+.art-select .art-button-content a:active {
 	display: block;
 	text-align: left;
 	padding: 4px 25px 5px 12px;

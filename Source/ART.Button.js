@@ -49,9 +49,7 @@ ART.Button = new Class({
 		input: null
 	},
 	
-	initialize: function(options, component){
-		
-		this.component = component || 'button';
+	initialize: function(options){
 		
 		this.bound = {
 			down: this.down.bind(this),
@@ -60,7 +58,7 @@ ART.Button = new Class({
 			blur: this.blur.bind(this)
 		};
 		
-		arguments.callee.parent(options, this.component);
+		arguments.callee.parent(options, 'button');
 		
 		this.input = new Element('a', {href: '#'}).addEvent('click', function(e){
 			e.preventDefault();
@@ -112,7 +110,7 @@ ART.Button = new Class({
 		if (!this.options.preventActions) document.addEvent('mouseup', this.bound.up);
 
 		this.draw(this.options.theme.active);
-		this.wrapper.addClass('art-' + this.component + '-active');
+		this.wrapper.addClass('art-button-active');
 		return false;
 	},
 	
@@ -122,25 +120,25 @@ ART.Button = new Class({
 		this.enableFocus();
 		this.focus();
 		
-		this.wrapper.removeClass('art-' + this.component + '-active');
+		this.wrapper.removeClass('art-button-active');
 		if (e.target == this.input) this.fireEvent('onAction', e);
 	},
 	
 	focus: function(){
 		this.draw(this.options.theme.focus);
-		this.wrapper.addClass('art-' + this.component + '-focus');
+		this.wrapper.addClass('art-button-focus');
 	},
 	
 	blur: function(){
 		this.draw(this.options.theme.normal);
-		this.wrapper.removeClass('art-' + this.component + '-focus');
+		this.wrapper.removeClass('art-button-focus');
 	},
 	
 	enable: function(){
 		if (!this.disabled) return this;
 		this.disabled = false;
 		this.draw(this.options.theme);
-		this.wrapper.removeClass('art-' + this.component + '-disabled');
+		this.wrapper.removeClass('art-button-disabled');
 		return this;
 	},
 	
@@ -148,7 +146,7 @@ ART.Button = new Class({
 		if (this.disabled) return this;
 		this.disabled = true;
 		this.draw(this.options.theme.disabled);
-		this.wrapper.addClass('art-' + this.component + '-disabled');
+		this.wrapper.addClass('art-button-disabled');
 		return this;
 	}
 	
