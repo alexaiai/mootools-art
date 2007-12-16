@@ -49,20 +49,22 @@ ART.Menu = new Class({
 		});
 		
 		document.addEvent('keydown', function(event){
-			
-			if (!this.opened || !event.key.match(/up|down/)) return;
-				
-			switch (event.key){
-				case 'down': this.active++; break;
-				case 'up': this.active--;
-			}
-			
-			if (this.active < 0) this.active = 0;
-			if (this.active > this.links.length - 1) this.active = this.links.length - 1;
-			
-			this.focusItem(this.links[this.active], true);
-			
+			if (this.opened) this.moveFocus(event);
 		}.bind(this));
+		
+	},
+	
+	moveFocus: function(event){
+		if (!event.key.match(/up|down/)) return;
+		switch (event.key){
+			case 'down': this.active++; break;
+			case 'up': this.active--;
+		}
+		
+		if (this.active < 0) this.active = 0;
+		if (this.active > this.links.length - 1) this.active = this.links.length - 1;
+		
+		this.focusItem(this.links[this.active], true);
 	},
 	
 	load: function(data){
@@ -143,11 +145,13 @@ ART.Menu = new Class({
 	},
 	
 	focusItem: function(link, force){
+		if (!this.opened) return;
 		if (force) link.forceFocus();
 		link.getParent('li').addClass('art-menu-selected');
 	},
 	
 	blurItem: function(link, force){
+		if (!this.opened) return;
 		if (force) link.forceBlur();
 		link.getParent('li').removeClass('art-menu-selected');
 	},

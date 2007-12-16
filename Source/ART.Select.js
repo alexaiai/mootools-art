@@ -71,7 +71,6 @@ ART.Select = new Class({
 		}, this);
 		
 		this.select(this.menu.links[0]);
-
 		
 		this.button.input.addActions({
 			
