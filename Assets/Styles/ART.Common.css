@@ -14,10 +14,10 @@
 
 /* @group Button / Select */
 
-.art-button-content a:link,
-.art-button-content a:visited,
-.art-button-content a:hover,
-.art-button-content a:active {
+.art-button a:link,
+.art-button a:visited,
+.art-button a:hover,
+.art-button a:active {
 	display: block;
 	text-align: center;
 	padding: 4px 12px 5px;
@@ -31,10 +31,10 @@
 	background: transparent url(../Images/select.png) no-repeat center right;
 }
 
-.art-select .art-button-content a:link,
-.art-select .art-button-content a:visited,
-.art-select .art-button-content a:hover,
-.art-select .art-button-content a:active {
+.art-select a:link,
+.art-select a:visited,
+.art-select a:hover,
+.art-select a:active {
 	display: block;
 	text-align: left;
 	padding: 4px 25px 5px 12px;

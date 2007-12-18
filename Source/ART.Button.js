@@ -44,9 +44,7 @@ ART.Button = new Class({
 		
 		// onAction: $empty,
 		
-		theme: ART.Themes.MetalButton,
-		
-		input: null
+		theme: ART.Themes.MetalButton
 	},
 	
 	initialize: function(options){
@@ -64,6 +62,8 @@ ART.Button = new Class({
 			e.preventDefault();
 		});
 		
+		this.setContent(this.input);
+		
 		if (!this.options.preventActions) this.input.addEvents({
 
 			keydown: function(e){
@@ -79,16 +79,22 @@ ART.Button = new Class({
 		});
 		
 		this.enableFocus();
+	},
+	
+	load: function(input){
 		
-		var input = this.options.input;
+		var elementInput = $(input), replaces = false;
 		
-		switch ($type(input)){
-			case 'text': this.input.set('html', input); break;
-			case 'element': this.input.set('html', input.value);
-		};
+		if (elementInput && ['input', 'button'].contains(input.get('tag'))){
+			this.input.set('html', elementInput.value);
+			if (elementInput.parentNode) replaces = true;
+		} else {
+			this.input.setContent(input);
+		}
+
+		if (replaces) this.replaces(input);
 		
-		this.setContent(this.input);
-		if ($type(input) == 'element' && input.parentNode) this.replaces(input);
+		return this;
 	},
 	
 	enableFocus: function(){

@@ -69,6 +69,8 @@ ART.Menu = new Class({
 	
 	load: function(data){
 		
+		if (this.list) this.list.destroy();
+		
 		if ($type(data) != 'array'){
 			
 			this.list = $(data);
