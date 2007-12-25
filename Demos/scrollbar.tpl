@@ -46,9 +46,9 @@ window.addEvent('load', function(){
 	
 	window.win1 = new ART.Window({
 		title: 'ciao',
-		status: 'ciao',
+		// status: 'ciao',
 		styles: {overflow: 'hidden'}
-	}).setContent($('content').innerHTML).inject(document.body);
+	}).setContent($('content').innerHTML).open(document.body, {x: 0, y: 0});
 	
 	win1.scrollBar = new ART.ScrollBar(win1.centerWrapper, win1.center);
 	

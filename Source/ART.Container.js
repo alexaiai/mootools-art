@@ -55,7 +55,7 @@ ART.Container = new Class({
 		if (options.content) this.setContent(options.content);
 		if (options.status) this.setStatus(options.status);
 		
-		this.container.set('morph', this.options.morph);
+		this.morpher = new Fx.Morph(this.container, this.options.morph);
 		
 		arguments.callee.parent({
 			subject: this.container,

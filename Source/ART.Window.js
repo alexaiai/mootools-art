@@ -234,7 +234,7 @@ ART.Window = new Class({
 	blur: function(){
 		if (!this.focused) return;
 		this.focused = false;
-		
+
 		this.wrapper.addClass('art-window-blur');
 		this.hideOverflow();
 		this.draw(this.options.theme.blur);
@@ -246,16 +246,17 @@ ART.Window = new Class({
 		this.opened = true;
 		ART.WM.include(this);
 		
+		position = position || {x: 0, y: 0};
+		this.setPosition(position);
+		
 		this.hideOverflow();
 		this.setStyle('opacity', 0).inject(element);
 		
-		position = position || {x: 0, y: 0};
-		
-		this.setPosition({x: position.x, y: position.y - 10});
-		
-		return this.container.morph({opacity: 1, top: position.y}, function(){
+		this.morpher.start({opacity: 1}).chain(function(){
 			this.showOverflow();
-		});
+		}.bind(this));
+		
+		return this;
 	},
 	
 	close: function(){
@@ -265,13 +266,12 @@ ART.Window = new Class({
 		ART.WM.remove(this);
 		
 		this.hideOverflow();
-		
-		var position = this.container.getRelativePosition();
-		
-		this.container.setStyle('opacity', 1);
-		return this.container.morph({opacity: 0, top: position.y + 10}, function(){
-			this.container.position({x: position.x, y: position.y}).dispose();
+
+		this.morpher.start({opacity: 0}).chain(function(){
+			this.container.dispose();
 		}.bind(this));
+		
+		return this;
 	},
 	
 	maximize: function(){
