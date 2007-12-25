@@ -83,5 +83,5 @@ ART.Element = new Class({
 		this.subject.width = size.width;
 		return this;
 	}
-	
+
 });

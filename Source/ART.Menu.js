@@ -172,14 +172,14 @@ ART.Menu = new Class({
 
 		this.setStyle('opacity', 0).setPosition(position);
 		
-		return this.morph({opacity: 1});
+		return this.container.morph({opacity: 1});
 	},
 	
 	close: function(){
 		if (!this.opened) return this;
 		this.opened = false;		
 				
-		return this.morph({opacity: 0}, function(){
+		return this.container.morph({opacity: 0}, function(){
 			this.links.removeClass('art-menu-selected');
 			this.container.dispose();
 		}.bind(this));

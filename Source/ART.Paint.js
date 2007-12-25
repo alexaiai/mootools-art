@@ -32,6 +32,8 @@ ART.Paint = new Class({
 	
 	draw: function(style){
 		
+		if ($type(style) != 'art:style') style = ART.Style(style);
+		
 		this.resize({height: style.outerHeight, width: style.outerWidth});
 		
 		var tl = style.topLeftRadius, tr = style.topRightRadius, bl = style.bottomLeftRadius, br = style.bottomRightRadius;

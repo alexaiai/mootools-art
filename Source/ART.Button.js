@@ -143,7 +143,7 @@ ART.Button = new Class({
 	enable: function(){
 		if (!this.disabled) return this;
 		this.disabled = false;
-		this.draw(this.options.theme);
+		this.draw(this.options.theme.normal);
 		this.wrapper.removeClass('art-button-disabled');
 		return this;
 	},

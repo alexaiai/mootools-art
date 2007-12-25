@@ -55,10 +55,7 @@ ART.Container = new Class({
 		if (options.content) this.setContent(options.content);
 		if (options.status) this.setStatus(options.status);
 		
-		this.pfx = new Fx.Draw(this, this.options.morph);
-		this.sfx = new Fx.Morph(this.container, this.options.morph);
-		
-		this.theme = options.theme.normal;
+		this.container.set('morph', this.options.morph);
 		
 		arguments.callee.parent({
 			subject: this.container,
@@ -118,24 +115,19 @@ ART.Container = new Class({
 		
 		this.container.setStyles({width: '100%'});
 		
-		var h = theme.height, w = theme.width;
-		if ($chk(h)){
-			this.center.setStyles({height: h});
-			delete theme.height;
-		}
-		if ($chk(w)){
-			this.center.setStyles({width: w});
-			delete theme.width;
-		}
+		var height = theme.height, width = theme.width;
 		
-		$extend(this.theme, $extend(theme, {
+		if ($chk(height)) this.center.setStyles({height: height});
+		if ($chk(width)) this.center.setStyles({width: width});
+		
+		theme = $merge(this.options.theme.normal, theme, {
 			title: this.top.offsetHeight,
 			status: this.bottom.offsetHeight,
 			height: this.center.offsetHeight,
 			width: this.center.offsetWidth
-		}));
+		});
 		
-		theme = ART.Theme.fill(this.theme);
+		theme = ART.Style(theme);
 		
 		this.container.setStyles({height: theme.outerHeight, width: theme.outerWidth});
 		var shadow = theme.shadow, border = theme.border;
@@ -153,43 +145,6 @@ ART.Container = new Class({
 	
 	setPosition: function(position){
 		this.container.position({x: position.x - this.offsets.x, y: position.y - this.offsets.y});
-		return this;
-	},
-	
-	morph: function(properties, callback){
-		if (!properties) return this;
-		
-		var self = this;
-		
-		var cb = function(){
-			if (arguments.callee.done) return;
-			arguments.callee.done = true;
-			if (callback) callback.call(self);
-		};
-		
-		var pstyle = {};
-		for (var p in this.theme){
-			var pp = properties[p];
-			if ($defined(pp)){
-				pstyle[p] = properties[p];
-				delete properties[p];
-			}
-		}
-		
-		if (Hash.getLength(pstyle)){
-			this.draw({drawShadow: false});
-			this.pfx.start(pstyle).chain(function(){
-				self.draw({drawShadow: true});
-				cb();
-			});
-		}
-		
-		if (Hash.getLength(properties)){
-			var left = properties.left, top = properties.top;
-			if ($defined(left)) properties.left = left - this.offsets.x;
-			if ($defined(top)) properties.top = top - this.offsets.y;
-			this.sfx.start(properties).chain(cb);
-		}
 		return this;
 	}
 	

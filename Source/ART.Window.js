@@ -208,7 +208,6 @@ ART.Window = new Class({
 			
 		}
 		
-		this.draw();
 	},
 	
 	onInject: function(){
@@ -252,7 +251,7 @@ ART.Window = new Class({
 		
 		this.setPosition({x: position.x, y: position.y - 10});
 		
-		return this.morph({opacity: 1, top: position.y}, function(){
+		return this.container.morph({opacity: 1, top: position.y}, function(){
 			this.showOverflow();
 		});
 	},
@@ -268,7 +267,7 @@ ART.Window = new Class({
 		var position = this.container.getRelativePosition();
 		
 		this.container.setStyle('opacity', 1);
-		return this.morph({opacity: 0, top: position.y + 10}, function(){
+		return this.container.morph({opacity: 0, top: position.y + 10}, function(){
 			this.container.position({x: position.x, y: position.y}).dispose();
 		}.bind(this));
 	},
@@ -277,7 +276,7 @@ ART.Window = new Class({
 		var size = window.getSize();
 		document.body.setStyle('overflow', 'hidden');
 		var oversize = this.bottom.offsetHeight + this.top.offsetHeight;
-		return this.morph({
+		return this.container.morph({
 			height: size.y - oversize,
 			width: size.x,
 			top: -1,
@@ -286,8 +285,6 @@ ART.Window = new Class({
 	},
 	
 	showMask: function(){
-		
-		var border = this.theme.border;
 		
 		this.mask.setStyles({
 			height: this.wrapper.offsetHeight,
@@ -338,13 +335,13 @@ ART.Window = new Class({
 		
 		if (buttons.maxi) this.buttons.maxi.addEvents({
 			mouseup: function(){
-				self.morph({height: lim.y[1], width: lim.x[1]});
+				self.draw({height: lim.y[1], width: lim.x[1]});
 			}
 		});
 		
 		if (buttons.mini) this.buttons.mini.addEvents({
 			mouseup: function(){
-				self.morph({height: lim.y[0], width: lim.x[0]});
+				self.draw({height: lim.y[0], width: lim.x[0]});
 			}
 		});
 		

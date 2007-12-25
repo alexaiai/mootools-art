@@ -2,8 +2,6 @@
 
 <title>{TITLE}</title>
 
-<script type="text/javascript" src="mootools.js"></script>
-
 <!--[if IE]>
 <script type="text/javascript" src="moocanvas.js"></script>
 <![endif]-->
@@ -17,6 +15,7 @@
 <script type="text/javascript" src="{URI}/Source/ART.Paint.js"></script>
 <script type="text/javascript" src="{URI}/Source/ART.Theme.js"></script>
 <script type="text/javascript" src="{URI}/Source/ART.Container.js"></script>
+<script type="text/javascript" src="{URI}/Source/ART.ScrollBar.js"></script>
 <script type="text/javascript" src="{URI}/Source/ART.Window.js"></script>
 <script type="text/javascript" src="{URI}/Source/ART.Button.js"></script>
 <script type="text/javascript" src="{URI}/Source/ART.TextInput.js"></script>

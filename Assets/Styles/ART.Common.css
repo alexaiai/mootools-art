@@ -96,7 +96,7 @@
 
 .art-window-content p {
 	line-height: 1.5;
-	margin-bottom: 1em;
+	padding-bottom: 1em;
 }
 
 .art-window-status {
@@ -215,6 +215,23 @@
 .art-menu-separator {
 	height: 10px;
 	background: url(../Images/menu-separator.png) repeat-x center center;
+}
+
+/* @end */
+
+/* @group ScrollBar */
+
+.art-scrollbar {
+	position: absolute;
+	top: 0;
+	right: 0;
+	height: 100%;
+	width: 8px;
+}
+
+.art-scrollbar-thumb {
+	position: absolute;
+	width: 100%;
 }
 
 /* @end */
