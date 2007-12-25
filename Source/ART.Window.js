@@ -170,7 +170,9 @@ ART.Window = new Class({
 	initialize: function(options){
 
 		arguments.callee.parent(options, 'window');
-
+		
+		this.centerWrapper = new Element('div').wraps(this.center).setStyle('position', 'relative');
+		
 		var buttons = this.options.buttons;
 		
 		if (buttons){
@@ -336,12 +338,14 @@ ART.Window = new Class({
 		if (buttons.maxi) this.buttons.maxi.addEvents({
 			mouseup: function(){
 				self.draw({height: lim.y[1], width: lim.x[1]});
+				self.fireEvent('onSizeChange');
 			}
 		});
 		
 		if (buttons.mini) this.buttons.mini.addEvents({
 			mouseup: function(){
 				self.draw({height: lim.y[0], width: lim.x[0]});
+				self.fireEvent('onSizeChange');
 			}
 		});
 		
@@ -380,6 +384,7 @@ ART.Window = new Class({
 				self.showOverflow();
 				self.remask(true);
 				self.hideMask();
+				self.fireEvent('onSizeChange');
 			},
 			handle: this.handle
 		});
