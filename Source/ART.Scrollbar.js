@@ -22,6 +22,8 @@ ART.ScrollBar = new Class({
 		id: null,
 		className: null,
 		
+		autoHide: true,
+		
 		minThumbSize: 10,
 		wheel: 8,
 		
@@ -38,7 +40,12 @@ ART.ScrollBar = new Class({
 		
 		this.content = $(content);
 		
-		this.track = new Element('div').addClass('art-scrollbar').inject(this.container).setStyle('opacity', 0);
+		this.track = new Element('div').addClass('art-scrollbar').inject(this.container);
+		
+		if (this.options.autoHide){
+			this.hidden = true;
+			this.track.setStyle('opacity', 0);
+		}
 		
 		if (this.options.id) this.track.set('id', this.options.id);
 		if (this.options.className) this.track.addClass(this.options.className);
@@ -77,9 +84,10 @@ ART.ScrollBar = new Class({
 	},
 
 	attach: function(){
-		
-		this.container.addEvent('mouseenter', this.bound.show);
-		this.container.addEvent('mouseleave', this.bound.hide);
+		if (this.options.autoHide){
+			this.container.addEvent('mouseenter', this.bound.show);
+			this.container.addEvent('mouseleave', this.bound.hide);
+		}
 		
 		this.thumb.addEvent('mousedown', this.bound.start);
 		if (this.options.wheel) this.container.addEvent('mousewheel', this.bound.wheel);
@@ -87,11 +95,17 @@ ART.ScrollBar = new Class({
 	},
 	
 	show: function(force){
-		if (!this.mousedown && (force === true || this.check())) this.morphTrack.start({opacity: 1});
+		if (this.hidden && !this.mousedown && (force === true || this.check())){
+			this.hidden = false;
+			this.morphTrack.start({opacity: 1});
+		}
 	},
 	
 	hide: function(force){
-		if (!this.mousedown && (force === true || this.check())) this.morphTrack.start({opacity: 0});
+		if (!this.hidden && !this.mousedown && (force === true || this.check())){
+			this.hidden = true;
+			this.morphTrack.start({opacity: 0});
+		}
 	},
 	
 	check: function(){
@@ -114,13 +128,13 @@ ART.ScrollBar = new Class({
 		
 		if (!this.check()){
 			this.hide(true);
-			return;
+		} else {
+			if (!this.options.autoHide) this.show(true);
+			this.paint.draw($extend({height: this.thumb.offsetHeight, width: this.thumb.offsetWidth}, this.options.theme.normal));
 		}
-
+		
 		this.updateThumbFromContentScroll();
 		this.updateContentFromThumbPosition();
-		
-		this.paint.draw($extend({height: this.thumb.offsetHeight, width: this.thumb.offsetWidth}, this.options.theme.normal));
 	},
 
 	updateContentFromThumbPosition: function(){
@@ -160,7 +174,7 @@ ART.ScrollBar = new Class({
 
 	end: function(event){
 		this.mousedown = false;
-		if (event.target != this.container && !this.container.hasChild(event.target)) this.hide();
+		if (this.options.autoHide && event.target != this.container && !this.container.hasChild(event.target)) this.hide();
 		this.document.removeEvent('mousemove', this.bound.drag);
 		this.document.removeEvent('mouseup', this.bound.end);
 		this.document.removeEvent(this.selection, this.bound.stopSelection);

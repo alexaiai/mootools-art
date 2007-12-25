@@ -378,6 +378,7 @@ ART.Window = new Class({
 			},
 			onDrag: function(){
 				self.remask(false);
+				self.fireEvent('onSizeChange');
 			},
 			onComplete: function(){
 				self.showCenter();
