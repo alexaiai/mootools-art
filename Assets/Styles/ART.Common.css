@@ -226,7 +226,15 @@
 	top: 0;
 	right: 0;
 	height: 100%;
-	width: 9px;
+	width: 10px;
+}
+
+.art-scrollbar-track {
+	position: absolute;
+	top: 0;
+	right: 0;
+	height: 100%;
+	width: 100%;
 }
 
 .art-scrollbar-thumb {

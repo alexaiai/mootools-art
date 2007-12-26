@@ -20,6 +20,20 @@
 		width: 180px;
 		padding: 10px;
 	}
+
+	.win-scrollbar .art-scrollbar-track {
+		top: 1px;
+		right: 1px;
+		width: 10px;
+	}
+	
+	.win-scrollbar {
+		
+	}
+	
+	.win-scrollbar .art-scrollbar-thumb {
+		
+	}
 	
 	
 </style>
@@ -50,12 +64,10 @@ window.addEvent('load', function(){
 		styles: {overflow: 'hidden'}
 	}).setContent($('content').innerHTML).open(document.body, {x: 0, y: 0});
 	
-	win1.scrollBar = new ART.ScrollBar(win1.centerWrapper, win1.center);
+	win1.scrollBar = new ART.ScrollBar(win1.centerWrapper, win1.center, {className: 'win-scrollbar'});
 	
 	var updateScrollBar = function(){
-		win1.scrollBar.track.setStyle('height', win1.center.offsetHeight - 4);
-		win1.scrollBar.track.setStyle('top', 2);
-		win1.scrollBar.track.setStyle('right', 2);
+		win1.scrollBar.track.setStyle('height', win1.center.offsetHeight - 2);
 		win1.scrollBar.update();
 	};
 	
