@@ -164,7 +164,7 @@ ART.ScrollBar = new Class({
 	},
 
 	page: function(option){
-		if ($type(option) == 'event' && option.target != this.track) return;
+		if (this.mousedown) return;
 		var height = this.content.offsetHeight;
 		var page = (($type(option) == 'event' && option.page.y > this.thumb.getPosition().y) || option == 'down') ? height : -height;
 		var scroll = this.content.scrollTop + page;

@@ -29,14 +29,14 @@
 	}
 	
 	.test-scrollbar {
-		width: 14px;
+		width: 26px;
 	}
 	
 	.test-scrollbar .art-scrollbar-track {
-		top: 2px;
-		right: 2px;
+		top: 8px;
+		right: 8px;
 		width: 10px;
-		height: 196px;
+		height: 184px;
 	}
 	
 	
