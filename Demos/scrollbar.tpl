@@ -11,7 +11,8 @@
 		overflow: hidden;
 		height: 200px;
 		width: 200px;
-		background: #ddd;
+		background: #333;
+		color: #ccc;
 	}
 	
 	#content {
@@ -27,12 +28,15 @@
 		width: 10px;
 	}
 	
-	.win-scrollbar {
-		
+	.test-scrollbar {
+		width: 14px;
 	}
 	
-	.win-scrollbar .art-scrollbar-thumb {
-		
+	.test-scrollbar .art-scrollbar-track {
+		top: 2px;
+		right: 2px;
+		width: 10px;
+		height: 196px;
 	}
 	
 	
@@ -56,7 +60,7 @@
 
 window.addEvent('load', function(){
 	
-	var scrollBar = new ART.ScrollBar('wrapper', 'content');
+	var scrollBar = new ART.ScrollBar('wrapper', 'content', {className: 'test-scrollbar'});
 	
 	window.win1 = new ART.Window({
 		title: 'ciao',
