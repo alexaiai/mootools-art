@@ -109,8 +109,8 @@
 	</select>
 	<span class="clr"></span>
 	
-	<label><input id="realCheckbox" type="checkbox" value="1" /> Test</label>
-	<label><input id="realCheckbox2" type="checkbox" value="1" checked/> Another Theme</label>
+	<label><input id="realCheckbox" type="checkbox" value="1" /></label>
+	<label><input id="realCheckbox2" type="checkbox" value="1" checked/></label>
 	
 	<span class="clr"></span>
 	
@@ -152,9 +152,27 @@ window.addEvent('load', function(){
 	
 	new ART.TextInput({input: 'real6'});
 	
-	window.checkbox1 = new ART.Checkbox({className: 'checkbox', styles: {width: 16, height: 16}}).load('realCheckbox');
+	window.checkbox1 = new ART.Checkbox({
+		caption: 'Yeeeha!',
+		className: 'checkbox',
+		styles: {width: 16, height: 16}
+	}).load('realCheckbox');
 	
-	window.checkbox2 = new ART.Checkbox({theme: ART.Themes.MetalTextInput, className: 'checkbox', styles: {width: 16, height: 16}}).load('realCheckbox2');
+	window.checkbox2 = new ART.Checkbox({
+		captionStyle: {
+			paddingTop: 5,
+			cursor: 'pointer',
+			fontWeight: 'bold',
+			width: 200
+		},
+		caption: 'hello, I am styled! click me',
+		theme: ART.Themes.MetalTextInput,
+		className: 'checkbox',
+		styles: {
+			width: 16,
+			height: 16
+		}
+	}).load('realCheckbox2');
 	
 	window.file1 = new ART.File({showValue: 'showValueHere', caption: 'Choose file...', styles: {width: 140}}).load('realFile');
 });

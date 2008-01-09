@@ -4,7 +4,7 @@ ART.File = new Class({
 	
 	options: {
 		caption: '',
-		showValue: false,
+		showValue: false
 	},
 	
 	initialize: function(options){

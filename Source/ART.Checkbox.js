@@ -3,10 +3,16 @@ ART.Checkbox = new Class({
 	
 	options: {
 		theme: ART.Themes.MetalButton,
-		
+		caption: '',
+		captionStyle: {},
+		label: false
 	},
 	
 	initialize: function(options){
+		this.bound = {
+			toggle: this.toggle.bind(this)
+		};
+		
 		arguments.callee.parent(options, 'checkbox');
 		
 		this.input = new Element('a', {href: '#'}).addEvent('click', (function(e){
@@ -19,11 +25,20 @@ ART.Checkbox = new Class({
 	
 	load: function(input){
 		var input = $(input);
+		
+		if(this.options.label)
+			var parent = $(this.options.label) || input.getParent();
+		
 		if (input && input.get('tag')=='input'){
 			this.checkbox = input.setStyle('display', 'none');
 			this.replaces(this.checkbox);
 			if(this.checkbox.checked) this.check();
 		}
+		
+		if(this.options.caption)
+			new Element('div', {text: this.options.caption, styles: $merge({marginLeft: this.subject.getSize().x+5}, this.options.captionStyle)}).addEvent('click', this.bound.toggle).inject(this.subject);
+			
+		if(parent) parent.addEvent('click', this.bound.toggle);
 		return this;
 	},
 	
