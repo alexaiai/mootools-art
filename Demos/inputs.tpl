@@ -108,6 +108,14 @@
 
 	</select>
 	<span class="clr"></span>
+	
+	<label><input id="realCheckbox" type="checkbox" value="1" /> Test</label>
+	<label><input id="realCheckbox2" type="checkbox" value="1" checked/> Another Theme</label>
+	
+	<span class="clr"></span>
+	<label>Maybe "caption" should be added for label text</label>
+	
+	<span class="clr"></span>
 	<input id="real" type="submit" value="Cancel&hellip;" title="if you press here you will die" />
 	<input id="real2" type="submit" value="Send&hellip;" title="if you press here you will live" />
 	<span class="clr noh"></span>
@@ -138,11 +146,15 @@ window.addEvent('load', function(){
 	button2.addEvent('onAction', function(){
 		console.log('clicked ok');
 	});
-	
 	window.select1 = new ART.Select({styles: {width: 224}}).load('realselect');
 	
 	new ART.TextInput({input: 'real6'});
 	
+	window.checkbox1 = new ART.Checkbox({className: 'checkbox', styles: {width: 16, height: 16}}).load('realCheckbox');
+	
+	window.checkbox2 = new ART.Checkbox({theme: ART.Themes.MetalTextInput, className: 'checkbox', styles: {width: 16, height: 16}}).load('realCheckbox2');
+	
+	console.log(window.checkbox1);
 });
 
 </script>

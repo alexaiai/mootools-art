@@ -12,7 +12,7 @@
 
 /* @end */
 
-/* @group Button / Select */
+/* @group Button / Checkbox / Select */
 
 .art-button a:link,
 .art-button a:visited,
@@ -25,6 +25,15 @@
 	border: 0;
 	color: #222;
 	text-decoration: none;
+}
+.art-checkbox a:link,
+.art-checkbox a:visited,
+.art-checkbox a:hover,
+.art-checkbox a:active  {
+	display: block;
+	outline: 0;
+	width: 100%;
+	height: 100%;
 }
 
 .art-select .art-button-content {
@@ -240,6 +249,20 @@
 .art-scrollbar-thumb {
 	position: absolute;
 	width: 100%;
+}
+
+/* @end */
+
+/* @group Checkbox */
+
+.art-checkbox .art-checkbox-button {
+	width: 100%;
+	height: 100%;
+	left: 1px;
+}
+
+.art-checkbox .art-checkbox-checked {
+	background-image: url(../Images/checkbox-checked.png);
 }
 
 /* @end */

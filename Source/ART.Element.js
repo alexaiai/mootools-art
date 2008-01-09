@@ -25,9 +25,9 @@ ART.Element = new Class({
 	Implements: [Events, Options],
 	
 	options: {
-		// onInject: $empty,
-		// onDispose: $empty,
-		// onGrab: $empty,
+		/* onInject: $empty,
+		onDispose: $empty,
+		onGrab: $empty,*/
 		subject: null,
 		grabber: null
 	},

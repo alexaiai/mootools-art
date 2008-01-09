@@ -48,7 +48,6 @@ ART.Button = new Class({
 	},
 	
 	initialize: function(options){
-		
 		this.bound = {
 			down: this.down.bind(this),
 			up: this.up.bind(this),
@@ -82,7 +81,6 @@ ART.Button = new Class({
 	},
 	
 	load: function(input){
-		
 		var elementInput = $(input), replaces = false;
 		
 		if (elementInput && ['input', 'button'].contains(input.get('tag'))){
