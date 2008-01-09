@@ -25,6 +25,7 @@
 	border: 0;
 	color: #222;
 	text-decoration: none;
+	cursor: pointer;
 }
 .art-checkbox a:link,
 .art-checkbox a:visited,
@@ -34,6 +35,7 @@
 	outline: 0;
 	width: 100%;
 	height: 100%;
+	cursor: pointer;
 }
 
 .art-select .art-button-content {
@@ -265,4 +267,14 @@
 	background-image: url(../Images/checkbox-checked.png);
 }
 
+/* @end */
+
+/* @group File */
+
+.art-file {
+	position: relative;
+	height: 100%;
+	width: auto;
+	cursor: pointer;
+}
 /* @end */

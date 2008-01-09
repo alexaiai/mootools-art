@@ -83,8 +83,9 @@ ART.Button = new Class({
 	load: function(input){
 		var elementInput = $(input), replaces = false;
 		
-		if (elementInput && ['input', 'button'].contains(input.get('tag'))){
-			this.input.set('html', elementInput.value);
+		if (elementInput && ['input', 'button'].contains(elementInput.get('tag'))){
+			if(elementInput.get('type') != 'file')
+				this.input.set('html', elementInput.value);
 			if (elementInput.parentNode) replaces = true;
 		} else {
 			this.input.setContent(input);
@@ -107,7 +108,8 @@ ART.Button = new Class({
 	
 	down: function(e){
 		e.preventDefault();
-
+		if(this.disabled) return false;
+		
 		this.disableFocus();
 		this.input.forceFocus();
 		

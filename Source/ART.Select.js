@@ -74,13 +74,13 @@ ART.Select = new Class({
 		
 		this.button.input.addActions({
 			
-			up: function(event){
+			up: function(e){
 				this.menu.close();
-				this.button.up(event);
+				this.button.up(e);
 			}.bind(this),
 
-			down: function(event){
-				this.button.down(event);
+			down: function(e){
+				this.button.down(e);
 				var c = this.button.wrapper.getCoordinates();
 				this.menu.open({x: c.left - 1, y: c.bottom});
 			}.bind(this)

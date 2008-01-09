@@ -113,7 +113,9 @@
 	<label><input id="realCheckbox2" type="checkbox" value="1" checked/> Another Theme</label>
 	
 	<span class="clr"></span>
-	<label>Maybe "caption" should be added for label text</label>
+	
+	<span id="showValueHere">You'll see the selected file instead of this text</span>
+	<input id="realFile" type="file" title="Select a file" />
 	
 	<span class="clr"></span>
 	<input id="real" type="submit" value="Cancel&hellip;" title="if you press here you will die" />
@@ -154,7 +156,7 @@ window.addEvent('load', function(){
 	
 	window.checkbox2 = new ART.Checkbox({theme: ART.Themes.MetalTextInput, className: 'checkbox', styles: {width: 16, height: 16}}).load('realCheckbox2');
 	
-	console.log(window.checkbox1);
+	window.file1 = new ART.File({showValue: 'showValueHere', caption: 'Choose file...', styles: {width: 140}}).load('realFile');
 });
 
 </script>

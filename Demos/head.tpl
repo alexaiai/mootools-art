@@ -18,6 +18,7 @@
 <script type="text/javascript" src="{URI}/Source/ART.ScrollBar.js"></script>
 <script type="text/javascript" src="{URI}/Source/ART.Window.js"></script>
 <script type="text/javascript" src="{URI}/Source/ART.Button.js"></script>
+<script type="text/javascript" src="{URI}/Source/ART.File.js"></script>
 <script type="text/javascript" src="{URI}/Source/ART.TextInput.js"></script>
 <script type="text/javascript" src="{URI}/Source/ART.ToolTip.js"></script>
 <script type="text/javascript" src="{URI}/Source/ART.Menu.js"></script>
