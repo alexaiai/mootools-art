@@ -57,4 +57,5 @@ ART.File = new Class({
 		arguments.callee.parent();
 		this.file.setStyle('display', '');
 	}
+	
 });

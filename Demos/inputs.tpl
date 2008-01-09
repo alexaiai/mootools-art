@@ -13,6 +13,11 @@
 		padding: 10px;
 	}
 	
+	h1 {
+		font-size: 16px;
+		color: #e2e2e2;
+	}
+	
 	textarea {
 		height: 120px;
 		width: 300px;
@@ -109,15 +114,24 @@
 	</select>
 	<span class="clr"></span>
 	
+	<h1>Checkbox Test</h1>
 	<label><input id="realCheckbox" type="checkbox" value="1" /></label>
 	<label><input id="realCheckbox2" type="checkbox" value="1" checked/></label>
-	
 	<span class="clr"></span>
 	
+	<h1>Radio Test</h1>
+	<div id="radios">
+		<label><input id="realRadio1" name="realRadio" type="radio" value="0" /></label>
+		<label><input id="realRadio2" name="realRadio" type="radio" value="1" checked/></label>
+		<label><input id="realRadio3" name="realRadio" type="radio" value="2"/></label>
+	</div>
+	<span class="clr"></span>
+	
+	<h1>Input type="file" Test</h1>
 	<span id="showValueHere">You'll see the selected file instead of this text</span>
 	<input id="realFile" type="file" title="Select a file" />
-	
 	<span class="clr"></span>
+	
 	<input id="real" type="submit" value="Cancel&hellip;" title="if you press here you will die" />
 	<input id="real2" type="submit" value="Send&hellip;" title="if you press here you will live" />
 	<span class="clr noh"></span>
@@ -160,7 +174,6 @@ window.addEvent('load', function(){
 	
 	window.checkbox2 = new ART.Checkbox({
 		captionStyle: {
-			paddingTop: 5,
 			cursor: 'pointer',
 			fontWeight: 'bold',
 			width: 200
@@ -173,6 +186,19 @@ window.addEvent('load', function(){
 			height: 16
 		}
 	}).load('realCheckbox2');
+	
+	window.radios = new ART.Radio({
+		options: [
+			{caption: 'myFirst'},
+			{caption: 'mySecond'},
+			{caption: 'theLast', captionStyle: {fontWeight: 'bold', cursor: 'pointer'}}
+		],
+		className: 'radio',
+		styles: {
+			width: 14,
+			height: 14
+		}
+	}).loadElements('radios');
 	
 	window.file1 = new ART.File({showValue: 'showValueHere', caption: 'Choose file...', styles: {width: 140}}).load('realFile');
 });

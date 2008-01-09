@@ -30,7 +30,11 @@
 .art-checkbox a:link,
 .art-checkbox a:visited,
 .art-checkbox a:hover,
-.art-checkbox a:active  {
+.art-checkbox a:active,
+.art-radio a:link,
+.art-radio a:visited,
+.art-radio a:hover,
+.art-radio a:active  {
 	display: block;
 	outline: 0;
 	width: 100%;
@@ -255,17 +259,26 @@
 
 /* @end */
 
-/* @group Checkbox */
+/* @group Checkbox / Radio */
 
-.art-checkbox .art-checkbox-button {
+.art-checkbox .art-checkbox-button, .art-radio .art-radio-button {
 	cursor: pointer;
 	width: 100%;
 	height: 100%;
-	left: 1px;
 }
 
 .art-checkbox .art-checkbox-checked {
 	background-image: url(../Images/checkbox-checked.png);
+}
+.art-checkbox-caption {
+	padding-top: 5px;
+}
+
+.art-radio .art-radio-checked {
+	background-image: url(../Images/radio-checked.png);
+}
+.art-radio-caption {
+	padding-top: 3px;
 }
 
 /* @end */
