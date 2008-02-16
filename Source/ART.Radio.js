@@ -22,8 +22,7 @@ ART.Radio = new Class({
 	Extends: ART.Checkbox,
 	
 	options: {
-		theme: ART.Themes.MetalRadio,
-		options: []
+		theme: ART.Themes.MetalRadio
 	},
 	
 	initialize: function(options, list){
@@ -34,13 +33,13 @@ ART.Radio = new Class({
 	
 	loadElements: function(input){
 		input = $(input);
-		if(input){
-			if(input.get('tag') == 'input' && input.get('type')=='radio')
+		if (input){
+			if (input.get('tag') == 'input' && input.get('type')=='radio')
 				this.list.push(input);
 			else
 				this.list = input.getElements('input[type="radio"]');
 		}
-		if(this.list.length)
+		if (this.list.length)
 			this.list.each(function(v, i){
 				var options = $unlink(this.options);
 				if(options.options[i])
@@ -58,10 +57,10 @@ ART.Radio = new Class({
 	
 	check: function(){
 		this.list.each(function(el){
-			if(!el.checked) return;
+			if (!el.checked) return;
 			el.checked = false;
 			//this is to make sure the list element already has been created!
-			if(el.retrieve('art:radio'))
+			if (el.retrieve('art:radio'))
 				el.retrieve('art:radio').uncheck(true);
 		});
 		arguments.callee.parent();

@@ -12,12 +12,11 @@ ART.File = new Class({
 	},
 	
 	load: function(input){
-		this.file = $(input).clone().setOpacity(0).addClass('art-file');
+		var el = this.file = $(input).clone().setOpacity(0).addClass('art-file');
 		
-		if(this.options.caption) this.input.set('html', this.options.caption);
+		if (this.options.caption) this.input.set('html', this.options.caption);
 		arguments.callee.parent(input);
-		this.file.inject(this.content);
-		var el = this.file;
+		el.inject(this.content);
 		
 		this.container.addEvent('mousemove', function(e){
 			var pos = this.getCoordinates();
@@ -27,7 +26,7 @@ ART.File = new Class({
 			});
 		});
 		
-		if($(this.options.showValue)){
+		if ($(this.options.showValue)){
 			this.updateValue = $(this.options.showValue);
 			this.check.create({periodical: 500, bind: this})();
 		}
@@ -36,7 +35,7 @@ ART.File = new Class({
 	},
 	
 	check: function(){
-		if(!this.file.value || this.updateValue.get('text')==this.file.value)
+		if (!this.file.value || this.updateValue.get('text')==this.file.value)
 			return;
 		
 		this.updateValue.set('text', this.file.value);

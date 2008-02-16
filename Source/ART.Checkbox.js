@@ -16,7 +16,7 @@ ART.Checkbox = new Class({
 		arguments.callee.parent(options, component || 'checkbox');
 		
 		this.input = new Element('a', {href: '#'}).addEvent('click', (function(e){
-			if(!this.disabled) this.toggle();
+			if (!this.disabled) this.toggle();
 			e.preventDefault();
 		}).bind(this));
 		this.handle = new Element('div', {'class': this.component+'-button'}).setStyles({'position': 'absolute', 'background-repeat': 'no-repeat'}).inject(this.input);
@@ -26,7 +26,7 @@ ART.Checkbox = new Class({
 	load: function(input){
 		input = $(input);
 		
-		if(this.options.label)
+		if (this.options.label)
 			var parent = $(this.options.label) || input.getParent();
 		
 		if (input && input.get('tag') == 'input'){
@@ -36,10 +36,10 @@ ART.Checkbox = new Class({
 			if(this.elementInput.checked) this.check();
 		}
 		
-		if(this.options.caption)
+		if (this.options.caption)
 			new Element('div', {'class': this.component.trim()+'-caption', text: this.options.caption, styles: $merge({marginLeft: this.subject.getSize().x+5}, this.options.captionStyle)}).addEvent('click', this.bound.toggle).inject(this.subject);
 			
-		if(parent) parent.addEvent('click', this.bound.toggle);
+		if (parent) parent.addEvent('click', this.bound.toggle);
 		return this;
 	},
 	

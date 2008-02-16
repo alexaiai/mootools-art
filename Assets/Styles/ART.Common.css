@@ -12,12 +12,16 @@
 
 /* @end */
 
-/* @group Button / Checkbox / Select */
+/* @group Button / Checkbox / Select / Tab */
 
 .art-button a:link,
 .art-button a:visited,
 .art-button a:hover,
-.art-button a:active {
+.art-button a:active,
+.art-tab a:link,
+.art-tab a:visited,
+.art-tab a:hover,
+.art-tab a:active {
 	display: block;
 	text-align: center;
 	padding: 4px 12px 5px;
@@ -27,6 +31,7 @@
 	text-decoration: none;
 	cursor: pointer;
 }
+
 .art-checkbox a:link,
 .art-checkbox a:visited,
 .art-checkbox a:hover,
@@ -65,6 +70,36 @@
 	background-position: 4px center;
 }
 
+/* @end */
+
+/* @group Tab */
+.art-tabcontainer {
+	height: 23px;
+	border-bottom: 1px solid #222;
+}
+.art-tabcontent {
+	margin: 10px;
+}
+
+.art-tab {
+	float: left;
+	margin: 0 2px;
+}
+.art-tab-button-close {
+	float: right;
+	margin-left: 10px;
+	border: 0;
+	width: 12px;
+	height: 13px;
+	background: url(../Images/button-close.png) no-repeat 0 -13px;
+	overflow: hidden;
+}
+.art-tab-button-close:hover {
+	background-position: 0 0;
+}
+.art-tab-blur .art-tab-button-close {
+	background-image: url(../Images/button-close-blur.png);
+}
 /* @end */
 
 /* @group TextInput */
@@ -135,6 +170,7 @@
 	background-image: url(../Images/button-handle.png);
 	height: 18px;
 	width: 18px;
+	cursor: se-resize;
 }
 
 /* traffic button container */

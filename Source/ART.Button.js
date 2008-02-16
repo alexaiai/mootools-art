@@ -47,7 +47,7 @@ ART.Button = new Class({
 		theme: ART.Themes.MetalButton
 	},
 	
-	initialize: function(options){
+	initialize: function(options, component){
 		this.bound = {
 			down: this.down.bind(this),
 			up: this.up.bind(this),
@@ -55,7 +55,7 @@ ART.Button = new Class({
 			blur: this.blur.bind(this)
 		};
 		
-		arguments.callee.parent(options, 'button');
+		arguments.callee.parent(options, component || 'button');
 		
 		this.input = new Element('a', {href: '#'}).addEvent('click', function(e){
 			e.preventDefault();
@@ -80,12 +80,13 @@ ART.Button = new Class({
 		this.enableFocus();
 	},
 	
-	load: function(input){
-		var elementInput = $(input), replaces = false;
+	load: function(input, force){
+		var elementInput = $(input),
+			replaces = false,
+			isTag = elementInput && ['input', 'button'].contains(elementInput.get('tag'));
 		
-		if (elementInput && ['input', 'button'].contains(elementInput.get('tag'))){
-			if(elementInput.get('type') != 'file')
-				this.input.set('html', elementInput.value);
+		if (elementInput && (force || isTag)) {
+			if (elementInput.get('type') != 'file' && isTag) this.input.set('html', elementInput.value);
 			if (elementInput.parentNode) replaces = true;
 		} else {
 			this.input.setContent(input);
@@ -114,7 +115,7 @@ ART.Button = new Class({
 		this.input.forceFocus();
 		
 		if (!this.options.preventActions) document.addEvent('mouseup', this.bound.up);
-
+		
 		this.draw(this.options.theme.active);
 		this.wrapper.addClass('art-button-active');
 		return false;
