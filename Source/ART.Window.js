@@ -169,7 +169,7 @@ ART.Window = new Class({
 	
 	initialize: function(options){
 
-		arguments.callee.parent(options, 'window');
+		this.parent(options, 'window');
 		
 		this.centerWrapper = new Element('div').wraps(this.center).setStyle('position', 'relative');
 		
@@ -217,7 +217,7 @@ ART.Window = new Class({
 		if (this.options.buttons) this.attachButtonEvents();
 		if (this.options.draggable) this.makeDraggable();
 		if (this.options.resizable) this.makeResizable();
-		arguments.callee.parent();
+		this.parent();
 	},
 	
 	focus: function(){

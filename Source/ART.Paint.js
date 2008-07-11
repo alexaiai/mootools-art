@@ -10,7 +10,7 @@ ART.Paint = new Class({
 	
 	initialize: function(options){
 		this.setOptions(options);
-		arguments.callee.parent({id: this.options.id});
+		this.parent({id: this.options.id});
 	},
 	
 	colorize: function(color, alpha){

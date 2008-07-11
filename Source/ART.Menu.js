@@ -29,7 +29,7 @@ ART.Menu = new Class({
 	},
 	
 	initialize: function(options){
-		arguments.callee.parent($merge(options, {styles: {position: 'absolute'}}), 'menu');
+		this.parent($merge(options, {styles: {position: 'absolute'}}), 'menu');
 		
 		var target = $(this.options.target), relative = this.options.relative;
 		

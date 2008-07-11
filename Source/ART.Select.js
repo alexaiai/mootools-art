@@ -23,7 +23,7 @@ ART.Select = new Class({
 			relative: 'element'
 		}));
 		
-		arguments.callee.parent({
+		this.parent({
 			subject: this.button.container,
 			onInject: this.onInject
 		});

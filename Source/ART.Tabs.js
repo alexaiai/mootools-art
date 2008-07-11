@@ -46,7 +46,7 @@ ART.TabElement = new Class({
 		this.tabs = tabs;
 		this.index = index;
 		
-		arguments.callee.parent(options, 'tab');
+		this.parent(options, 'tab');
 	},
 	
 	load: function(input){
@@ -65,7 +65,7 @@ ART.TabElement = new Class({
 			}).inject(this.input, 'top');
 		}
 		
-		arguments.callee.parent(input, true);
+		this.parent(input, true);
 		
 		return this;
 	},
@@ -95,7 +95,7 @@ ART.TabElement = new Class({
 	},
 	
 	focus: function(){
-		arguments.callee.parent();
+		this.parent();
 	},
 	
 	blur: function(){
@@ -105,7 +105,7 @@ ART.TabElement = new Class({
 	down: function(e){
 		this.tabs.open(this.index);
 		
-		arguments.callee.parent(e);
+		this.parent(e);
 		return false;
 	}
 	

@@ -57,7 +57,7 @@ ART.Container = new Class({
 		
 		this.morpher = new Fx.Morph(this.container, this.options.morph);
 		
-		arguments.callee.parent({
+		this.parent({
 			subject: this.container,
 			onInject: this.onInject
 		});
@@ -74,7 +74,7 @@ ART.Container = new Class({
 	},
 	
 	replaces: function(element){
-		arguments.callee.parent(element);
+		this.parent(element);
 		return this.draw();
 	},
 	

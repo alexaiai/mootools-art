@@ -13,7 +13,7 @@ ART.Checkbox = new Class({
 			toggle: this.toggle.bind(this)
 		};
 		
-		arguments.callee.parent(options, component || 'checkbox');
+		this.parent(options, component || 'checkbox');
 		
 		this.input = new Element('a', {href: '#'}).addEvent('click', (function(e){
 			if (!this.disabled) this.toggle();

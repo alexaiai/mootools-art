@@ -8,14 +8,14 @@ ART.File = new Class({
 	},
 	
 	initialize: function(options){
-		arguments.callee.parent(options);
+		this.parent(options);
 	},
 	
 	load: function(input){
 		var el = this.file = $(input).clone().setOpacity(0).addClass('art-file');
 		
 		if (this.options.caption) this.input.set('html', this.options.caption);
-		arguments.callee.parent(input);
+		this.parent(input);
 		el.inject(this.content);
 		
 		this.container.addEvent('mousemove', function(e){
@@ -43,17 +43,17 @@ ART.File = new Class({
 	
 	draw: function(theme){
 		this.file.setStyle('display', 'none');
-		arguments.callee.parent(theme);
+		this.parent(theme);
 		this.file.setStyle('display', '');
 	},
 	
 	disable: function(){
-		arguments.callee.parent();
+		this.parent();
 		this.file.setStyle('display', 'none');
 	},
 	
 	enable: function(){
-		arguments.callee.parent();
+		this.parent();
 		this.file.setStyle('display', '');
 	}
 	

@@ -47,7 +47,7 @@ ART.ToolTip = new Class({
 
 	initialize: function(elements, options){
 		
-		arguments.callee.parent(options, 'tooltip');
+		this.parent(options, 'tooltip');
 		
 		this.elements = $$(elements);
 		this.contents = this.options.contents;

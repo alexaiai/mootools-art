@@ -26,7 +26,7 @@ ART.Radio = new Class({
 	},
 	
 	initialize: function(options, list){
-		arguments.callee.parent(options, 'radio');
+		this.parent(options, 'radio');
 		
 		this.list = list || [];
 	},
@@ -51,7 +51,7 @@ ART.Radio = new Class({
 	},
 	
 	load: function(input){
-		arguments.callee.parent(input);
+		this.parent(input);
 		return this;
 	},
 	
@@ -59,15 +59,15 @@ ART.Radio = new Class({
 		this.list.each(function(el){
 			if (!el.checked) return;
 			el.checked = false;
-			//this is to make sure the list element already has been created!
+			// This is to make sure the list element already has been created!
 			if (el.retrieve('art:radio'))
 				el.retrieve('art:radio').uncheck(true);
 		});
-		arguments.callee.parent();
+		this.parent();
 	},
 	
 	uncheck: function(force){
-		if(force) arguments.callee.parent();
+		if(force) this.parent();
 	},
 	
 	getValue: function(){

@@ -39,7 +39,7 @@ ART.TextInput = new Class({
 	},
 	
 	initialize: function(options){
-		arguments.callee.parent(options, 'textinput');
+		this.parent(options, 'textinput');
 		
 		this.input = $(this.options.input) || new Element('input', {type: this.options.type || 'text', name: this.options.name || ''});
 		

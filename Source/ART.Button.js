@@ -55,7 +55,7 @@ ART.Button = new Class({
 			blur: this.blur.bind(this)
 		};
 		
-		arguments.callee.parent(options, component || 'button');
+		this.parent(options, component || 'button');
 		
 		this.input = new Element('a', {href: '#'}).addEvent('click', function(e){
 			e.preventDefault();

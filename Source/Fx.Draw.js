@@ -6,7 +6,7 @@ Fx.Draw = new Class({
 	
 	initialize: function(paint, options){
 		this.paint = paint;
-		arguments.callee.parent(options);
+		this.parent(options);
 	},
 	
 	set: function(style){
@@ -16,7 +16,7 @@ Fx.Draw = new Class({
 	
 	compute: function(from, to, delta){
 		var now = {};
-		for (var p in from) now[p] = arguments.callee.parent(from[p], to[p], delta);
+		for (var p in from) now[p] = this.parent(from[p], to[p], delta);
 		return now;
 	},
 	
@@ -27,7 +27,7 @@ Fx.Draw = new Class({
 			from[p] = this.paint.theme[p];
 			to[p] = properties[p];
 		}
-		return arguments.callee.parent(from, to);
+		return this.parent(from, to);
 	}
 	
 });

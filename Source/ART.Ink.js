@@ -11,7 +11,7 @@ ART.Ink = new Class({
 		if (window.G_vmlCanvasManager) element = G_vmlCanvasManager.initElement(element);
 		this.paint = element;
 		this.canvas = this.paint.getContext('2d');
-		arguments.callee.parent({subject: this.paint});
+		this.parent({subject: this.paint});
 		this.save();
 	},
 	
