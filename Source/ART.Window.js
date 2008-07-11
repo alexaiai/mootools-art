@@ -38,12 +38,12 @@ ART.WM = {
 	},
 	
 	remove: function(win){
-		ART.WM.windows.remove(win);
+		ART.WM.windows.erase(win);
 	},
 	
 	refocus: function(win){
 		if (win){
-			ART.WM.windows.remove(win).unshift(win);
+			ART.WM.windows.erase(win).unshift(win);
 			win.focus();
 		}
 		ART.WM.windows.each(function(w, i){
