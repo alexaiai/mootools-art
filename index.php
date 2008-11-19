@@ -2,6 +2,8 @@
 
 $file = $_GET['file'];
 
+if (!preg_match('/^[a-z]+$/', $file)) die('Oh Oh');
+
 $content = @file_get_contents('Demos/' . $file . '.tpl');
 
 if (!$content) die('Invalid file: ' . $file);
