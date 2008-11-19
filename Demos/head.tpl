@@ -2,6 +2,8 @@
 
 <title>{TITLE}</title>
 
+<script type="text/javascript" src="/js/mootools-1.2-core-nc.js"></script>
+<script type="text/javascript" src="/js/mootools-1.2-more.js"></script>
 <!--[if IE]>
 <script type="text/javascript" src="moocanvas.js"></script>
 <![endif]-->
@@ -31,21 +33,21 @@
 <link rel="stylesheet" type="text/css" media="screen" href="{URI}/Assets/Styles/ART.Common.css" />
 
 <style type="text/css" media="screen">
-	
+
 	* {
 		padding: 0;
 		margin: 0;
 	}
-	
+
 	body {
 		font: 14px/1.5 Helvetica;
 	}
-	
+
 	h1 {
 		font-size: 35px;
 		padding: 10px 0 0;
 	}
-	
+
 	#debug {
 		font-family: Andale Mono, Monaco, Monospace;
 		white-space: pre;
@@ -53,9 +55,9 @@
 		color: #000;
 		padding: 10px;
 	}
-	
+
 	.mono {
 		font-family: Andale Mono, Monaco, Monospace;
 	}
-	
+
 </style>
