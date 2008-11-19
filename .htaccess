@@ -1,0 +1,14 @@
+DirectoryIndex index.php
+Options -MultiViews -Indexes
+
+<IfDefine APACHE2>
+	AcceptPathInfo On
+</IfDefine>
+
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+	RewriteBase /repos/art/
+	
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteRule (.*) index.php?file=$1 [QSA,L]
+</IfModule>
